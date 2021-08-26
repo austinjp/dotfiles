@@ -1,0 +1,16 @@
+[General]
+showStatus=true
+
+[LDAP]
+port=389
+port1=0
+port2=0
+server=localhost
+useldap=false
+
+[trayicon]
+enabled=false
+maxdiscon=true
+mincon=false
+mintotray=true
+noclose=false
