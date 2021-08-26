@@ -18,3 +18,6 @@ alias remmina='flatpak run org.remmina.Remmina'
 alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
 
 # alias chromium='flatpak run com.github.Eloston.UngoogledChromium'
+
+alias dotfile='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles/ "$@"'
+alias dotfiles=dotfile
