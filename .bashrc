@@ -96,7 +96,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-# Added by Austin 2021-08-11
+# Added 2021-08-11
 source ~/.bashrc.oh-my-bash
 unalias -a
 export PAGER='less -XF'
@@ -117,9 +117,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Added by Austin 2019-09-12: use specific ssh key in Git:
+# Added 2019-09-12: use specific ssh key in Git:
 # export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_bitbucket"
-# Updated by Austin 2020-04-10
+# Updated 2020-04-10
 # Using ~/.ssh/config file instead.
 # The following line ensures ssh-add can be used to
 # add keys to gnome-keyring, the GUI key auth thing.
@@ -127,7 +127,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/keyring/ssh"
 
 export PATH="$PATH:~/bin/"
 
-# Added by Austin 2020-01-08 for Android Studio
+# Added 2020-01-08 for Android Studio
 # as per https://facebook.github.io/react-native/docs/getting-started
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH="$PATH:$ANDROID_HOME/emulator"
@@ -135,7 +135,7 @@ export PATH="$PATH:$ANDROID_HOME/tools"
 export PATH="$PATH:$ANDROID_HOME/tools/bin"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 
-# Added by Austin 2020-02-09 for pip user installs.
+# Added 2020-02-09 for pip user installs.
 export PATH="$PATH:~/.local/bin/"
 
 # tabtab source for packages
@@ -144,13 +144,13 @@ export PATH="$PATH:~/.local/bin/"
 
 export $(gnome-keyring-daemon --daemonize --start)
 
-PATH="/home/austinjp/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/austinjp/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/austinjp/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/austinjp/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/austinjp/perl5"; export PERL_MM_OPT;
+PATH="${HOME}/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"${HOME}/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"; export PERL_MM_OPT;
 
-# Added by Austin 2020-11-23
+# Added 2020-11-23
 # Dynamic Python cache dirs based on env vars set by virtualenv.
 # source() approach courtesy https://stackoverflow.com/a/9497416
 unset PYTHONPYCACHEPREFIX
@@ -169,20 +169,20 @@ source () {
     fi
 }
 
-# Added by Austin 2020-11-25
-PATH="/home/austinjp/go/bin:${PATH}" ; export PATH
+# Added 2020-11-25
+PATH="${HOME}/go/bin:${PATH}" ; export PATH
 PATH="node_modules/.bin:${PATH}" ; export PATH
 
-# Added by Austin 2021-01-18 as per https://wiki.postmarketos.org/wiki/Installing_pmbootstrap
+# Added 2021-01-18 as per https://wiki.postmarketos.org/wiki/Installing_pmbootstrap
 eval "$(register-python-argcomplete pmbootstrap)"
 
-# Added by Austin 2021-02-11
+# Added 2021-02-11
 # for yarn global add (installs)
-PATH="/home/austinjp/.yarn/bin/:${PATH}"; export PATH
+PATH="${HOME}/.yarn/bin/:${PATH}"; export PATH
 
-# Added by Austin 2021-06-06
+# Added 2021-06-06
 # mainly for 'git commit'.
 EDITOR='emacsclient -c "$@"'; export EDITOR
 
-# Added by Austin 2021-06-26
+# Added 2021-06-26
 export PYTHONSTARTUP="${HOME}/.pythonrc.py"
