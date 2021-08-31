@@ -206,7 +206,6 @@ There are two things you can do about this warning:
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(column-number-mode t)
  '(custom-safe-themes
-
    (quote
     ("6096a2f93610f29bf0f6fe34307587edd21edec95073cbfcfb9d7a3b9206b399" "86e410cba23455840ec0b55cde70eb04cecdc961569f1b4bf4d775738ce73ddb" "a156cf298f369349e34da18a6d1f353b83ac0539da78c8334938dcfb120f378c" "fa2af0c40576f3bde32290d7f4e7aa865eb6bf7ebe31eb9e37c32aa6f4ae8d10" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "f8e384517a35bd7430acb09e7925ab73c79507873e38b442eee2183887250b81" default)))
  '(display-line-numbers-type nil)
@@ -214,8 +213,8 @@ There are two things you can do about this warning:
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (markdown-mode spinner ejc-sql simple-httpd skewer-mode quote
-                   (jedi elpy leuven-theme edit-indirect gnu-elpa-keyring-update))))
+    (dockerfile-mode markdown-mode spinner ejc-sql simple-httpd skewer-mode quote
+                     (jedi elpy leuven-theme edit-indirect gnu-elpa-keyring-update))))
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
  '(show-paren-mode t))
 
