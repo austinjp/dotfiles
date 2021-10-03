@@ -186,3 +186,6 @@ EDITOR='emacsclient -c "$@"'; export EDITOR
 
 # Added 2021-06-26
 export PYTHONSTARTUP="${HOME}/.pythonrc.py"
+
+# Added 2021-09026 mainly to get libimobiledevice (and libplist) working
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
