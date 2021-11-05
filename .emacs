@@ -214,8 +214,8 @@ There are two things you can do about this warning:
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (web-mode flycheck-yamllint flycheck-pycheckers flycheck-popup-tip flycheck-mypy flycheck-languagetool flycheck-checkbashisms flycheck magit psgml dockerfile-mode markdown-mode spinner ejc-sql simple-httpd skewer-mode quote
-              (jedi elpy leuven-theme edit-indirect gnu-elpa-keyring-update))))
+    (which-key web-mode flycheck-yamllint flycheck-pycheckers flycheck-popup-tip flycheck-mypy flycheck-languagetool flycheck-checkbashisms flycheck magit psgml dockerfile-mode markdown-mode spinner ejc-sql simple-httpd skewer-mode quote
+               (jedi elpy leuven-theme edit-indirect gnu-elpa-keyring-update))))
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
  '(show-paren-mode t))
 
@@ -341,9 +341,12 @@ There are two things you can do about this warning:
 
 ;; Inspired by Prelude Emacs, a bunch of packages.
 
-(require 'undo-tree)
-(require 'magit)
-(require 'web-mode)
+;; (require 'undo-tree)
+(undo-tree-mode t)
+;; (require 'magit)
+;; (require 'web-mode)
+;; (require 'which-key)
+(which-key-mode t)
 
 ;; =====================================================================
 ;; Magit setup.
