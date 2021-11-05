@@ -213,8 +213,8 @@ There are two things you can do about this warning:
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (dockerfile-mode markdown-mode spinner ejc-sql simple-httpd skewer-mode quote
-                     (jedi elpy leuven-theme edit-indirect gnu-elpa-keyring-update))))
+    (psgml dockerfile-mode markdown-mode spinner ejc-sql simple-httpd skewer-mode quote
+           (jedi elpy leuven-theme edit-indirect gnu-elpa-keyring-update))))
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
  '(show-paren-mode t))
 
