@@ -214,8 +214,8 @@ There are two things you can do about this warning:
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (psgml dockerfile-mode markdown-mode spinner ejc-sql simple-httpd skewer-mode quote
-           (jedi elpy leuven-theme edit-indirect gnu-elpa-keyring-update))))
+    (web-mode flycheck-yamllint flycheck-pycheckers flycheck-popup-tip flycheck-mypy flycheck-languagetool flycheck-checkbashisms flycheck magit psgml dockerfile-mode markdown-mode spinner ejc-sql simple-httpd skewer-mode quote
+              (jedi elpy leuven-theme edit-indirect gnu-elpa-keyring-update))))
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
  '(show-paren-mode t))
 
@@ -336,3 +336,42 @@ There are two things you can do about this warning:
 ;; https://github.com/tungd/kite-mini.el
 ;; (add-to-list 'load-path "~/.emacs.d/kite-mini/")
 ;; (require 'kite-mini)
+
+;; =====================================================================
+
+;; Inspired by Prelude Emacs, a bunch of packages.
+
+(require 'undo-tree)
+(require 'magit)
+(require 'web-mode)
+
+;; =====================================================================
+;; Magit setup.
+
+(setq magit-view-git-manual-method 'man)
+
+;; =====================================================================
+;; Flycheck setup.
+;; https://gist.github.com/CodyReichert/9dbc8bd2a104780b64891d8736682cea
+
+;; Disable Flymake:
+(setq flymake-start-on-flymake-mode nil)
+
+;; ;; (use-package flycheck :ensure t :init (global-flycheck-mode t))
+(with-eval-after-load 'flycheck
+  (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
+;; ;; Disable default jshint:
+;; (setq-default flycheck-disabled-checkers
+;;               (append flycheck-disabled-checkers
+;;                       '(javascript-jshint json-jsonlist)))
+;; Enable eslint checker for web-mode
+;; (flycheck-add-mode 'javascript-eslint 'web-mode)
+
+
+;; =====================================================================
+;; Web-mode setup.
+;; Auto-enable for .js/.jsx files:
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+;; JSX syntax highlighting:
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+(add-hook 'web-mode-hook  'web-mode-init-hook)
