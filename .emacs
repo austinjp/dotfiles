@@ -109,7 +109,7 @@
 
 ;; =====================================================================
 
-;; Use MELPA package manager
+;; Package managers.
 
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -129,6 +129,7 @@ There are two things you can do about this warning:
 
   ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
   ;; (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  (add-to-list 'package-archives (cons "melpa" "://melpa.org/packages/") t)
   (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
 
   ;; Org mode
