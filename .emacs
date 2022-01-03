@@ -152,13 +152,13 @@ There are two things you can do about this warning:
 
 ;; =====================================================================
 
-(menu-bar-mode t)
+(menu-bar-mode -1)
 (ido-mode -1)
 
 (setq backup-by-copying t      ; don't clobber symlinks
       delete-old-versions t
       kept-new-versions 6
-      kept-old-versions 2
+      kept-old-versions 6
       version-control t)       ; use versioned backups
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
@@ -179,7 +179,7 @@ There are two things you can do about this warning:
   ;; java/c/c++
   (setq-default c-basic-offset n)
   ;; web development
-  (setq-default coffee-tab-width n) ; coffeescript
+  ;; (setq-default coffee-tab-width n) ; coffeescript
   (setq-default javascript-indent-level n) ; javascript-mode
   (setq-default js-indent-level n) ; js-mode
   (setq-default js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
