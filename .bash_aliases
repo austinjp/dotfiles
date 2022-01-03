@@ -1,11 +1,5 @@
-my_emacs() {
-    if [[ x`pgrep emacs 2>/dev/null` = x ]] ; then
-	\emacs --daemon
-    fi
-    emacsclient -c "$@"
-}
+alias emacs="emacsclient -t -c -a '' ${@}"
 
-alias emacs=my_emacs
 alias less="less -XRS"
 alias ls="ls -h --color=auto --time-style=long-iso"
 alias pgrep="pgrep -fila"
