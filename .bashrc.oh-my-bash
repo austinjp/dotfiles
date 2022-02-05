@@ -47,11 +47,11 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom completions may be added to ~/.oh-my-bash/custom/completions/
 # Example format: completions=(ssh git bundler gem pip pip3)
 # Add wisely, as too many completions slow down shell startup.
-completions=(
-  git
-  pip3
-  ssh
-)
+# completions=(
+#   git
+#   pip3
+#   ssh
+# )
 
 # Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
 # Custom aliases may be added to ~/.oh-my-bash/custom/aliases/
