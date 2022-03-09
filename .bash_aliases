@@ -17,3 +17,5 @@ alias dotfile='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles/ "
 alias dotfiles=dotfile
 
 alias podman='source <(/usr/local/bin/podman completion bash) && unalias podman && /usr/local/bin/podman "$@"'
+
+alias bat=batcat
