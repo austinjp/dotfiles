@@ -1,0 +1,8 @@
+# Directories created by sdk (see sdkman.io)
+.sdkman/archives/
+.sdkman/candidates/java/
+.sdkman/tmp/
+.sdkman/var/
+
+# Retain the symlink to the current version of Java selected using sdk.
+!.sdkman/candidates/java/current
