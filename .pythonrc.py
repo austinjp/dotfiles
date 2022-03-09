@@ -17,8 +17,10 @@ else:
     logger.setLevel(10)
 
     # The following prevent ptpython's buggy (?) logging filling the repl :)
-    parso_logger = logging.getLogger("parso.python.diff")
-    parso_logger.setLevel(100)
+    parso_logger1 = logging.getLogger("parso.python.diff")
+    parso_logger1.setLevel(100)
+    parso_logger2 = logging.getLogger("parso.cache")
+    parso_logger2.setLevel(100)
     asyncio_logger = logging.getLogger("asyncio")
     asyncio_logger.setLevel(100)
 
