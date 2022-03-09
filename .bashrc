@@ -190,6 +190,10 @@ export PYTHONSTARTUP="${HOME}/.pythonrc.py"
 # Added 2021-09026 mainly to get libimobiledevice (and libplist) working
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
 
+# Added 2022-03-09 for nim (via choosenim).
+export PATH=/home/austinjp/.nimble/bin:$PATH
+
+# Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
