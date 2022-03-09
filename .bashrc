@@ -189,3 +189,7 @@ export PYTHONSTARTUP="${HOME}/.pythonrc.py"
 
 # Added 2021-09026 mainly to get libimobiledevice (and libplist) working
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
