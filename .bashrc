@@ -197,3 +197,9 @@ export PATH=/home/austinjp/.nimble/bin:$PATH
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Added 2022-03-25
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Added 2022-03-25
+[ -f ~/.config/nnn/nnn-autocompletion.bash ] && source ~/.config/nnn/nnn-autocompletion.bash
