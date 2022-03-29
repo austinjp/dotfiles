@@ -79,7 +79,7 @@ fi
 # Added 2021-08-11
 source ~/.bashrc.oh-my-bash
 
-export PAGER='less -XF'
+export PAGER='less'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -104,14 +104,14 @@ export PATH="$PATH:~/bin/"
 
 # Added 2020-01-08 for Android Studio
 # as per https://facebook.github.io/react-native/docs/getting-started
-export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_HOME="${HOME}/Android/Sdk"
 export PATH="$PATH:$ANDROID_HOME/emulator"
 export PATH="$PATH:$ANDROID_HOME/tools"
 export PATH="$PATH:$ANDROID_HOME/tools/bin"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 
 # Added 2020-02-09 for pip user installs.
-export PATH="$PATH:~/.local/bin/"
+export PATH="${PATH}:~/.local/bin/"
 
 # tabtab source for packages
 # uninstall by removing these lines
@@ -119,11 +119,11 @@ export PATH="$PATH:~/.local/bin/"
 
 export $(gnome-keyring-daemon --daemonize --start)
 
-PATH="${HOME}/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"${HOME}/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"; export PERL_MM_OPT;
+export PATH="${HOME}/perl5/bin${PATH:+:${PATH}}"
+export PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+export PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+export PERL_MB_OPT="--install_base \"${HOME}/perl5\""
+export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
 
 # Added 2020-11-23
 # Dynamic Python cache dirs based on env vars set by virtualenv.
@@ -145,19 +145,18 @@ source () {
 }
 
 # Added 2020-11-25
-PATH="${HOME}/go/bin:${PATH}" ; export PATH
-PATH="node_modules/.bin:${PATH}" ; export PATH
+export PATH="${HOME}/go/bin:node_modules/.bin:${PATH}"
 
 # Added 2021-01-18 as per https://wiki.postmarketos.org/wiki/Installing_pmbootstrap
 eval "$(register-python-argcomplete pmbootstrap)"
 
 # Added 2021-02-11
 # for yarn global add (installs)
-PATH="${HOME}/.yarn/bin/:${PATH}"; export PATH
+export PATH="${HOME}/.yarn/bin/:${PATH}"
 
 # Added 2021-06-06
 # mainly for 'git commit'.
-EDITOR='emacsclient -c "$@"'; export EDITOR
+export EDITOR='emacsclient -c "$@"'
 
 # Added 2021-06-26
 export PYTHONSTARTUP="${HOME}/.pythonrc.py"
@@ -166,12 +165,7 @@ export PYTHONSTARTUP="${HOME}/.pythonrc.py"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
 
 # Added 2022-03-09 for nim (via choosenim).
-export PATH=/home/austinjp/.nimble/bin:$PATH
-
-# Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export PATH="/home/austinjp/.nimble/bin:${PATH}"
 
 # Added 2022-03-25
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -179,3 +173,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # Added 2022-03-25
 [ -f ~/.config/nnn/nnn-autocompletion.bash ] && source ~/.config/nnn/nnn-autocompletion.bash
 
+# Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="${HOME}/.sdkman"
+[[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
