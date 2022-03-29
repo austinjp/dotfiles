@@ -18,7 +18,7 @@
 
 # set env vars if not set
 if [ -z "$SDKMAN_VERSION" ]; then
-	export SDKMAN_VERSION="5.13.2"
+	export SDKMAN_VERSION="5.14.2"
 fi
 
 if [ -z "$SDKMAN_CANDIDATES_API" ]; then
@@ -64,7 +64,7 @@ function infer_platform() {
 		echo "LinuxARM64"
 		;;
 	  *)
-	  	echo "LinuxX64"
+	  	echo "Exotic"
 	  	;;
 	  esac
 	  ;;
