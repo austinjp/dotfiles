@@ -7,7 +7,6 @@ alias dotfile='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles/ "
 alias dotfiles=dotfile
 alias emacs="emacsclient -t -c -a '' ${@}"
 alias less="less -XFRS"
-alias ls="ls -h --color=auto --time-style=long-iso"
 alias pgrep="pgrep -fila"
 alias podman='source <(/usr/local/bin/podman completion bash) && unalias podman && /usr/local/bin/podman "$@"'
 alias remmina='flatpak run org.remmina.Remmina'
@@ -19,7 +18,7 @@ alias tree="tree --ignore-case"
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    alias ls="ls -h --color=auto --time-style=long-iso"
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
