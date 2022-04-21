@@ -18,7 +18,7 @@
 
 # set env vars if not set
 if [ -z "$SDKMAN_VERSION" ]; then
-	export SDKMAN_VERSION="5.14.2"
+	export SDKMAN_VERSION="5.15.0"
 fi
 
 if [ -z "$SDKMAN_CANDIDATES_API" ]; then
