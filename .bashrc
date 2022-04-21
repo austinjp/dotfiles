@@ -177,3 +177,9 @@ export PATH="/home/austinjp/.nimble/bin:${PATH}"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="${HOME}/.sdkman"
 [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
+
+# Added during installation of broot https://dystroy.org/broot/install-br/
+source /home/austinjp/.config/broot/launcher/bash/br
+
+# Added 2022-04-18 for delta git pager.
+export DELTA_PAGER="less -XFRS"
