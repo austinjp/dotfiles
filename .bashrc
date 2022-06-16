@@ -100,15 +100,15 @@ fi
 # add keys to gnome-keyring, the GUI key auth thing.
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/keyring/ssh"
 
-export PATH="$PATH:~/bin/"
+export PATH="${PATH}:~/bin/"
 
 # Added 2020-01-08 for Android Studio
 # as per https://facebook.github.io/react-native/docs/getting-started
 export ANDROID_HOME="${HOME}/Android/Sdk"
-export PATH="$PATH:$ANDROID_HOME/emulator"
-export PATH="$PATH:$ANDROID_HOME/tools"
-export PATH="$PATH:$ANDROID_HOME/tools/bin"
-export PATH="$PATH:$ANDROID_HOME/platform-tools"
+export PATH="${PATH}:$ANDROID_HOME/emulator"
+export PATH="${PATH}:$ANDROID_HOME/tools"
+export PATH="${PATH}:$ANDROID_HOME/tools/bin"
+export PATH="${PATH}:$ANDROID_HOME/platform-tools"
 
 # Added 2020-02-09 for pip user installs.
 export PATH="${PATH}:~/.local/bin/"
@@ -145,14 +145,14 @@ source () {
 }
 
 # Added 2020-11-25
-export PATH="${HOME}/go/bin:node_modules/.bin:${PATH}"
+export PATH="${PATH}:${HOME}/go/bin:node_modules/.bin"
 
 # Added 2021-01-18 as per https://wiki.postmarketos.org/wiki/Installing_pmbootstrap
 eval "$(register-python-argcomplete pmbootstrap)"
 
 # Added 2021-02-11
 # for yarn global add (installs)
-export PATH="${HOME}/.yarn/bin/:${PATH}"
+export PATH="${PATH}:${HOME}/.yarn/bin/"
 
 # Added 2021-06-06
 # mainly for 'git commit'.
@@ -165,7 +165,7 @@ export PYTHONSTARTUP="${HOME}/.pythonrc.py"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
 
 # Added 2022-03-09 for nim (via choosenim).
-export PATH="/home/austinjp/.nimble/bin:${PATH}"
+export PATH="${PATH}:/home/austinjp/.nimble/bin"
 
 # Added 2022-03-25
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -173,13 +173,18 @@ export PATH="/home/austinjp/.nimble/bin:${PATH}"
 # Added 2022-03-25
 [ -f ~/.config/nnn/nnn-autocompletion.bash ] && source ~/.config/nnn/nnn-autocompletion.bash
 
-# Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="${HOME}/.sdkman"
-[[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
-
 # Added during installation of broot https://dystroy.org/broot/install-br/
 source /home/austinjp/.config/broot/launcher/bash/br
 
 # Added 2022-04-18 for delta git pager.
 export DELTA_PAGER="less -XFRS"
+
+# Added 2022-06-15 for functiontrace server.
+export PATH="${PATH}:/home/austinjp/.cargo/bin"
+
+# Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="${HOME}/.sdkman"
+[[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
+
+# Do not add anything below here, see sdkman above.
