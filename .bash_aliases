@@ -6,6 +6,7 @@ alias docker="podman"
 alias dotfile='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles/ "$@"'
 alias dotfiles=dotfile
 alias emacs="emacsclient -t -c -a '' ${@}"
+alias lg="lazygit ${@}"
 alias less="less -XFRS"
 alias pgrep="pgrep -fila"
 alias podman='source <(/usr/local/bin/podman completion bash) && unalias podman && /usr/local/bin/podman "$@"'
