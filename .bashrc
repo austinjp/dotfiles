@@ -182,6 +182,9 @@ export DELTA_PAGER="less -XFRS"
 # Added 2022-06-15 for functiontrace server.
 export PATH="${PATH}:/home/austinjp/.cargo/bin"
 
+# Added 2022-07-16 for latest pandoc-crossref build.
+export PATH="${PATH}:/home/austinjp/.cabal/bin"
+
 # Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="${HOME}/.sdkman"
