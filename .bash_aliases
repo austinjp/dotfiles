@@ -2,6 +2,7 @@ alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml 
 alias bat=batcat
 # alias chromium='flatpak run com.github.Eloston.UngoogledChromium'
 alias chromium='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/bin/chromium --file-forwarding com.github.Eloston.UngoogledChromium @@u %U @@'
+alias db="_OLD_VIRTUAL_PATH= VIRTUAL_ENV= devbox"
 alias docker="podman"
 alias dotfile='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles/ "$@"'
 alias dotfiles=dotfile

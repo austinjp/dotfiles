@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Note: this file must be sourced, not executed, to work.
+# Also see:
+#   ~/.local/share/bash-completion
+#   ~/.oh-my-bash/completions/
+#   /etc/bash_completion
+#   /etc/bash_completion.d/
+#   /usr/share/bash-completion/completions/
+
+
+for f in $(ls -1 ~/.bash_completion.d/*); do
+    source "${f}"
+done
+
+OLDIFS=$IFS
+IFS=','
+for i in devbox,db ; do
+    set -- $i
+    export __ORIGINAL=$1
+    export __ALIAS=$2
+    __cmd=$(complete | grep -E " ${__ORIGINAL}"'$' | head -n 1 | sed -e 's, '"${__ORIGINAL}"'$, '"${__ALIAS}"',')
+    if [ "x${__cmd}" != "x" ] ; then
+        eval "${__cmd}"
+    fi
+    unset __ORIGINAL
+    unset __ALIAS
+    unset i
+done
+
+IFS=$OLDIFS

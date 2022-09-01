@@ -40,6 +40,7 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
+force_color_prompt=yes
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
 	# We have color support; assume it's compliant with Ecma-48
@@ -76,21 +77,22 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# This is already getting executed, probably via oh-my-bash.
+# Enable programmable completion features.
+# Must run after aliases to apply completion to aliases.
+# Also see /etc/bash.bashrc and /etc/profile
+# if ! shopt -oq posix; then
+#   if [ -f /usr/share/bash-completion/bash_completion ]; then
+#     . /usr/share/bash-completion/bash_completion
+#   elif [ -f /etc/bash_completion ]; then
+#     . /etc/bash_completion
+#   fi
+# fi
+
 # Added 2021-08-11
 source ~/.bashrc.oh-my-bash
 
 export PAGER='less'
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
 
 # Added 2019-09-12: use specific ssh key in Git:
 # export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_bitbucket"
@@ -174,7 +176,7 @@ export PATH="${PATH}:/home/austinjp/.nimble/bin"
 [ -f ~/.config/nnn/nnn-autocompletion.bash ] && source ~/.config/nnn/nnn-autocompletion.bash
 
 # Added during installation of broot https://dystroy.org/broot/install-br/
-source /home/austinjp/.config/broot/launcher/bash/br
+# source /home/austinjp/.config/broot/launcher/bash/br
 
 # Added 2022-04-18 for delta git pager.
 export DELTA_PAGER="less -XFRS"
