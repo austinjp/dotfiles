@@ -81,16 +81,16 @@ fi
 # Enable programmable completion features.
 # Must run after aliases to apply completion to aliases.
 # Also see /etc/bash.bashrc and /etc/profile
-# if ! shopt -oq posix; then
-#   if [ -f /usr/share/bash-completion/bash_completion ]; then
-#     . /usr/share/bash-completion/bash_completion
-#   elif [ -f /etc/bash_completion ]; then
-#     . /etc/bash_completion
-#   fi
-# fi
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 
 # Added 2021-08-11
-source ~/.bashrc.oh-my-bash
+# source ~/.bashrc.oh-my-bash
 
 export PAGER='less'
 
@@ -170,7 +170,7 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
 export PATH="${PATH}:/home/austinjp/.nimble/bin"
 
 # Added 2022-03-25
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Added 2022-03-25
 [ -f ~/.config/nnn/nnn-autocompletion.bash ] && source ~/.config/nnn/nnn-autocompletion.bash
@@ -186,6 +186,35 @@ export PATH="${PATH}:/home/austinjp/.cargo/bin"
 
 # Added 2022-07-16 for latest pandoc-crossref build.
 export PATH="${PATH}:/home/austinjp/.cabal/bin"
+
+# Added 2022-09-12 for go
+export GOPATH=/home/austinjp/.local/lib/go/
+export GOBIN=/home/austinjp/.local/lib/go/bin/
+export PATH="${PATH}:${GOBIN}"
+
+# Added 2022-09-12 for powerline-go
+# See https://github.com/justjanne/powerline-go
+function _update_ps1() {
+    PS1="$($GOPATH/bin/powerline-go -error $? -jobs $(jobs -p | wc -l))"
+
+    # Uncomment the following line to automatically clear errors after showing
+    # them once. This not only clears the error for powerline-go, but also for
+    # everything else you run in that shell. Don't enable this if you're not
+    # sure this is what you want.
+
+    #set "?"
+}
+if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+# Workaround for nix-shell --pure
+if [ "$IN_NIX_SHELL" == "pure" ]; then
+    if [ -x "$HOME/.nix-profile/bin/powerline-go" ]; then
+        alias powerline-go="$HOME/.nix-profile/bin/powerline-go"
+    elif [ -x "/run/current-system/sw/bin/powerline-go" ]; then
+        alias powerline-go="/run/current-system/sw/bin/powerline-go"
+    fi
+fi
 
 # Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
