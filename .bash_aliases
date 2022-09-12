@@ -4,14 +4,16 @@ alias bat=batcat
 alias chromium='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/bin/chromium --file-forwarding com.github.Eloston.UngoogledChromium @@u %U @@'
 alias db="_OLD_VIRTUAL_PATH= VIRTUAL_ENV= devbox"
 alias docker="podman"
-alias dotfile='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles/ "$@"'
+
+# Using functions helps avoid issues with $@ being defined elsewhere.
+alias dotfile='_dotfile(){ git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles/ "${@}";}; _dotfile'
+
 alias dotfiles=dotfile
-alias emacs="emacsclient -t -c -a '' ${@}"
+alias emacs='_emx(){ emacsclient -t -c -a "" "${@}";}; _emx'
 alias free="free -h --giga"
-alias lg="lazygit ${@}"
 alias less="less -XFRS"
 alias pgrep="pgrep -fila"
-alias podman='source <(/usr/local/bin/podman completion bash) && unalias podman && /usr/local/bin/podman "$@"'
+alias podman='_podman(){ source <(/usr/bin/podman completion bash) && unalias podman && /usr/bin/podman "${@}";}; _podman ; unset _podman'
 alias remmina='flatpak run org.remmina.Remmina'
 alias skype="flatpak run com.skype.Client"
 alias spotify="flatpak run com.spotify.Client"
