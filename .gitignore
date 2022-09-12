@@ -1,3 +1,7 @@
+# XFCE
+xfce/
+xfce4/
+
 # OneDrive
 .config/onedrive/items.sqlite3
 .config/onedrive/items.sqlite3-wal
