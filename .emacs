@@ -13,88 +13,86 @@
 ;; See http://tapoueh.org/emacs/el-get.html
 ;; and https://github.com/dimitri/el-get
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-;; (require 'el-get)
-(unless (require 'el-get nil t)
-  (url-retrieve
-   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
-   (lambda (s)
-     (end-of-buffer)
-     (eval-print-last-sexp))))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/recipes")
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/")
-(setq el-get-verbose t)
-
-;; ;; personal recipes
-;; (setq el-get-sources
-;;       '((:name el-get :branch "master")
-;; 
-;;         ;; (:name magit
-;;         ;;              :before (global-set-key (kbd "C-x C-z") 'magit-status))
-;; 
-;;         (:name expand-region
-;;                       :before (global-set-key (kbd "C-@") 'er/expand-region))
-;; 
-;;         (:name descbinds-anything
-;;                       :after (progn
-;;                                (descbinds-anything-install)
-;;                                (global-set-key (kbd "C-h b") 'descbinds-anything)))
-;; 
-;;         (:name goto-last-change
-;;                       :before (global-set-key (kbd "C-x C-/") 'goto-last-change))))
-
-
-;; =====================================================================
-
-;; my packages
-(setq dim-packages
-      (append
-       ;; list of packages we use straight from official recipes
-       '(
-         ;; better-defaults
-         ;; gnus
-         ;; bbdb
-         ;; switch-window
-         ;; vkill
-         ;; google-maps
-         ;; pgdevenv-el
-         ;; mbsync
-         ;; asciidoc
-         ;; smex
-         ;; geiser
-         ;; xcscope
-         ;; multiple-cursors
-         ;; anything
-         ;; descbinds-anything
-         ;; pcmpl-git
-         ;; magit-view-file
-         ;; emacs-goodies-el
-         ;; sicp
-         ;; auto-dictionnary
-         ;; keywiz
-         pandoc-mode
-         ;; pgsql-linum-format
-         ;; psvn
-         ;; rect-mark
-         ;; crontab-mode
-         ;; icomplete+
-         ;; php-mode-improved
-         ;; rainbow-delimiters
-         ;; muse
-         ;; deft
-         ;; dpans2texi
-         markdown-mode
-         color-theme-solarized
-         ;; multi-mode
-         ;; protobuf-mode
-         ;; paredit
-        )
-
-       (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
-
-(el-get 'sync dim-packages)
+;;;;;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+;;;;;; 
+;;;;;; ;; (require 'el-get)
+;;;;;; (unless (require 'el-get nil t)
+;;;;;;   (url-retrieve
+;;;;;;    "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+;;;;;;    (lambda (s)
+;;;;;;      (end-of-buffer)
+;;;;;;      (eval-print-last-sexp))))
+;;;;;; 
+;;;;;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/recipes")
+;;;;;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/")
+;;;;;; (setq el-get-verbose t)
+;;;;;; 
+;;;;;; ;; ;; personal recipes
+;;;;;; ;; (setq el-get-sources
+;;;;;; ;;       '((:name el-get :branch "master")
+;;;;;; ;; 
+;;;;;; ;;         ;; (:name magit
+;;;;;; ;;         ;;              :before (global-set-key (kbd "C-x C-z") 'magit-status))
+;;;;;; ;; 
+;;;;;; ;;         (:name expand-region
+;;;;;; ;;                       :before (global-set-key (kbd "C-@") 'er/expand-region))
+;;;;;; ;; 
+;;;;;; ;;         (:name descbinds-anything
+;;;;;; ;;                       :after (progn
+;;;;;; ;;                                (descbinds-anything-install)
+;;;;;; ;;                                (global-set-key (kbd "C-h b") 'descbinds-anything)))
+;;;;;; ;; 
+;;;;;; ;;         (:name goto-last-change
+;;;;;; ;;                       :before (global-set-key (kbd "C-x C-/") 'goto-last-change))))
+;;;;;; 
+;;;;;; 
+;;;;;; ;; my packages
+;;;;;; (setq dim-packages
+;;;;;;       (append
+;;;;;;        ;; list of packages we use straight from official recipes
+;;;;;;        '(
+;;;;;;          ;; better-defaults
+;;;;;;          ;; gnus
+;;;;;;          ;; bbdb
+;;;;;;          ;; switch-window
+;;;;;;          ;; vkill
+;;;;;;          ;; google-maps
+;;;;;;          ;; pgdevenv-el
+;;;;;;          ;; mbsync
+;;;;;;          ;; asciidoc
+;;;;;;          ;; smex
+;;;;;;          ;; geiser
+;;;;;;          ;; xcscope
+;;;;;;          ;; multiple-cursors
+;;;;;;          ;; anything
+;;;;;;          ;; descbinds-anything
+;;;;;;          ;; pcmpl-git
+;;;;;;          ;; magit-view-file
+;;;;;;          ;; emacs-goodies-el
+;;;;;;          ;; sicp
+;;;;;;          ;; auto-dictionnary
+;;;;;;          ;; keywiz
+;;;;;;          pandoc-mode
+;;;;;;          ;; pgsql-linum-format
+;;;;;;          ;; psvn
+;;;;;;          ;; rect-mark
+;;;;;;          ;; crontab-mode
+;;;;;;          ;; icomplete+
+;;;;;;          ;; php-mode-improved
+;;;;;;          ;; rainbow-delimiters
+;;;;;;          ;; muse
+;;;;;;          ;; deft
+;;;;;;          ;; dpans2texi
+;;;;;;          markdown-mode
+;;;;;;          color-theme-solarized
+;;;;;;          ;; multi-mode
+;;;;;;          ;; protobuf-mode
+;;;;;;          ;; paredit
+;;;;;;         )
+;;;;;; 
+;;;;;;        (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
+;;;;;; 
+;;;;;; (el-get 'sync dim-packages)
 
 ;; =====================================================================
 
@@ -214,10 +212,42 @@ There are two things you can do about this warning:
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (nim-mode tide typescript-mode svelte-mode cython-mode which-key web-mode flycheck-yamllint flycheck-pycheckers flycheck-popup-tip flycheck-mypy flycheck-languagetool flycheck-checkbashisms flycheck magit psgml dockerfile-mode markdown-mode spinner ejc-sql simple-httpd skewer-mode quote
-              (jedi elpy leuven-theme edit-indirect gnu-elpa-keyring-update))))
+    (nim-mode
+     tide
+     typescript-mode
+     svelte-mode
+     cython-mode
+     which-key
+     web-mode
+     flycheck-yamllint
+     flycheck-pycheckers
+     flycheck-popup-tip
+     flycheck-mypy
+     flycheck-languagetool
+     flycheck-checkbashisms
+     flycheck
+     magit
+     psgml
+     dockerfile-mode
+     spinner
+     ejc-sql
+     simple-httpd
+     skewer-mode
+     quote
+     elpy
+     leuven-theme
+     edit-indirect
+     gnu-elpa-keyring-update
+     markdown-mode
+     pandoc-mode
+     color-theme-solarized
+     )
+    )
+   )
+
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
- '(show-paren-mode t))
+ '(show-paren-mode t)
+)
 
 ;; =====================================================================
 
