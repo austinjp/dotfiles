@@ -1,0 +1,30 @@
+[user]
+    email = austin.plunkett@gmail.com
+    name = austinjp
+[core]
+    autocrlf = input
+    # pager = less -XFRS
+    pager = delta
+[credential]
+    helper = store
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive --diff-so-fancy
+
+[include]
+    path = /home/austin/.config/delta/themes.gitconfig
+
+[delta]
+    features = phage-austin
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
+
+[delta "decorations"]
+    # commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = imot
+    # hunk-header-decoration-style = blue ol
+    hunk-header-file-style = red
+    # hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
