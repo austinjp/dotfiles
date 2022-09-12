@@ -20,6 +20,7 @@ chromium
 !.sdkman/candidates/java/current
 
 # Misc
+cni
 .config/dconf
 .config/libreoffice
 .config/pulse
