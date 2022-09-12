@@ -1,0 +1,10 @@
+[Added Associations]
+text/plain=userapp-emacs-2DK4R1.desktop;
+text/css=vim.desktop;
+x-scheme-handler/http=xfce4-web-browser.desktop;
+x-scheme-handler/https=xfce4-web-browser.desktop;
+
+[Default Applications]
+x-scheme-handler/http=xfce4-web-browser.desktop
+x-scheme-handler/https=xfce4-web-browser.desktop
+
