@@ -1,3 +1,11 @@
+# OneDrive
+.config/onedrive/items.sqlite3
+.config/onedrive/items.sqlite3-wal
+.config/onedrive/refresh_token
+
+# Ungoogled Chromium
+chromium
+
 # Directories created by sdk (see sdkman.io)
 .sdkman/archives/
 .sdkman/candidates/java/
@@ -6,3 +14,11 @@
 
 # Retain the symlink to the current version of Java selected using sdk.
 !.sdkman/candidates/java/current
+
+# Misc
+.config/dconf
+.config/libreoffice
+.config/pulse
+.config/Thunar
+.emacs.d/auto-save-list/
+*~
