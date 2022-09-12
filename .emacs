@@ -13,20 +13,20 @@
 ;; See http://tapoueh.org/emacs/el-get.html
 ;; and https://github.com/dimitri/el-get
 
-;;;;;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-;;;;;; 
-;;;;;; ;; (require 'el-get)
-;;;;;; (unless (require 'el-get nil t)
-;;;;;;   (url-retrieve
-;;;;;;    "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
-;;;;;;    (lambda (s)
-;;;;;;      (end-of-buffer)
-;;;;;;      (eval-print-last-sexp))))
-;;;;;; 
-;;;;;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/recipes")
-;;;;;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/")
-;;;;;; (setq el-get-verbose t)
-;;;;;; 
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+;; (require 'el-get)
+(unless (require 'el-get nil t)
+  (url-retrieve
+   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+   (lambda (s)
+     (end-of-buffer)
+     (eval-print-last-sexp))))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/recipes")
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get/")
+(setq el-get-verbose t)
+
 ;;;;;; ;; ;; personal recipes
 ;;;;;; ;; (setq el-get-sources
 ;;;;;; ;;       '((:name el-get :branch "master")
@@ -44,55 +44,54 @@
 ;;;;;; ;; 
 ;;;;;; ;;         (:name goto-last-change
 ;;;;;; ;;                       :before (global-set-key (kbd "C-x C-/") 'goto-last-change))))
-;;;;;; 
-;;;;;; 
-;;;;;; ;; my packages
-;;;;;; (setq dim-packages
-;;;;;;       (append
-;;;;;;        ;; list of packages we use straight from official recipes
-;;;;;;        '(
-;;;;;;          ;; better-defaults
-;;;;;;          ;; gnus
-;;;;;;          ;; bbdb
-;;;;;;          ;; switch-window
-;;;;;;          ;; vkill
-;;;;;;          ;; google-maps
-;;;;;;          ;; pgdevenv-el
-;;;;;;          ;; mbsync
-;;;;;;          ;; asciidoc
-;;;;;;          ;; smex
-;;;;;;          ;; geiser
-;;;;;;          ;; xcscope
-;;;;;;          ;; multiple-cursors
-;;;;;;          ;; anything
-;;;;;;          ;; descbinds-anything
-;;;;;;          ;; pcmpl-git
-;;;;;;          ;; magit-view-file
-;;;;;;          ;; emacs-goodies-el
-;;;;;;          ;; sicp
-;;;;;;          ;; auto-dictionnary
-;;;;;;          ;; keywiz
-;;;;;;          pandoc-mode
-;;;;;;          ;; pgsql-linum-format
-;;;;;;          ;; psvn
-;;;;;;          ;; rect-mark
-;;;;;;          ;; crontab-mode
-;;;;;;          ;; icomplete+
-;;;;;;          ;; php-mode-improved
-;;;;;;          ;; rainbow-delimiters
-;;;;;;          ;; muse
-;;;;;;          ;; deft
-;;;;;;          ;; dpans2texi
-;;;;;;          markdown-mode
-;;;;;;          color-theme-solarized
-;;;;;;          ;; multi-mode
-;;;;;;          ;; protobuf-mode
-;;;;;;          ;; paredit
-;;;;;;         )
-;;;;;; 
-;;;;;;        (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
-;;;;;; 
-;;;;;; (el-get 'sync dim-packages)
+
+;; my packages
+(setq dim-packages
+      (append
+       ;; list of packages we use straight from official recipes
+       '(
+         ;; better-defaults
+         ;; gnus
+         ;; bbdb
+         ;; switch-window
+         ;; vkill
+         ;; google-maps
+         ;; pgdevenv-el
+         ;; mbsync
+         ;; asciidoc
+         ;; smex
+         ;; geiser
+         ;; xcscope
+         ;; multiple-cursors
+         ;; anything
+         ;; descbinds-anything
+         ;; pcmpl-git
+         ;; magit-view-file
+         ;; emacs-goodies-el
+         ;; sicp
+         ;; auto-dictionnary
+         ;; keywiz
+         pandoc-mode
+         ;; pgsql-linum-format
+         ;; psvn
+         ;; rect-mark
+         ;; crontab-mode
+         ;; icomplete+
+         ;; php-mode-improved
+         ;; rainbow-delimiters
+         ;; muse
+         ;; deft
+         ;; dpans2texi
+         markdown-mode
+         color-theme-solarized
+         ;; multi-mode
+         ;; protobuf-mode
+         ;; paredit
+        )
+
+       (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
+
+(el-get 'sync dim-packages)
 
 ;; =====================================================================
 
@@ -238,9 +237,6 @@ There are two things you can do about this warning:
      leuven-theme
      edit-indirect
      gnu-elpa-keyring-update
-     markdown-mode
-     pandoc-mode
-     color-theme-solarized
      )
     )
    )
