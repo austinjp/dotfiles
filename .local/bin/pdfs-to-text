@@ -1,0 +1,12 @@
+#!/bin/bash
+
+wd="/home/austinjp/OneDrive/hmy652/"
+
+OLD_IFS="${IFS}"
+IFS=$'\n'
+
+for f in $(comm -2 -3 <(find "${wd}" -type f -name '*.pdf' | sed 's/\.pdf$//i' | sort) <(find "${wd}" -type f -name '*.txt' | sed 's/\.txt$//i' | sort)); do
+    echo "${f}".pdf
+    pdftotext -q -raw -eol unix -nopgbrk "${f}.pdf"
+done
+IFS="${OLD_IFS}"
