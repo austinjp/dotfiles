@@ -6,6 +6,9 @@ cert*
 token*
 *token
 
+# gauth
+.config/gauth.*
+
 # Syncthing -- should set this up by hand per machine.
 .config/syncthing
 .config/systemd/user/default.target.wants/syncthing.service
