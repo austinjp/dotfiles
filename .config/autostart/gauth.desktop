@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+Name=gauth
+Comment=One-time passes
+Exec=xfce4-terminal -e 'watch -ctn1 ~/.local/lib/go/bin/gauth' --title="gauth" --geometry=64x10
+OnlyShowIn=XFCE;
+RunHook=0
+StartupNotify=false
+Terminal=false
+Hidden=false
+
