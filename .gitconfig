@@ -5,7 +5,7 @@
 [core]
     autocrlf = input
     # pager = less -XFRS
-    pager = delta
+    pager = delta $(delta_theme_switch.sh) 
 
 [credential]
     helper = store
