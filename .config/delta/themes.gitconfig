@@ -247,17 +247,16 @@
     #author: https://github.com/austinjp
     #taxon: https://phagesdb.org/phages/Austin/
     side-by-side = true
-    light = true
-    pink = "#ffe0e0"
-    dark-pink = "#ffc0c0"
-    green = "#d0ffd0"
-    dark-green = "#a0efa0"
-    dark-green-2 = "#067a00"
-    minus-style = black phage-austin.pink
-    minus-emph-style = black phage-austin.dark-pink
-    minus-non-emph-style = minus-style
-    plus-style = black phage-austin.green
-    plus-emph-style = black phage-austin.dark-green
+    # pink = "#ffe0e0"
+    # dark-pink = "#ffc0c0"
+    # green = "#d0ffd0"
+    # dark-green = "#a0efa0"
+    # dark-green-2 = "#067a00"
+    # minus-style = black phage-austin.pink
+    # minus-emph-style = black phage-austin.dark-pink
+    # minus-non-emph-style = minus-style
+    # plus-style = black phage-austin.green
+    # plus-emph-style = black phage-austin.dark-green
     plus-non-emph-style = plus-style
     minus-empty-line-marker-style = minus-style
     plus-empty-line-marker-style = plus-style
@@ -266,10 +265,10 @@
     file-style = omit
     hunk-header-decoration-style = blue ol
     hunk-header-file-style = red
-    hunk-header-line-number-style = phage-austin.dark-green-2
+    # hunk-header-line-number-style = phage-austin.dark-green-2
     hunk-header-style = file line-number syntax
-    syntax-theme = GitHub
+    # syntax-theme = GitHub
     zero-style = syntax
     line-numbers = false
-    line-numbers-right-style = "#ff0000"
-    blame-palette = "#333333"
+    # line-numbers-right-style = "#ff0000"
+    # blame-palette = "#333333"
