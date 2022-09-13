@@ -1,18 +1,20 @@
 [user]
     email = austin.plunkett@gmail.com
     name = austinjp
+
 [core]
     autocrlf = input
     # pager = less -XFRS
     pager = delta
+
 [credential]
     helper = store
 
 [interactive]
-    diffFilter = delta --color-only --features=interactive --diff-so-fancy
+    diffFilter = delta --color-only --features=interactive
 
 [include]
-    path = /home/austin/.config/delta/themes.gitconfig
+    path = /home/austinjp/.config/delta/themes.gitconfig
 
 [delta]
     features = phage-austin
