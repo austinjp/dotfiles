@@ -1,3 +1,16 @@
+# Secure stuff.
+*.pem
+*.cert
+cert*
+*token*
+token*
+*token
+
+# Syncthing -- should set this up by hand per machine.
+.config/syncthing
+.config/systemd/user/default.target.wants/syncthing.service
+.config/systemd/user/syncthing.service
+
 # XFCE
 xfce/
 xfce4/
