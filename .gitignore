@@ -38,8 +38,10 @@ chromium
 # Misc
 cni
 .config/dconf
+.config/gtk-3.0
 .config/libreoffice
 .config/pulse
 .config/Thunar
 .emacs.d/auto-save-list/
+
 *~
