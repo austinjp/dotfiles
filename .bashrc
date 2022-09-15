@@ -137,6 +137,7 @@ source () {
         if [[ ! -z "${VIRTUAL_ENV}" ]] && [[ ! -z "${_OLD_VIRTUAL_PATH}" ]]
         then
             export PYTHONPYCACHEPREFIX="/tmp/pycache/"$(echo $(cd $VIRTUAL_ENV/.. 1>/dev/null ; pwd ; cd - 1>/dev/null))
+            . <(pip completion --bash) # Add pip completions for bash. Note: don't use "source"! :)
         else
             unset PYTHONPYCACHEPREFIX
         fi
