@@ -2,6 +2,7 @@ alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml 
 alias bat=batcat
 # alias chromium='flatpak run com.github.Eloston.UngoogledChromium'
 alias chromium='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/bin/chromium --file-forwarding com.github.Eloston.UngoogledChromium @@u %U @@'
+alias cp="cp -i"
 alias db="_OLD_VIRTUAL_PATH= VIRTUAL_ENV= devbox"
 alias docker="podman"
 
@@ -12,6 +13,7 @@ alias dotfiles=dotfile
 alias emacs='_emx(){ emacsclient -t -c -a "" "${@}";}; _emx'
 alias free="free -h --giga"
 alias less="less -XFRS"
+alias mv="mv -i"
 alias pgrep="pgrep -fila"
 alias podman='_podman(){ source <(/usr/bin/podman completion bash) && unalias podman && /usr/bin/podman "${@}";}; _podman ; unset _podman'
 alias remmina='flatpak run org.remmina.Remmina'
