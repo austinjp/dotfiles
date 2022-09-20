@@ -19,9 +19,9 @@ xfce/
 xfce4/
 
 # OneDrive
-.config/onedrive/items.sqlite3
-.config/onedrive/items.sqlite3-wal
-.config/onedrive/refresh_token
+# .config/onedrive/items.sqlite3
+# .config/onedrive/items.sqlite3-wal
+# .config/onedrive/refresh_token
 
 # Ungoogled Chromium
 chromium
@@ -36,6 +36,9 @@ chromium
 !.sdkman/candidates/java/current
 
 # Misc
+*.sqlite
+*.sqlite3
+*.sqlite3*
 cni
 .config/dconf
 .config/gtk-3.0

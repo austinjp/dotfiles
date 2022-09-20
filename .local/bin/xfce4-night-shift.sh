@@ -150,6 +150,28 @@ set_theme 'xsettings' '/Gtk/CursorThemeName' "CURSOR_$suffix"
 # Window manager theme
 set_theme 'xfwm4' '/general/theme' "WM_$suffix"
 
+# Terminal background.
+case "$mode" in
+    day)
+        if is_terminal_dark.sh ; then
+            sed -i'' -e '/^ColorForeground.*/d' ~/.config/xfce4/terminal/terminalrc
+            sed -i'' -e '/^ColorBackground.*/d' ~/.config/xfce4/terminal/terminalrc
+            echo 'ColorForeground=#000000' >> ~/.config/xfce4/terminal/terminalrc
+            echo 'ColorBackground=#ffffff' >> ~/.config/xfce4/terminal/terminalrc
+        fi
+        ;;
+    night)
+        if ! is_terminal_dark.sh ; then
+            sed -i'' -e '/^ColorForeground.*/d' ~/.config/xfce4/terminal/terminalrc
+            sed -i'' -e '/^ColorBackground.*/d' ~/.config/xfce4/terminal/terminalrc
+            echo 'ColorForeground=#f9f6f0' >> ~/.config/xfce4/terminal/terminalrc
+            echo 'ColorBackground=#000000' >> ~/.config/xfce4/terminal/terminalrc
+        fi
+        ;;
+    *)
+        exit 1
+esac
+
 set_config 'active' 'string' "$mode"
 
 echo "<txt>$TEXT</txt>"
