@@ -17,16 +17,7 @@
     path = /home/austinjp/.config/delta/themes.gitconfig
 
 [delta]
-    features = phage-austin
+   features = phage-austin
 
 [delta "interactive"]
     keep-plus-minus-markers = false
-
-[delta "decorations"]
-    # commit-decoration-style = blue ol
-    commit-style = raw
-    file-style = imot
-    # hunk-header-decoration-style = blue ol
-    hunk-header-file-style = red
-    # hunk-header-line-number-style = "#067a00"
-    hunk-header-style = file line-number syntax
