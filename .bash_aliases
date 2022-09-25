@@ -1,5 +1,5 @@
 alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
-alias bat=batcat
+alias bat='batcat --pager="less -XFRS"'
 # alias chromium='flatpak run com.github.Eloston.UngoogledChromium'
 alias chromium='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/bin/chromium --file-forwarding com.github.Eloston.UngoogledChromium @@u %U @@'
 alias cp="cp -i"
@@ -9,7 +9,6 @@ alias docker="podman"
 # Using functions helps avoid issues with $@ being defined elsewhere.
 alias dotfile='_dotfile(){ git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles/ "${@}";}; _dotfile'
 
-alias dotfiles=dotfile
 alias emacs='_emx(){ emacsclient -t -c -a "" "${@}";}; _emx'
 alias free="free -h --giga"
 alias less="less -XFRS"
