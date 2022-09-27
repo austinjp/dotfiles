@@ -11,7 +11,7 @@
     helper = store
 
 [interactive]
-    diffFilter = delta --color-only --features=interactive
+    diffFilter = delta $(delta_theme_switch.sh) --color-only --features=interactive
 
 [include]
     path = /home/austinjp/.config/delta/themes.gitconfig
