@@ -13,11 +13,12 @@ alias emacs='_emx(){ emacsclient -t -c -a "" "${@}";}; _emx'
 alias free="free -h --giga"
 alias less="less -XFRS"
 alias mv="mv -i"
+alias p="pnpm"
 alias pgrep="pgrep -fila"
 alias podman='_podman(){ source <(/usr/bin/podman completion bash) && unalias podman && /usr/bin/podman "${@}";}; _podman ; unset _podman'
 alias remmina='flatpak run org.remmina.Remmina'
 alias skype="flatpak run com.skype.Client"
-alias spotify="flatpak run com.spotify.Client"
+alias spotify="spt"
 alias tree="tree --ignore-case"
 
 
