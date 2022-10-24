@@ -127,26 +127,6 @@ export PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LI
 export PERL_MB_OPT="--install_base \"${HOME}/perl5\""
 export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
 
-# Added 2020-11-23
-# Dynamic Python cache dirs based on env vars set by virtualenv.
-# source() approach courtesy https://stackoverflow.com/a/9497416
-unset PYTHONPYCACHEPREFIX
-source () { 
-    if builtin source "$@"
-    then
-        if [[ ! -z "${VIRTUAL_ENV}" ]] && [[ ! -z "${_OLD_VIRTUAL_PATH}" ]]
-        then
-            export PYTHONPYCACHEPREFIX="/tmp/pycache/"$(echo $(cd $VIRTUAL_ENV/.. 1>/dev/null ; pwd ; cd - 1>/dev/null))
-            . <(pip completion --bash) # Add pip completions for bash. Note: don't use "source"! :)
-        else
-            unset PYTHONPYCACHEPREFIX
-        fi
-        return 0
-    else
-        return $?
-    fi
-}
-
 # Added 2020-11-25
 export PATH="${PATH}:${HOME}/go/bin:node_modules/.bin"
 
@@ -168,7 +148,7 @@ export PYTHONSTARTUP="${HOME}/.pythonrc.py"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
 
 # Added 2022-03-09 for nim (via choosenim).
-export PATH="${PATH}:/home/austinjp/.nimble/bin"
+export PATH="${PATH}:${HOME}/.nimble/bin"
 
 # Added 2022-03-25
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -183,14 +163,14 @@ export PATH="${PATH}:/home/austinjp/.nimble/bin"
 export DELTA_PAGER="less -XFRS"
 
 # Added 2022-06-15 for functiontrace server.
-export PATH="${PATH}:/home/austinjp/.cargo/bin"
+export PATH="${PATH}:${HOME}/.cargo/bin"
 
 # Added 2022-07-16 for latest pandoc-crossref build.
-export PATH="${PATH}:/home/austinjp/.cabal/bin"
+export PATH="${PATH}:${HOME}/.cabal/bin"
 
 # Added 2022-09-12 for go
-export GOPATH=/home/austinjp/.local/lib/go/
-export GOBIN=/home/austinjp/.local/lib/go/bin/
+export GOPATH="${HOME}"/.local/lib/go/
+export GOBIN="${HOME}"/.local/lib/go/bin/
 export PATH="${PATH}:${GOBIN}"
 
 # Added 2022-09-12 for powerline-go
@@ -210,12 +190,47 @@ if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
 fi
 # Workaround for nix-shell --pure
 if [ "$IN_NIX_SHELL" == "pure" ]; then
-    if [ -x "$HOME/.nix-profile/bin/powerline-go" ]; then
-        alias powerline-go="$HOME/.nix-profile/bin/powerline-go"
+    if [ -x "${HOME}/.nix-profile/bin/powerline-go" ]; then
+        alias powerline-go="${HOME}/.nix-profile/bin/powerline-go"
     elif [ -x "/run/current-system/sw/bin/powerline-go" ]; then
         alias powerline-go="/run/current-system/sw/bin/powerline-go"
     fi
 fi
+
+# Added 2022-09-17
+export TZ='Europe/London'
+
+# Added 2022-09-20
+# pnpm
+export PNPM_HOME="${HOME}/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
+# Added 2022-09-22
+export PATH="${HOME}/.nimble/bin:${PATH}"
+
+# Added 2022-10-01 for Rust/Cargo/etc.
+source "${HOME}/.cargo/env"
+
+# Added 2020-11-23
+# Dynamic Python cache dirs based on env vars set by virtualenv.
+# source() approach courtesy https://stackoverflow.com/a/9497416
+unset PYTHONPYCACHEPREFIX
+source () { 
+    if builtin source "$@"
+    then
+        if [[ ! -z "${VIRTUAL_ENV}" ]] && [[ ! -z "${_OLD_VIRTUAL_PATH}" ]]
+        then
+            export PYTHONPYCACHEPREFIX="/tmp/pycache/"$(echo $(cd $VIRTUAL_ENV/.. 1>/dev/null ; pwd ; cd - 1>/dev/null))
+            . <(pip completion --bash) # Add pip completions for bash. Note: don't use "source"! :)
+        else
+            unset PYTHONPYCACHEPREFIX
+        fi
+        return 0
+    else
+        return $?
+    fi
+}
 
 # Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -223,3 +238,4 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 # Do not add anything below here, see sdkman above.
+. "$HOME/.cargo/env"
