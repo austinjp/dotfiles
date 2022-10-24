@@ -9,6 +9,20 @@
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 ;; =====================================================================
+;; smart-mode-line https://github.com/Malabarba/smart-mode-line
+
+(require 'smart-mode-line)
+(setq sml/no-confirm-load-theme t)
+(setq sml/theme 'atom-one-dark)
+(setq sml/theme 'light-powerline)
+(setq sml/theme 'powerline)
+(setq sml/theme 'light)
+(sml/setup)
+
+;; (setq sml/theme 'respectful)
+;; (sml/setup)
+
+;; =====================================================================
 
 ;; See http://tapoueh.org/emacs/el-get.html
 ;; and https://github.com/dimitri/el-get
@@ -193,6 +207,9 @@ There are two things you can do about this warning:
 
 ;; =====================================================================
 
+;; Note: https://github.com/Malabarba/smart-mode-line says custom-set-variables
+;; should be at the *very top* of this file.
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -204,46 +221,75 @@ There are two things you can do about this warning:
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(column-number-mode t)
  '(custom-safe-themes
-   (quote
-    ("6096a2f93610f29bf0f6fe34307587edd21edec95073cbfcfb9d7a3b9206b399" "86e410cba23455840ec0b55cde70eb04cecdc961569f1b4bf4d775738ce73ddb" "a156cf298f369349e34da18a6d1f353b83ac0539da78c8334938dcfb120f378c" "fa2af0c40576f3bde32290d7f4e7aa865eb6bf7ebe31eb9e37c32aa6f4ae8d10" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "f8e384517a35bd7430acb09e7925ab73c79507873e38b442eee2183887250b81" default)))
+   '("aba75724c5d4d0ec0de949694bce5ce6416c132bb031d4e7ac1c4f2dbdd3d580" "6096a2f93610f29bf0f6fe34307587edd21edec95073cbfcfb9d7a3b9206b399" "86e410cba23455840ec0b55cde70eb04cecdc961569f1b4bf4d775738ce73ddb" "a156cf298f369349e34da18a6d1f353b83ac0539da78c8334938dcfb120f378c" "fa2af0c40576f3bde32290d7f4e7aa865eb6bf7ebe31eb9e37c32aa6f4ae8d10" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "f8e384517a35bd7430acb09e7925ab73c79507873e38b442eee2183887250b81" default))
  '(display-line-numbers-type nil)
  '(global-display-line-numbers-mode t)
+ '(ispell-dictionary nil)
  '(load-home-init-file t t)
  '(package-selected-packages
-   (quote
-    (nim-mode
-     tide
-     typescript-mode
-     svelte-mode
-     cython-mode
-     which-key
-     web-mode
-     flycheck-yamllint
-     flycheck-pycheckers
-     flycheck-popup-tip
-     flycheck-mypy
-     flycheck-languagetool
-     flycheck-checkbashisms
-     flycheck
-     magit
-     psgml
-     dockerfile-mode
-     spinner
-     ejc-sql
-     simple-httpd
-     skewer-mode
-     quote
-     elpy
-     leuven-theme
-     edit-indirect
-     gnu-elpa-keyring-update
-     )
-    )
-   )
-
+   '(rust-mode python-mode pyimport py-import-check company-jedi blacken auto-virtualenv flymake-shell flymake-python-pyflakes flymake-flycheck flymake-eslint flymake-cursor flymake-css flymake flycheck-posframe flycheck-nimsuggest flycheck-nim flycheck-indicator flycheck-cython flycheck-clojure flycheck-color-mode-line flycheck-haskell yaml-imenu indent-tools flymake-yamllint flymake-yaml nim-mode tide typescript-mode svelte-mode cython-mode which-key web-mode flycheck-yamllint flycheck-pycheckers flycheck-popup-tip flycheck-mypy flycheck-languagetool flycheck-checkbashisms flycheck magit psgml dockerfile-mode spinner ejc-sql simple-httpd skewer-mode quote elpy leuven-theme edit-indirect gnu-elpa-keyring-update))
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
  '(show-paren-mode t)
-)
+ '(sml/mode-width (if (eq (powerline-current-separator) 'arrow) 'right 'full))
+ '(sml/pos-id-separator
+   '(""
+     (:propertize " " face powerline-active1)
+     (:eval
+      (propertize " " 'display
+                  (funcall
+                   (intern
+                    (format "powerline-%s-%s"
+                            (powerline-current-separator)
+                            (car powerline-default-separator-dir)))
+                   'powerline-active1 'powerline-active2)))
+     (:propertize " " face powerline-active2)))
+ '(sml/pos-minor-modes-separator
+   '(""
+     (:propertize " " face powerline-active1)
+     (:eval
+      (propertize " " 'display
+                  (funcall
+                   (intern
+                    (format "powerline-%s-%s"
+                            (powerline-current-separator)
+                            (cdr powerline-default-separator-dir)))
+                   'powerline-active1 'sml/global)))
+     (:propertize " " face sml/global)))
+ '(sml/pre-id-separator
+   '(""
+     (:propertize " " face sml/global)
+     (:eval
+      (propertize " " 'display
+                  (funcall
+                   (intern
+                    (format "powerline-%s-%s"
+                            (powerline-current-separator)
+                            (car powerline-default-separator-dir)))
+                   'sml/global 'powerline-active1)))
+     (:propertize " " face powerline-active1)))
+ '(sml/pre-minor-modes-separator
+   '(""
+     (:propertize " " face powerline-active2)
+     (:eval
+      (propertize " " 'display
+                  (funcall
+                   (intern
+                    (format "powerline-%s-%s"
+                            (powerline-current-separator)
+                            (cdr powerline-default-separator-dir)))
+                   'powerline-active2 'powerline-active1)))
+     (:propertize " " face powerline-active1)))
+ '(sml/pre-modes-separator (propertize " " 'face 'sml/modes)))
+
+
+;; =====================================================================
+
+;; =====================================================================
+;; Yaml-mode newline-and-indent.
+
+(add-hook 'yaml-mode-hook
+          '(lambda ()
+             (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; =====================================================================
 
@@ -256,7 +302,8 @@ There are two things you can do about this warning:
 
 ;; =====================================================================
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path (expand-file-name "themes"
+                                                       user-emacs-directory))
 
 ;; =====================================================================
 
@@ -382,13 +429,19 @@ There are two things you can do about this warning:
 ;; =====================================================================
 ;; Flycheck setup.
 ;; https://gist.github.com/CodyReichert/9dbc8bd2a104780b64891d8736682cea
+;; https://github.com/alexmurray/flycheck-posframe
 
 ;; Disable Flymake:
 (setq flymake-start-on-flymake-mode nil)
 
+(require 'flymake-python-pyflakes)
+(add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
+
+
 ;; ;; (use-package flycheck :ensure t :init (global-flycheck-mode t))
-(with-eval-after-load 'flycheck
-  (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
+;; (with-eval-after-load 'flycheck
+;;  (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
+
 ;; ;; Disable default jshint:
 ;; (setq-default flycheck-disabled-checkers
 ;;               (append flycheck-disabled-checkers
@@ -396,6 +449,11 @@ There are two things you can do about this warning:
 ;; Enable eslint checker for web-mode
 ;; (flycheck-add-mode 'javascript-eslint 'web-mode)
 
+;; Automatically make Flycheck use postframe.
+;; (use-package flycheck-posframe
+;;              :ensure t
+;;              :after flycheck
+;;              :config (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
 
 ;; =====================================================================
 ;; Web-mode setup.
@@ -404,3 +462,4 @@ There are two things you can do about this warning:
 ;; JSX syntax highlighting:
 (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 (add-hook 'web-mode-hook  'web-mode-init-hook)
+
