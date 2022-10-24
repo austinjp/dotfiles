@@ -1,0 +1,34 @@
+{
+  "B34200000000:83000100": {
+    "_modelId": "B34200000000",
+    "_name": "Bluetooth Multi-Device Keyboard K380",
+    "_unitId": "83000100",
+    "disable-keyboard-keys": {
+      "1": false,
+      "16": false,
+      "4": false,
+      "8": false
+    },
+    "divert-keys": {
+      "1": 0,
+      "186": 0,
+      "187": 0,
+      "188": 0,
+      "189": 0,
+      "190": 0,
+      "191": 0,
+      "192": 0,
+      "193": 0,
+      "194": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "62": 0
+    },
+    "fn-swap": true,
+    "multiplatform": 1
+  },
+  "_version": "1.1.1"
+}
