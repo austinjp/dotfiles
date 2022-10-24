@@ -43,9 +43,24 @@ cni
 .config/dconf
 .config/gtk-3.0
 .config/libreoffice
+.config/Google
+.config/Kingsoft
+.config/Microsoft
 .config/pulse
 .config/Thunar
+.config/QtProject.conf
+.config/atril/
+.config/autostart/
+.config/calibre/
+.config/enchant/
+.config/graviton/
+.config/ibus/
+.config/papis/
+.config/teams/
+.config/zoomus.conf
 .emacs.d/auto-save-list/
 spotifyd/
 
+# Backup files.
 *~
+*.bak
