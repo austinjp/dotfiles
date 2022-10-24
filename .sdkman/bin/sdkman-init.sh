@@ -18,7 +18,7 @@
 
 # set env vars if not set
 if [ -z "$SDKMAN_VERSION" ]; then
-	export SDKMAN_VERSION="5.15.0"
+	export SDKMAN_VERSION="5.16.0"
 fi
 
 if [ -z "$SDKMAN_CANDIDATES_API" ]; then
@@ -225,8 +225,9 @@ if [[ "$sdkman_auto_env" == "true" ]]; then
 
 			export SDKMAN_OLD_PWD="$PWD"
 		}
-
-		[[ -z "$PROMPT_COMMAND" ]] && PROMPT_COMMAND="sdkman_auto_env" || PROMPT_COMMAND="${PROMPT_COMMAND%\;};sdkman_auto_env"
+		
+		trimmed_prompt_command="${PROMPT_COMMAND%"${PROMPT_COMMAND##*[![:space:]]}"}"
+		[[ -z "$trimmed_prompt_command" ]] && PROMPT_COMMAND="sdkman_auto_env" || PROMPT_COMMAND="${trimmed_prompt_command%\;};sdkman_auto_env"
 	fi
 
 	sdkman_auto_env
