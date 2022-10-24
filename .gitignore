@@ -19,9 +19,11 @@ xfce/
 xfce4/
 
 # OneDrive
-# .config/onedrive/items.sqlite3
-# .config/onedrive/items.sqlite3-wal
-# .config/onedrive/refresh_token
+.config/onedrive/items.sqlite3
+.config/onedrive/items.sqlite3-wal
+.config/onedrive/refresh_token
+.config/onedrive/.config.backup
+.config/onedrive/.config.hash
 
 # Ungoogled Chromium
 chromium
