@@ -1,5 +1,7 @@
 alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
 alias bat='batcat --pager="less -XFRS"'
+alias cast="mkchromecast"
+alias chromecast="mkchromecast"
 # alias chromium='flatpak run com.github.Eloston.UngoogledChromium'
 alias chromium='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/bin/chromium --file-forwarding com.github.Eloston.UngoogledChromium @@u %U @@'
 alias cp="cp -i"
