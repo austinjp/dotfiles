@@ -21,5 +21,13 @@
 
 [delta "interactive"]
     keep-plus-minus-markers = false
+
 [init]
-	defaultBranch = main
+    defaultBranch = main
+
+[diff "pandoc"]
+    textconv=pandoc --to=markdown --columns $(tput cols)
+    prompt = false
+
+[alias]
+    wdiff = diff --word-diff=color --unified=1
