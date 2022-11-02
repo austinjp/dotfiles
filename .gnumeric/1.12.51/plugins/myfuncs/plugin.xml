@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<plugin id="Gnumeric_MyFuncPlugin">
+  <information>
+    <name>Some Python functions</name>
+    <description>A few extra python functions.</description>
+  </information>
+  <loader type="Gnumeric_PythonLoader:python">
+    <attribute name="module_name" value="plugin_functions"/>
+  </loader>
+  <services>
+    <service type="function_group" id="austinjp">
+      <category>Local Python</category>
+      <functions>
+        <function name="py_md5"/>
+      </functions>
+    </service>
+  </services>
+</plugin>
