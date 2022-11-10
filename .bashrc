@@ -232,6 +232,11 @@ source () {
     fi
 }
 
+# Env var for https://keys.pub
+if test -f "${HOME}/.keys.sh"; then
+    source "${HOME}/.keys.sh"
+fi
+
 # Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="${HOME}/.sdkman"
