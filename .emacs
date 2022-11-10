@@ -220,15 +220,20 @@ There are two things you can do about this warning:
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(column-number-mode t)
+ '(css-indent-offset 2)
  '(custom-safe-themes
-   '("aba75724c5d4d0ec0de949694bce5ce6416c132bb031d4e7ac1c4f2dbdd3d580" "6096a2f93610f29bf0f6fe34307587edd21edec95073cbfcfb9d7a3b9206b399" "86e410cba23455840ec0b55cde70eb04cecdc961569f1b4bf4d775738ce73ddb" "a156cf298f369349e34da18a6d1f353b83ac0539da78c8334938dcfb120f378c" "fa2af0c40576f3bde32290d7f4e7aa865eb6bf7ebe31eb9e37c32aa6f4ae8d10" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "f8e384517a35bd7430acb09e7925ab73c79507873e38b442eee2183887250b81" default))
+   '("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "b9e9ba5aeedcc5ba8be99f1cc9301f6679912910ff92fdf7980929c2fc83ab4d" "ed68393e901a88b9feefea1abfa9a9c5983e166e4378c71bb92e636423bd94fd" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "67f0f440afa2e68d9d00219b5a56308761af45832fb60769d2b2fd36e3fead45" "aba75724c5d4d0ec0de949694bce5ce6416c132bb031d4e7ac1c4f2dbdd3d580" "6096a2f93610f29bf0f6fe34307587edd21edec95073cbfcfb9d7a3b9206b399" "86e410cba23455840ec0b55cde70eb04cecdc961569f1b4bf4d775738ce73ddb" "a156cf298f369349e34da18a6d1f353b83ac0539da78c8334938dcfb120f378c" "fa2af0c40576f3bde32290d7f4e7aa865eb6bf7ebe31eb9e37c32aa6f4ae8d10" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "f8e384517a35bd7430acb09e7925ab73c79507873e38b442eee2183887250b81" default))
  '(display-line-numbers-type nil)
  '(global-display-line-numbers-mode t)
+ '(hl-sexp-background-color "#33323e")
  '(ispell-dictionary nil)
+ '(js-indent-level 2)
  '(load-home-init-file t t)
  '(package-selected-packages
-   '(rust-mode python-mode pyimport py-import-check company-jedi blacken auto-virtualenv flymake-shell flymake-python-pyflakes flymake-flycheck flymake-eslint flymake-cursor flymake-css flymake flycheck-posframe flycheck-nimsuggest flycheck-nim flycheck-indicator flycheck-cython flycheck-clojure flycheck-color-mode-line flycheck-haskell yaml-imenu indent-tools flymake-yamllint flymake-yaml nim-mode tide typescript-mode svelte-mode cython-mode which-key web-mode flycheck-yamllint flycheck-pycheckers flycheck-popup-tip flycheck-mypy flycheck-languagetool flycheck-checkbashisms flycheck magit psgml dockerfile-mode spinner ejc-sql simple-httpd skewer-mode quote elpy leuven-theme edit-indirect gnu-elpa-keyring-update))
+   '(quarto-mode rust-mode python-mode pyimport py-import-check company-jedi blacken auto-virtualenv flymake-shell flymake-python-pyflakes flymake-flycheck flymake-eslint flymake-cursor flymake-css flymake flycheck-posframe flycheck-nimsuggest flycheck-nim flycheck-indicator flycheck-cython flycheck-clojure flycheck-color-mode-line flycheck-haskell yaml-imenu indent-tools flymake-yamllint flymake-yaml nim-mode tide typescript-mode svelte-mode cython-mode which-key web-mode flycheck-yamllint flycheck-pycheckers flycheck-popup-tip flycheck-mypy flycheck-languagetool flycheck-checkbashisms flycheck magit psgml dockerfile-mode spinner ejc-sql simple-httpd skewer-mode quote elpy leuven-theme edit-indirect gnu-elpa-keyring-update))
+ '(pyvenv-mode t)
  '(pyvenv-virtualenvwrapper-python "/usr/bin/python3")
+ '(sgml-basic-offset 2)
  '(show-paren-mode t)
  '(sml/mode-width (if (eq (powerline-current-separator) 'arrow) 'right 'full))
  '(sml/pos-id-separator
@@ -463,3 +468,6 @@ There are two things you can do about this warning:
 (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 (add-hook 'web-mode-hook  'web-mode-init-hook)
 
+;; =====================================================================
+;; Quarto mode, see quarto.org
+(require 'quarto-mode)
