@@ -1,0 +1,63 @@
+% Emacs-like key bindings.
+() = evalfile("/usr/share/jed/lib/emacs.sl");
+
+% Default colour scheme.
+% /usr/share/jed/lib/colors/default1.sl
+set_color_scheme ("default1");
+
+% enable_menu_keys ();
+
+% Enable mouse. It actually feels like mouse-down is "sticky".
+enable_xmouse ();
+
+% ...
+WRAP_INDENTS = 1;
+
+% ...
+USE_ANSI_COLORS = 1;
+
+% Ensure backups ARE created. Case-sensitive var!
+No_Backups = 0;
+
+% Enable region highlighting.
+HIGHLIGHT = 1;
+
+% Display column and line numbers in status bar.
+LINENUMBERS = 1;
+
+% Add newline to file when writing if one not present.
+ADD_NEWLINE = 1;
+
+% Emacs-like line killing.
+KILL_LINE_FEATURE = 0;
+
+% Ensure top menu bar is shown.
+enable_top_status_line(1);
+
+% More Emacs-like keybinding stuff. Kudos
+% https://github.com/miketang84/jedrc/blob/master/.jedrc
+%
+unsetkey("\ef");
+setkey("skip_word", "\ef");
+
+unsetkey("\eb");
+setkey("bskip_word", "\eb");
+
+unsetkey("\ee");
+setkey("eol_cmd", "\ee");
+
+unsetkey("\ea");
+setkey("beg_of_line", "\ea");
+
+unsetkey("\es");
+unsetkey("\eu");
+
+% Prevent jed's ctrl-h from triggering help.
+unsetkey("^h");
+unsetkey("^H");
+unsetkey("\eh");
+
+unsetkey("\ei");
+setkey ("insert_char('\t')", "\ei");
+%
+% End Emacs keybinding stuff.
