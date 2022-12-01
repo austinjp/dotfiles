@@ -1,4 +1,4 @@
-alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
+# alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
 alias bat='batcat --pager="less -XFRS"'
 alias cast="mkchromecast"
 alias chromecast="mkchromecast"
@@ -12,7 +12,7 @@ alias docker="podman"
 # Using functions helps avoid issues with $@ being defined elsewhere.
 alias dotfile='_dotfile(){ git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles/ "${@}";}; _dotfile'
 
-alias du='du --dereference-args --total -B 1MB'
+alias du='du -s -m -P -H'
 alias emacs='_emx(){ emacsclient -t -c -a "" "${@}";}; _emx'
 alias free="free -h --giga"
 alias less="less -XFRS"
