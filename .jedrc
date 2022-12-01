@@ -1,5 +1,8 @@
-% Emacs-like key bindings.
-() = evalfile("/usr/share/jed/lib/emacs.sl");
+% Blink matching parentheses.
+BLINK = 1;
+
+% Make search case insensitive.
+CASE_SEARCH = 0;
 
 % Default colour scheme.
 % /usr/share/jed/lib/colors/default1.sl
@@ -34,9 +37,11 @@ KILL_LINE_FEATURE = 0;
 % Ensure top menu bar is shown.
 enable_top_status_line(1);
 
-% More Emacs-like keybinding stuff. Kudos
+% Emacs-like keybinding stuff. Kudos
 % https://github.com/miketang84/jedrc/blob/master/.jedrc
 %
+() = evalfile("/usr/share/jed/lib/emacs.sl");
+
 unsetkey("\ef");
 setkey("skip_word", "\ef");
 
