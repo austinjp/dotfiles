@@ -61,7 +61,7 @@ cni
 .config/papis/
 .config/teams/
 .config/zoomus.conf
-.emacs.d/auto-save-list/
+.emacs.d/
 spotifyd/
 
 # Backup files.
