@@ -5,6 +5,7 @@ alias chromecast="mkchromecast"
 # alias chromium='flatpak run com.github.Eloston.UngoogledChromium'
 alias chromium='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/bin/chromium --file-forwarding com.github.Eloston.UngoogledChromium @@u %U @@'
 alias cp="cp -i"
+alias diff="diff --width=$(tput cols)"
 alias db="_OLD_VIRTUAL_PATH= VIRTUAL_ENV= devbox"
 alias df='df -B 1MB'
 alias docker="podman"
@@ -13,13 +14,17 @@ alias docker="podman"
 alias dotfile='_dotfile(){ git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles/ "${@}";}; _dotfile'
 
 alias du='du -s -m -P -H'
+
+# The -a arg uses $ALTERNATIVE_EDITOR but when set to blank string,
+# it starts an emacs daemon :)
 alias emacs='_emx(){ emacsclient -t -c -a "" "${@}";}; _emx'
+
 alias free="free -h --giga"
 alias less="less -XFRS"
 alias mv="mv -i"
 alias p="pnpm"
 alias pgrep="pgrep -fila"
-alias podman='_podman(){ source <(/usr/bin/podman completion bash) && unalias podman && /usr/bin/podman "${@}";}; _podman ; unset _podman'
+alias podman='_podman(){ type __podman_init_completion >/dev/null 2>/dev/null || source <(\podman completion bash) ; \podman "${@}" ; }; _podman'
 alias remmina='flatpak run org.remmina.Remmina'
 alias skype="flatpak run com.skype.Client"
 alias spotify="spt"
