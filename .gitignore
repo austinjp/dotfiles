@@ -5,6 +5,8 @@ cert*
 *token*
 token*
 *token
+.config/Signal
+.config/kleopatrarc
 
 # gauth
 .config/gauth.*
@@ -58,6 +60,8 @@ cni
 .config/enchant/
 .config/graviton/
 .config/ibus/
+.config/onedrive/.config.backup
+.config/onedrive/.config.hash
 .config/papis/
 .config/teams/
 .config/zoomus.conf
