@@ -7,10 +7,11 @@
 ;;  5. Online package repositories.
 ;;  6. Initialise package installers.
 ;;  7. Load custom packages.
-;;  8. Language server.
-;;  9. Flycheck (LS recommends this over flymake).
-;; 10. Flycheck language settings.
-;; 11. Mundane bits.
+;; . Language server.
+;; . Flycheck (LS recommends this over flymake).
+;; . Eldoc config.
+;; . Flycheck language settings.
+;; . Mundane bits.
 
 ;; ----------------------------------------------------------------------
 
@@ -52,8 +53,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(lsp-ui lsp-treemacs company lsp-mode xclip markdown-mode flycheck el-get)))
+ '(package-selected-packages '(eglot company xclip markdown-mode flycheck el-get)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -140,57 +140,71 @@
 
 ;; ----------------------------------------------------------------------
 
-;; 8. Language server.
+;; Company config.
 
-(use-package lsp-mode
-  :commands lsp)
-
-(use-package lsp-ui)
-
+;; Use 'complete-anything' (company) for pop-ups.
 (use-package company
-  :init global-company-mode
+  :init (global-company-mode)
   )
 (add-hook 'after-init-hook #'global-company-mode)
 
-(use-package lsp-treemacs)
-
-;; (use-package helm-lsp)
-
-(require 'lsp-mode)
-(setq lsp-mode 't)
-(setq lsp-ui-doc-enable nil)
-;; Hooks. Note, all are deferred.
-(add-hook 'python-mode-hook #'lsp-deferred)
-(add-hook 'lisp-mode-hook #'lsp-deferred)
-(add-hook 'sh-mode-hook #'lsp-deferred)
-
-;; (require 'lsp-ui-sideline)
-;; (setq lsp-ui-sideline 't)
-;; (setq lsp-ui-sideline-mode 't)
-
-;; Use 'complete-anything' (company) for pop-ups.
-;; (require 'company)
-
-;; Maybe use this?
-;; (use-package dap-mode)
-
-;; Pick one of the following:
-;; (use-package helm-lsp)
-;; (use-package lsp-ivy)
-
-;; Reminder to myself: alternative way to add hooks:
-;; (use-package lsp-mode
-;;   :commands lsp
-;;   :hook
-;;   (sh-mode . lsp))
-
-;; Reminder to myself: to change prefix for lsp-mode keybindings:
-;; (setq lsp-keymap-prefix "s-l")
-
+;; (use-package lsp-treemacs)
 
 ;; ----------------------------------------------------------------------
 
-;; 9. Flycheck.
+;; Eldoc config.
+
+;; Hmm, try using global-eldoc-mode instead?
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'python-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'sh-mode-hook 'turn-on-eldoc-mode)
+
+;; ----------------------------------------------------------------------
+
+;; Language server.
+
+(use-package eglot)
+(require 'eglot)
+
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+	       ;; I run pylsp as a systemd service, but that's not necessary.
+	       ;; Kudos: https://gitlab.com/morph027/vim8#linux
+	       '(emacs-lisp-mode . ("~/.roswell/bin/cl-lsp")))
+  (add-to-list 'eglot-server-programs
+	       '(lisp-mode . ("~/.roswell/bin/cl-lsp")))
+  (add-to-list 'eglot-server-programs
+	       '(python-mode . ("pylsp"))
+	       ;; "pyflakes3"
+	       ;; "jedi-language-server"
+	       )
+)
+
+
+;; ;; Reminder to self: This doesn't seem to work, no options appear??
+;; (with-eval-after-load 'eglot
+;;   (add-to-list 'eglot-server-programs
+;;                `(foo-mode . ,(eglot-alternatives
+;;                               '(("pylsp")
+;;                                 ("~/.local/bin/jedi-language-server/jedi-language-server"))))))
+
+(add-hook 'emacs-lisp-mode-hook 'eglot-ensure)
+(add-hook 'ielm-mode-hook 'eglot-ensure)
+(add-hook 'lisp-interaction-mode-hook 'eglot-ensure)
+(add-hook 'lisp-mode-hook 'eglot-ensure)
+(add-hook 'python-mode-hook 'eglot-ensure)
+(add-hook 'sh-mode-hook 'eglot-ensure)
+
+;; ;; Keep eglot away from some stuff:
+;; (add-to-list 'eglot-stay-out-of 'flymake)
+;; (add-to-list 'eglot-stay-out-of "company")
+
+;; ----------------------------------------------------------------------
+
+;; Flycheck.
 
 (setq flycheck-python-flake8-executable "flake8")
 (setq flycheck-enabled-checkers '(python-flake8))
@@ -211,30 +225,15 @@
 
 ;; ----------------------------------------------------------------------
 
-;; 10. Flycheck language settings.
+;; Flycheck language settings.
 
-;; 10 (a). Python.
+;; (a). Python.
 
-(add-to-list 'lsp-disabled-clients 'jedi pyls)
-(add-to-list 'lsp-enabled-clients 'pylsp)
-
-;; See https://github.com/fredcamps/lsp-jedi
-;; (use-package lsp-jedi
-;;   :ensure t
-;;   :config
-;;   (with-eval-after-load "lsp-mode"
-;;     (add-to-list 'lsp-disabled-clients 'pyls pylsp)
-;;     (add-to-list 'lsp-enabled-clients 'jedi)))
-
-;; ;; Remember, could use mypy here too:
-;; ;; (setq flycheck-enabled-checkers '(python-flake8 python-mypy))
-;; 
-;; ;; To explicitly disable pylint (not currently installed anyway):
-;; ;; (setq flycheck-disabled-checkers '(python-pylint)
+;; TODO: mypy
 
 ;; ----------------------------------------------------------------------
 
-;; 11. Mundane bits.
+;; Mundane bits.
 
 (setq column-number-mode 't)
 
