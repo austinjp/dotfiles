@@ -1,17 +1,16 @@
-import os
-
+from os import environ
 from pathlib import Path
 
-if not "PTPYTHON_CONFIG_HOME" in os.environ:
-    os.environ["PTPYTHON_CONFIG_HOME"] = str(Path.home() / ".config/ptpython")
-
+if "PTPYTHON_CONFIG_HOME" not in environ:
+    environ["PTPYTHON_CONFIG_HOME"] = str(Path.home() / ".config/ptpython")
 
 try:
     from ptpython.repl import embed
 except ImportError:
     print("ptpython is not available: falling back to standard prompt")
 else:
-    import logging, sys
+    import logging
+    import sys
 
     logger = logging.getLogger()
     logger.setLevel(10)
@@ -26,7 +25,9 @@ else:
 
     sys.exit(
         embed(
-            history_filename=str(Path.home() / ".local/share/ptpython/history"),
+            history_filename=str(
+                Path.home() / ".local/share/ptpython/history"
+            ),
             globals=globals(),
             locals=locals(),
             patch_stdout=True,
