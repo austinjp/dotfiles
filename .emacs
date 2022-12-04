@@ -26,6 +26,11 @@
 
 ;; Assumes Emacs version 27.1 on Linux.
 
+;; To byte-compile ~/.emacs.d directory, kill emacs the run the following.
+;; This will speed up subsequent startup times. Note the leading backslash
+;; which bypasses any aliases.
+;; \emacs -Q --batch --eval '(byte-recompile-directory "~/.emacs.d/" 0)'
+
 ;; I run Emacs as a daemon and connect to it with emacsclient, which
 ;; provides a speedy experience at the expense of a long-running
 ;; daemon which might in turn start other long-running processes.
