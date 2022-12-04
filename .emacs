@@ -38,11 +38,8 @@
 ;; daemon if there isn't one already running, see here:
 ;; https://github.com/austinjp/dotfiles/blob/main/.bash_aliases
 
-;; El-Get should be installed by hand, not using package-install.
-;; See https://github.com/dimitri/el-get
-;; The packaged version works, but uses the deprecated 'cl' package.
-;; Also, the packaged version seems to be responsible for impenetrable
-;; warning messages about el-get-core not being found.
+;; There is much debate about flymake vs flycheck. I've gone with flycheck
+;; but... see https://github.com/purcell/flymake-flycheck
 
 ;; ----------------------------------------------------------------------
 
