@@ -57,7 +57,7 @@
  ;; If there is more than one, they won't work right.
  '(help-at-pt-timer-delay 0.1)
  '(package-selected-packages
-   '(sideline-flycheck sideline project eglot company xclip markdown-mode flycheck)))
+   '(multi-web-mode json-mode treemacs-magit treemacs magit sideline-flycheck sideline project eglot company xclip markdown-mode flycheck)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -122,6 +122,9 @@
     :init
     (global-flycheck-mode)
     )
+  (use-package json-mode)
+  (use-package magit)
+  (use-package multi-web-mode)
   (use-package markdown-mode)
   (use-package project)
 
@@ -146,6 +149,8 @@
     :init
     )
 
+  (use-package treemacs-magit)
+  (use-package treemacs)
   (use-package xclip)
   )
 
