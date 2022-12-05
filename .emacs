@@ -9,9 +9,8 @@
 ;;  7. Load custom packages.
 ;;  8. Eldoc config.
 ;;  9. Language server.
-;; 10. Flycheck (LS recommends this over flymake).
-;; 11. Flycheck language settings.
-;; 12. Miscellaneous.
+;; 10. Flymake
+;; 11. Miscellaneous.
 
 ;; ======================================================================
 
@@ -38,7 +37,7 @@
 ;; daemon if there isn't one already running, see here:
 ;; https://github.com/austinjp/dotfiles/blob/main/.bash_aliases
 
-;; There is much debate about flymake vs flycheck. I've gone with flycheck
+;; There is much debate about flymake vs flycheck.
 ;; but... see https://github.com/purcell/flymake-flycheck
 
 ;; ======================================================================
@@ -57,7 +56,7 @@
  ;; If there is more than one, they won't work right.
  '(help-at-pt-timer-delay 0.1)
  '(package-selected-packages
-   '(sideline-flymake multi-web-mode json-mode treemacs-magit treemacs magit sideline-flycheck sideline project eglot company xclip markdown-mode flycheck)))
+   '(js2-mode flymake-eslint sideline-flymake multi-web-mode json-mode treemacs-magit treemacs magit sideline project eglot company xclip markdown-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -109,37 +108,39 @@
 
 ;; 7. Load custom packages.
 
-;; Using use-package not package, but Emacs inserts package-initialise if
-;; it's not in this file commented out!
+;; Using use-package not package, but Emacs inserts package-initialize if
+;; it's not in this file commented out, apparently!
 ;; (package-initialize)
-(eval-when-compile
-  (use-package company
-    :init
-    (global-company-mode)
-    )
-  ;; (use-package company-quickhelp) ;; see config below
-  (use-package eglot)             ;; see config below
-  (use-package flycheck           ;; see config below
-    :init
-    (global-flycheck-mode)
-    )
-  (use-package json-mode)
-  (use-package magit)
-  (use-package multi-web-mode)
-  (use-package markdown-mode)
-  (use-package project)
-  (use-package treemacs-magit)
-  (use-package treemacs)
-  (use-package xclip)
+(use-package company
+  :init
+  (global-company-mode)
   )
+;; (use-package company-quickhelp) ;; See config below
 
-;; Use sideline and sideline-flycheck to display messages from flycheck.
+(use-package eglot)                ;; See config below
+
+(use-package flymake)              ;; See sideline below.
+(use-package flymake-eslint)
+(require 'flymake-eslint)
+(setq flymake-eslint-executable-name "eslint_d")
+
+(use-package json-mode)
+(use-package magit)
+(use-package multi-web-mode)
+(use-package markdown-mode)
+(use-package project)
+(use-package treemacs-magit)
+(use-package treemacs)
+(use-package xclip)
+
 (use-package sideline
+  :hook (flymake-mode-hook . sideline-mode)
   :init
   (global-sideline-mode)
+  (setq sideline-flymake-display-errors-whole-line 'line) ; 'point to show errors only on point
+                                                          ; 'line to show errors on the current line
   (setq
-   sideline-backends-right '(sideline-flycheck)
-   ;; sideline-backends-skip-current-line t  ; don't display on current line
+   sideline-backends-right '(sideline-flymake)
    sideline-order-right 'down                ; or 'up
    sideline-format-left "%s   "              ; format for left aligment
    sideline-format-right "   %s"             ; format for right aligment
@@ -147,20 +148,34 @@
    sideline-display-backend-name t           ; display the backend name
    )
   )
-(use-package sideline-flycheck
-  :init
-  (sideline-flycheck-mode)
-  :hook
-  (flycheck-mode-hook . sideline-mode)
-  (flycheck-mode-hook . sideline-flycheck-setup)
-  )
+
+;; (use-package sideline
+;;   :init
+;;   (global-sideline-mode)
+;;   (setq
+;;    sideline-backends-right '(sideline-flycheck)
+;;    ;; sideline-backends-skip-current-line t  ; don't display on current line
+;;    sideline-order-right 'down                ; or 'up
+;;    sideline-format-left "%s   "              ; format for left aligment
+;;    sideline-format-right "   %s"             ; format for right aligment
+;;    sideline-priority 100                     ; overlays' priority
+;;    sideline-display-backend-name t           ; display the backend name
+;;    )
+;;   )
+;; (use-package sideline-flycheck
+;;   :init
+;;   (sideline-flycheck-mode)
+;;   :hook
+;;   (flycheck-mode-hook . sideline-mode)
+;;   (flycheck-mode-hook . sideline-flycheck-setup)
+;;   )
 
 ;; Ensure the following are always active.
 (add-hook 'after-init-hook #'global-company-mode)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'after-init-hook #'global-sideline-mode)
-(add-hook 'after-init-hook #'sideline-flycheck-mode)
-(sideline-flycheck-mode)
+;; (add-hook 'after-init-hook #'sideline-flycheck-mode)
+;; (sideline-flycheck-mode)
 
 ;; My key-bindings for company-quickhelp override one for flycheck,
 ;; so they're set up after flycheck, below.
@@ -216,14 +231,28 @@
   ;; (add-to-list 'eglot-server-programs
   ;;              '(lisp-mode . ("~/.roswell/bin/cl-lsp")))
   (add-to-list 'eglot-server-programs
-               ;; I run pylsp as a systemd service, but that's not necessary.
+               ;; I run pylsp and eslint_d as systemd services, but that's not necessary.
                ;; Kudos: https://gitlab.com/morph027/vim8#linux
                '(python-mode . ("pylsp"))
-               ;; "pyflakes3"
-               ;; "jedi-language-server"
-               )
-  )
+               ;; '(python-mode . ("pyflakes3"))
+               ;; '(python-mode . ("jedi-language-server"))
 
+               ;; '(javascript-mode . ("eslint_d"))
+               ;; '(js-mode . ("eslint_d"))
+               ;; '(js-jsx-mode . ("eslint_d"))
+               ;; '(json-mode . ("eslint_d"))
+               )
+
+  (add-hook 'python-mode-hook 'eglot-ensure)
+  (add-hook 'sh-mode-hook 'eglot-ensure)
+
+  (add-hook 'javascript-mode-hook 'eglot-ensure)
+  (add-hook 'javascript-mode-hook (lambda () (flymake-eslint-enable)))
+  (add-hook 'js-mode-hook 'eglot-ensure)
+  (add-hook 'js-mode-hook (lambda () (flymake-eslint-enable)))
+  (add-hook 'js-jsx-mode-hook 'eglot-ensure)
+  (add-hook 'js-jsx-mode-hook (lambda () (flymake-eslint-enable)))
+  )
 
 ;; ;; Reminder to self: This doesn't seem to work, no options appear??
 ;; (with-eval-after-load 'eglot
@@ -238,29 +267,26 @@
 ;; (add-hook 'lisp-interaction-mode-hook 'eglot-ensure)
 ;; (add-hook 'lisp-mode-hook 'eglot-ensure)
 
-(add-hook 'python-mode-hook 'eglot-ensure)
-(add-hook 'sh-mode-hook 'eglot-ensure)
-
 ;; ;; Keep eglot away from some stuff:
 ;; (add-to-list 'eglot-stay-out-of 'flymake)
 ;; (add-to-list 'eglot-stay-out-of "company")
 
 ;; ======================================================================
 
-;; 10.Flycheck.
-
-(setq flycheck-python-flake8-executable "flake8")
-(setq flycheck-enabled-checkers '(python-flake8))
-;; Prevent Flycheck complaining about various things.
-;; Kudos https://emacs.stackexchange.com/a/21666
-(setq-default flycheck-disabled-checkers
-              '(
-                emacs-lisp-checkdoc ;; this file :)
-                lsp                 ;; language server
-                )
-              )
-
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; ;; 10. Flycheck.
+;; 
+;; (setq flycheck-python-flake8-executable "flake8")
+;; (setq flycheck-enabled-checkers '(python-flake8))
+;; ;; Prevent Flycheck complaining about various things.
+;; ;; Kudos https://emacs.stackexchange.com/a/21666
+;; (setq-default flycheck-disabled-checkers
+;;               '(
+;;                 emacs-lisp-checkdoc ;; this file :)
+;;                 lsp                 ;; language server
+;;                 )
+;;               )
+;; 
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; ======================================================================
 
@@ -383,3 +409,6 @@ Letters do not insert themselves; instead, they are commands.
 
 ;; (dolist (p load-path)
 ;;   (message (concat "Load path contains: " p)))
+
+(global-eldoc-mode)
+(global-eldoc-mode-enable-in-buffers)
