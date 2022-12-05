@@ -57,7 +57,7 @@
  ;; If there is more than one, they won't work right.
  '(help-at-pt-timer-delay 0.1)
  '(package-selected-packages
-   '(multi-web-mode json-mode treemacs-magit treemacs magit sideline-flycheck sideline project eglot company xclip markdown-mode flycheck)))
+   '(sideline-flymake multi-web-mode json-mode treemacs-magit treemacs magit sideline-flycheck sideline project eglot company xclip markdown-mode flycheck)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -117,8 +117,9 @@
     :init
     (global-company-mode)
     )
-  (use-package eglot)    ;; see config below
-  (use-package flycheck  ;; see config below
+  ;; (use-package company-quickhelp) ;; see config below
+  (use-package eglot)             ;; see config below
+  (use-package flycheck           ;; see config below
     :init
     (global-flycheck-mode)
     )
@@ -127,37 +128,42 @@
   (use-package multi-web-mode)
   (use-package markdown-mode)
   (use-package project)
-
-  ;; Use sideline and sideline-flycheck to display messages from flycheck.
-  (use-package sideline
-    :init
-    (global-sideline-mode)
-    (setq
-     sideline-backends-right '(
-                               sideline-flycheck
-                               )
-     ;; sideline-backends-skip-current-line t  ; don't display on current line
-     sideline-order-right 'down                ; or 'up
-     sideline-format-left "%s   "              ; format for left aligment
-     sideline-format-right "   %s"             ; format for right aligment
-     sideline-priority 100                     ; overlays' priority
-     sideline-display-backend-name t           ; display the backend name
-     )
-    )
-  (use-package sideline-flycheck
-    :hook (flycheck-mode-hook . sideline-mode)
-    :init
-    )
-
   (use-package treemacs-magit)
   (use-package treemacs)
   (use-package xclip)
+  )
+
+;; Use sideline and sideline-flycheck to display messages from flycheck.
+(use-package sideline
+  :init
+  (global-sideline-mode)
+  (setq
+   sideline-backends-right '(sideline-flycheck)
+   ;; sideline-backends-skip-current-line t  ; don't display on current line
+   sideline-order-right 'down                ; or 'up
+   sideline-format-left "%s   "              ; format for left aligment
+   sideline-format-right "   %s"             ; format for right aligment
+   sideline-priority 100                     ; overlays' priority
+   sideline-display-backend-name t           ; display the backend name
+   )
+  )
+(use-package sideline-flycheck
+  :init
+  (sideline-flycheck-mode)
+  :hook
+  (flycheck-mode-hook . sideline-mode)
+  (flycheck-mode-hook . sideline-flycheck-setup)
   )
 
 ;; Ensure the following are always active.
 (add-hook 'after-init-hook #'global-company-mode)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'after-init-hook #'global-sideline-mode)
+(add-hook 'after-init-hook #'sideline-flycheck-mode)
+(sideline-flycheck-mode)
+
+;; My key-bindings for company-quickhelp override one for flycheck,
+;; so they're set up after flycheck, below.
 
 ;; The below is Not currently used, see FIXME.
 
@@ -189,7 +195,7 @@
 ;; Prevent eldoc expanding the echo area.
 (setq eldoc-echo-area-use-multiline-p nil)
 
-;; Hmm, try using global-eldoc-mode instead?
+;; Hmm, try global-eldoc-mode instead?
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
@@ -357,6 +363,19 @@ Letters do not insert themselves; instead, they are commands.
   (setq tabulated-list-sort-key (cons "Status" nil))
   (add-hook 'tabulated-list-revert-hook 'package-menu--refresh nil t)
   (tabulated-list-init-header))
+
+;; ······································································
+
+;; company-quickhelp
+
+;; '(define-key flycheck-mode "C-c h" nil)
+;; '(define-key flycheck "C-c h" nil)
+;; (eval-after-load 'company
+;;   '(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin))
+;; (eval-after-load 'flycheck
+;;   '(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin))
+;; (eval-after-load 'flycheck-mode
+;;   '(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin))
 
 ;; ======================================================================
 
