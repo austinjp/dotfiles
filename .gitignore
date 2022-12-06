@@ -16,6 +16,10 @@ token*
 .config/systemd/user/default.target.wants/syncthing.service
 .config/systemd/user/syncthing.service
 
+# Emacs
+.emacs.d/*
+!.emacs.d/init.el
+
 # XFCE
 xfce/
 xfce4/
@@ -65,7 +69,6 @@ cni
 .config/papis/
 .config/teams/
 .config/zoomus.conf
-.emacs.d/
 spotifyd/
 
 # Backup files.
