@@ -17,7 +17,7 @@ alias du='du -s -m -P -H'
 
 # The -a arg uses $ALTERNATIVE_EDITOR but when set to blank string,
 # it starts an emacs daemon :)
-alias emacs='_emx(){ emacsclient -t -c -a "" "${@}";}; _emx'
+alias emacs="emacsclient -t -c -a \"\""
 
 alias free="free -h --giga"
 alias less="less -XFRS"
