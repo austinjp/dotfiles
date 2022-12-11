@@ -1,5 +1,5 @@
 # alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
-alias bat='batcat --pager="less -XFRS"'
+alias bat='batcat --theme $(is_terminal_dark.sh && echo gruvbox-dark || echo OneHalfLight) --decorations never --pager="less -XFRS"'
 alias cast="mkchromecast"
 alias chromecast="mkchromecast"
 # alias chromium='flatpak run com.github.Eloston.UngoogledChromium'

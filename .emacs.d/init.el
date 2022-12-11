@@ -63,7 +63,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
+   '(js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -72,6 +72,8 @@
  ;; If there is more than one, they won't work right.
  '(font-lock-builtin-face ((((type tty)) (:foreground "cyan"))))
  '(font-lock-string-face ((((type tty)) (:foreground "blue"))))
+ '(markdown-comment-face ((t (:inherit font-lock-comment-face :foreground "color-201"))))
+ '(markdown-markup-face ((t (:inherit shadow :foreground "color-245" :slant normal :weight normal))))
  '(minibuffer-prompt ((((type tty)) (:foreground "cyan")))))
 
 ;; ======================================================================
@@ -150,10 +152,14 @@
    )
   )
 
+;; (c) Flymake bits and bobs.
 
-;; (x) Misc.
+(use-package flymake-css)
+
+;; (d) Misc.
 
 ;; (use-package web-mode :mode "\\.html\\.?")
+(use-package js2-mode)
 (use-package json-mode)
 (use-package multi-web-mode)
 (use-package markdown-mode)
@@ -176,16 +182,30 @@
 
 (use-package eglot)
 
+;; Tell Eglot which language servers are available.
 (with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs
-               '(python-mode . ("pylsp")))
   (add-to-list 'eglot-server-programs
                '(js-mode . ("typescript-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs
+               '(js2-mode . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs
                '(json-mode . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '(python-mode . ("pylsp")))
+  (add-to-list 'eglot-server-programs
+               '(sh-mode . ("bash-language-server" "start")))
+  (add-to-list 'eglot-server-programs
+               '(shell-script-mode . ("bash-language-server" "start")))
   )
 
+;; Enable generally:
 (add-hook 'prog-mode-hook 'eglot-ensure)
+;; Alternatively enable individually:
+(add-hook 'sh-mode-hook 'eglot-ensure)
+(add-hook 'shell-script-mode-hook 'eglot-ensure)
+;; (add-hook 'python-mode-hook 'eglot-ensure)
+;; (add-hook 'js-mode-hook 'eglot-ensure)
+;; etc.
 
 ;; Keep eglot away from some stuff:
 ;; (add-to-list 'eglot-stay-out-of 'flymake)
