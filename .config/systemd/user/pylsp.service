@@ -4,7 +4,7 @@ Description=Language Server for Python (pylsp)
 [Service]
 Type=simple
 WorkingDirectory=/home/austinjp/.cache/pylsp/
-ExecStart=/usr/bin/pylsp --verbose --log-file /tmp/pylsp.log
+ExecStart=/usr/bin/pylsp --verbose
 RestartSec=2
 Restart=on-failure
 
