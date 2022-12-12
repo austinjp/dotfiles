@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mpv 'https://stream.live.vc.bbcmedia.co.uk/bbc_radio_fourfm'

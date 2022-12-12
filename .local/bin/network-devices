@@ -1,0 +1,4 @@
+#!/bin/bash
+
+device=$(sudo arp-scan | ag 'Interface: ' | sed -r -e 's/^Interface: //' | cut -d',' -f 1)
+sudo arp-scan --interface=${device} --timeout 5000 --retry 5 --numeric --localnet
