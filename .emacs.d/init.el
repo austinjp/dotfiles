@@ -71,6 +71,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(font-lock-builtin-face ((((type tty)) (:foreground "cyan"))))
+ '(font-lock-function-name-face ((t (:foreground "color-33"))))
  '(font-lock-string-face ((((type tty)) (:foreground "blue"))))
  '(markdown-comment-face ((t (:inherit font-lock-comment-face :foreground "color-201"))))
  '(markdown-markup-face ((t (:inherit shadow :foreground "color-245" :slant normal :weight normal))))
