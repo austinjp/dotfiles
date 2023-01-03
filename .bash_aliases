@@ -30,6 +30,7 @@ alias remmina='flatpak run org.remmina.Remmina'
 alias skype="flatpak run com.skype.Client"
 alias spotify="spt"
 alias tree="tree --ignore-case"
+alias venv='python -m venv venv$(python --version | cut -f 2 -d" " | cut -f 1-2 -d ".")'
 
 
 # enable color support of ls and also add handy aliases
