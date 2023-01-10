@@ -1,0 +1,8 @@
+#!/bin/bash
+
+dims=$(xdpyinfo | awk -c '/dimensions:/ { print $2 }')
+bash -c 'Xnest :2 -geometry '$dims' & '
+
+dims=$(echo $dims | sed 's/x/,/')
+DISPLAY=:2 /usr/bin/chromium --incognito --temp-profile --window-size=$dims
+
