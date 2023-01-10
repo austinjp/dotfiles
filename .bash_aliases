@@ -1,9 +1,11 @@
 # alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
 alias bat='batcat --theme $(is_terminal_dark.sh && echo gruvbox-dark || echo OneHalfLight) --decorations never --pager="less -XFRSi"'
-alias cast="mkchromecast"
-alias chromecast="mkchromecast"
+# alias cast="mkchromecast"
+# alias chromecast="mkchromecast"
+
 # alias chromium='flatpak run com.github.Eloston.UngoogledChromium'
-alias chromium='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/bin/chromium --file-forwarding com.github.Eloston.UngoogledChromium @@u %U @@'
+# alias chromium='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/bin/chromium --file-forwarding com.github.Eloston.UngoogledChromium @@u %U @@'
+
 alias cp="cp -i"
 alias diff='diff --color=auto --width=$(tput cols)'
 alias db="_OLD_VIRTUAL_PATH= VIRTUAL_ENV= devbox"
