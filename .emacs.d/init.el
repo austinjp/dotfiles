@@ -288,5 +288,13 @@
     (if (> space-count tab-count) (setq indent-tabs-mode nil))
     (if (> tab-count space-count) (setq indent-tabs-mode t))))
 
+;; Copy to X clipboard using M-c (left alt c).
+(defun copy-selected (beg end)
+  (interactive "*r")
+  (if (region-active-p)
+      (shell-command-on-region beg end "xsel -b")
+    (message "No selection!")))
+(global-set-key (kbd "M-c") 'copy-selected)
+
 ;; ======================================================================
 
