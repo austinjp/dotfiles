@@ -75,7 +75,19 @@
  '(font-lock-string-face ((((type tty)) (:foreground "blue"))))
  '(markdown-comment-face ((t (:inherit font-lock-comment-face :foreground "color-201"))))
  '(markdown-markup-face ((t (:inherit shadow :foreground "color-245" :slant normal :weight normal))))
- '(minibuffer-prompt ((((type tty)) (:foreground "cyan")))))
+ '(minibuffer-prompt ((((type tty)) (:foreground "cyan"))))
+ '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "red"))))
+ '(rainbow-delimiters-base-face ((t (:inherit nil))))
+ '(rainbow-delimiters-depth-1-face ((t (:inherit rainbow-delimiters-base-face :foreground "color-40"))))
+ '(rainbow-delimiters-depth-2-face ((t (:inherit rainbow-delimiters-base-face :foreground "color-208"))))
+ '(rainbow-delimiters-depth-3-face ((t (:inherit rainbow-delimiters-base-face :foreground "blue"))))
+ '(rainbow-delimiters-depth-4-face ((t (:inherit rainbow-delimiters-depth-1-face))))
+ '(rainbow-delimiters-depth-5-face ((t (:inherit rainbow-delimiters-depth-2-face))))
+ '(rainbow-delimiters-depth-6-face ((t (:inherit rainbow-delimiters-depth-3-face))))
+ '(rainbow-delimiters-depth-7-face ((t (:inherit rainbow-delimiters-depth-1-face))))
+ '(rainbow-delimiters-depth-8-face ((t (:inherit rainbow-delimiters-depth-2-face))))
+ '(rainbow-delimiters-depth-9-face ((t (:inherit rainbow-delimiters-depth-3-face))))
+ '(rainbow-delimiters-mismatched-face ((t (:inherit rainbow-delimiters-unmatched-face)))))
 
 ;; ======================================================================
 
