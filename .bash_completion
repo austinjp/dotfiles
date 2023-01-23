@@ -9,16 +9,15 @@
 #   /usr/share/bash-completion/completions/
 
 
-for f in $(ls -1 ~/.bash_completion.d/*); do
+for f in $(find ~/.bash_completion.d/ -maxdepth 1 -type f); do
     source "${f}"
 done
 
-OLDIFS=$IFS
-IFS=','
+OLDIFS="${IFS}"
 for i in devbox,db ; do
-    set -- $i
-    export __ORIGINAL=$1
-    export __ALIAS=$2
+    IFS=',' read -r __ORIGINAL __ALIAS <<< "${i}"
+    export __ORIGINAL
+    export __ALIAS
     __cmd=$(complete | grep -E " ${__ORIGINAL}"'$' | head -n 1 | sed -e 's, '"${__ORIGINAL}"'$, '"${__ALIAS}"',')
     if [ "x${__cmd}" != "x" ] ; then
         eval "${__cmd}"
@@ -28,4 +27,4 @@ for i in devbox,db ; do
     unset i
 done
 
-IFS=$OLDIFS
+IFS="${OLDIFS}"
