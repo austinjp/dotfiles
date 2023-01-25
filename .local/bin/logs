@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# journalctl --all --since "$(date --utc +%Y-%0m-%0d\ %H:%M:00)" --utc -x --pager-end --user --follow --output=cat --user-unit "${@}"
+journalctl --all --utc -x --pager-end --user --follow --output=cat --user-unit "${@}"
