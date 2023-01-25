@@ -25,6 +25,9 @@ else:
     asyncio_logger = logging.getLogger("asyncio")
     asyncio_logger.setLevel(100)
 
+    print("Current loggers:",end="\n    ")
+    print("\n    ".join([str(logging.getLogger(name)) for name in logging.root.manager.loggerDict]))
+
     sys.exit(
         embed(
             history_filename=str(
