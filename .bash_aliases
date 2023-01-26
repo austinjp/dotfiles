@@ -22,6 +22,7 @@ alias du='du -s -m -P -H'
 alias emacs="emacsclient -t -c -a \"\""
 
 alias free="free -h --giga"
+alias gitui='EDITOR=/usr/bin/emacs\ -Q VISUAL=/usr/bin/emacs\ -Q gitui'
 alias less="less -XFRS"
 alias mv="mv -i"
 alias p="pnpm"
