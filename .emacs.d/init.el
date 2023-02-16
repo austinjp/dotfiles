@@ -201,34 +201,35 @@
 
 ;; ======================================================================
 
-;; 7. Eglot config.
+;; 7. Eglot config. Currently disabled!
 
-(use-package eglot)
-
-;; Tell Eglot which language servers are available.
-(with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs
-               '(js-mode . ("typescript-language-server" "--stdio")))
-  (add-to-list 'eglot-server-programs
-               '(js2-mode . ("typescript-language-server" "--stdio")))
-  (add-to-list 'eglot-server-programs
-               '(json-mode . ("typescript-language-server" "--stdio")))
-  (add-to-list 'eglot-server-programs
-               '(python-mode . ("pylsp")))
-  (add-to-list 'eglot-server-programs
-               '(sh-mode . ("bash-language-server" "start")))
-  (add-to-list 'eglot-server-programs
-               '(shell-script-mode . ("bash-language-server" "start")))
-  )
-
-;; Enable generally:
-(add-hook 'prog-mode-hook 'eglot-ensure)
-;; Alternatively enable individually:
-(add-hook 'sh-mode-hook 'eglot-ensure)
-(add-hook 'shell-script-mode-hook 'eglot-ensure)
-;; (add-hook 'python-mode-hook 'eglot-ensure)
-;; (add-hook 'js-mode-hook 'eglot-ensure)
-;; etc.
+;; (use-package eglot)
+;; 
+;; ;; Tell Eglot which language servers are available.
+;; (with-eval-after-load 'eglot
+;;   (add-to-list 'eglot-server-programs
+;;                '(js-mode . ("typescript-language-server" "--stdio")))
+;;   (add-to-list 'eglot-server-programs
+;;                '(js2-mode . ("typescript-language-server" "--stdio")))
+;;   (add-to-list 'eglot-server-programs
+;;                '(json-mode . ("typescript-language-server" "--stdio")))
+;;   ;; (add-to-list 'eglot-server-programs
+;;   ;;              '(python-mode . ("pylsp")))
+;;   (add-to-list 'eglot-server-programs
+;;                '(sh-mode . ("bash-language-server" "start")))
+;;   (add-to-list 'eglot-server-programs
+;;                '(shell-script-mode . ("bash-language-server" "start")))
+;;   )
+;; 
+;; ;; Enable generally:
+;; ;; (add-hook 'prog-mode-hook 'eglot-ensure)
+;; 
+;; ;; Alternatively enable individually:
+;; (add-hook 'sh-mode-hook 'eglot-ensure)
+;; (add-hook 'shell-script-mode-hook 'eglot-ensure)
+;; ;; (add-hook 'python-mode-hook 'eglot-ensure)
+;; ;; (add-hook 'js-mode-hook 'eglot-ensure)
+;; ;; etc.
 
 ;; Keep eglot away from some stuff:
 ;; (add-to-list 'eglot-stay-out-of 'flymake)
