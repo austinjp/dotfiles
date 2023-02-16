@@ -1,5 +1,5 @@
 # alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
-alias bat='batcat --theme $(is_terminal_dark.sh && echo gruvbox-dark || echo OneHalfLight) --decorations never --pager="less -XFRSi"'
+alias bat='batcat --theme $(is_terminal_dark.sh && echo gruvbox-dark || echo OneHalfLight) --decorations never --pager="less -XFRi"'
 # alias cast="mkchromecast"
 # alias chromecast="mkchromecast"
 
@@ -23,7 +23,7 @@ alias emacs="emacsclient -t -c -a \"\""
 
 alias free="free -h --giga"
 alias gitui='EDITOR=/usr/bin/emacs\ -Q VISUAL=/usr/bin/emacs\ -Q gitui'
-alias less="less -XFRS"
+alias less="less -XFRi"
 alias mv="mv -i"
 alias p="pnpm"
 alias pgrep="pgrep -fila"
