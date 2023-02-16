@@ -118,6 +118,12 @@
   :config
   (setq use-package-always-ensure 't))
 
+;; Manually kick-start lorem-ipsum.el
+(require 'lorem-ipsum)
+
+;; Manually kick-start quarto-mode for Quarto files.
+(require 'quarto-mode)
+
 ;; ======================================================================
 
 ;; 5. Online package repositories.
