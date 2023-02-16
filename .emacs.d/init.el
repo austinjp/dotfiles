@@ -129,7 +129,9 @@
 ;; 5. Online package repositories.
 
 (add-to-list 'package-archives
-             '("MELPA Stable" . "https://stable.melpa.org/packages/") 't)
+             '("MELPA" . "https://melpa.org/packages/") 't)
+;; (add-to-list 'package-archives
+;;              '("MELPA Stable" . "https://stable.melpa.org/packages/") 't)
 (add-to-list 'package-archives
              '("ELPA" . "https://elpa.gnu.org/packages/") 't)
 
