@@ -17,9 +17,18 @@ alias dotfile='_dotfile(){ git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/
 
 alias du='du -s -m -P -H'
 
-# The -a arg uses $ALTERNATIVE_EDITOR but when set to blank string,
-# it starts an emacs daemon :)
-alias emacs="emacsclient -t -c -a \"\""
+function emacs() {
+    mkdir -p "${HOME}"/.local/tmp
+    emacs_daemon_is_running=$(pgrep emacs | ag '( \-\-daemon| \-\-bg\-daemon)');
+    if [[ "${emacs_daemon_is_running}" ]]; then
+        TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -c -t -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}" || \
+            TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -c -t -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}"
+    else
+        TMPDIR="${HOME}"/.local/tmp /usr/bin/emacs --daemon="${HOME}"/.local/tmp/emacs.socket
+        TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -c -t -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}" || \
+            TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -c -t -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}"
+    fi
+}
 
 alias free="free -h --giga"
 alias gitui='EDITOR=/usr/bin/emacs\ -Q VISUAL=/usr/bin/emacs\ -Q gitui'
