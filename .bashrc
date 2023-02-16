@@ -200,12 +200,6 @@ fi
 # Added 2022-09-17
 export TZ='Europe/London'
 
-# Added 2022-09-20
-# pnpm
-export PNPM_HOME="${HOME}/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
-
 # Added 2022-09-22
 export PATH="${HOME}/.nimble/bin:${PATH}"
 
@@ -236,6 +230,12 @@ source () {
 if test -f "${HOME}/.keys.sh"; then
     source "${HOME}/.keys.sh"
 fi
+
+# Added 2023-01-31 during re-install of pnpm.
+# pnpm
+export PNPM_HOME="${HOME}/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
 
 # Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
