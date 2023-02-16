@@ -24,6 +24,10 @@ alias emacs="emacsclient -t -c -a \"\""
 alias free="free -h --giga"
 alias gitui='EDITOR=/usr/bin/emacs\ -Q VISUAL=/usr/bin/emacs\ -Q gitui'
 alias less="less -XFRi"
+
+function _man() { man "${@}" | bat -l man ; }
+alias man=_man
+
 alias mv="mv -i"
 alias p="pnpm"
 alias pgrep="pgrep -fila"
