@@ -104,7 +104,7 @@
 
 (eval-when-compile
   (setq custom-paths '())
-  (dolist (p '("elpa" "package"))
+  (dolist (p '("elpa" "packages" "site-lisp"))
     (add-to-list 'custom-paths (expand-file-name p user-emacs-directory))
     (add-to-list 'load-path (expand-file-name p user-emacs-directory))
     )
