@@ -21,13 +21,11 @@ function emacs() {
     mkdir -p "${HOME}"/.local/tmp
     emacs_daemon_is_running=$(pgrep emacs | ag '( \-\-daemon| \-\-bg\-daemon)');
     if [[ "${emacs_daemon_is_running}" ]]; then
-        TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -c -t -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}" || \
-            TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -c -t -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}"
+        :
     else
         TMPDIR="${HOME}"/.local/tmp /usr/bin/emacs --daemon="${HOME}"/.local/tmp/emacs.socket
-        TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -c -t -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}" || \
-            TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -c -t -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}"
     fi
+    TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -t -c -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}"
 }
 
 alias free="free -h --giga"
