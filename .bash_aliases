@@ -1,3 +1,4 @@
+#!/bin/bash
 # alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
 alias bat='batcat --theme $(is_terminal_dark.sh && echo gruvbox-dark || echo OneHalfLight) --decorations never --pager="less -XFRi"'
 # alias cast="mkchromecast"
@@ -17,16 +18,18 @@ alias dotfile='_dotfile(){ git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/
 
 alias du='du -s -m -P -H'
 
-function emacs() {
+function _emacs() {
     mkdir -p "${HOME}"/.local/tmp
-    emacs_daemon_is_running=$(pgrep emacs | ag '( \-\-daemon| \-\-bg\-daemon)');
+    emacs_daemon_is_running=$(pgrep emacs | ag '( \-\-daemon| \-\-bg\-daemon| \-\-fg\-daemon)');
     if [[ "${emacs_daemon_is_running}" ]]; then
         :
     else
-        TMPDIR="${HOME}"/.local/tmp /usr/bin/emacs --daemon="${HOME}"/.local/tmp/emacs.socket
+        TMPDIR="${HOME}"/.local/tmp /usr/bin/emacs --daemon="${HOME}"/.local/tmp/emacs.socket ;
     fi
-    TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -t -c -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}"
+    TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -t -c -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}" ;
 }
+alias emacs=_emacs
+export GIT_EDITOR='TMPDIR='"${HOME}"'/.local/tmp /usr/bin/emacsclient -t -c -a jed --socket-name='"${HOME}"'/.local/tmp/emacs.socket'
 
 alias free="free -h --giga"
 alias gitui='EDITOR=/usr/bin/emacs\ -Q VISUAL=/usr/bin/emacs\ -Q gitui'
