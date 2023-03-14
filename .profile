@@ -26,3 +26,7 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 . "$HOME/.cargo/env"
+
+# Update timezone. Added by AJP 2023-02-24.
+TZ='Europe/London'
+export TZ
