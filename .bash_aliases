@@ -42,7 +42,10 @@ alias mv="mv -i"
 alias p="pnpm"
 alias pgrep="pgrep -fila"
 alias podman='_podman(){ type __podman_init_completion >/dev/null 2>/dev/null || source <(\podman completion bash) ; \podman "${@}" ; }; _podman'
-alias redshift='redshift -l 51.5:0.0 -m randr'
+
+# Redshift alias, hard-coded location.
+alias redshift='/usr/bin/redshift -l 51.5:0.0 -m randr'  # UK
+
 alias remmina='flatpak run org.remmina.Remmina'
 alias skype="flatpak run com.skype.Client"
 alias spotify="spt"
