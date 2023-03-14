@@ -233,7 +233,7 @@
 
 ;; Keep eglot away from some stuff:
 ;; (add-to-list 'eglot-stay-out-of 'flymake)
-(add-to-list 'eglot-stay-out-of "company")
+;; (add-to-list 'eglot-stay-out-of "company")
 
 ;; ======================================================================
 
