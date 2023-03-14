@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Kudos: https://unix.stackexchange.com/a/163716
+
+# ( speaker-test -t sine -f 1000 &>/dev/null )& pid=$! ; sleep 0.2s ; kill -9 $pid
+( speaker-test -t pink -f 1000 &>/dev/null )& pid=$! ; sleep 0.2s ; kill -9 $pid
+
