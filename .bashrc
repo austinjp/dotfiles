@@ -197,8 +197,8 @@ if [ "$IN_NIX_SHELL" == "pure" ]; then
     fi
 fi
 
-# Added 2022-09-17
-export TZ='Europe/London'
+# Changed 2023-03-20
+# ALL TIMEZONE/TZ STUFF HAS BEEN MOVED TO ~/.profile
 
 # Added 2022-09-22
 export PATH="${HOME}/.nimble/bin:${PATH}"
