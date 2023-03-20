@@ -19,14 +19,23 @@ fi
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
+    export PATH
 fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
+    export PATH
 fi
 . "$HOME/.cargo/env"
 
-# Update timezone. Added by AJP 2023-02-24.
+
+# TIMTEZONE/TZ settings. If changing this:
+#   1. Edit this file.
+#   2. Start a shell, and check $TZ
+#   3. Run timedatectl set-timezone "${TZ}"
+#   4. Check/edit /etc/ntp.conf
+#   5. Probably reboot!
+# For valid values of TZ, run tzelect.
 TZ='Europe/London'
 export TZ
