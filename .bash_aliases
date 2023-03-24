@@ -32,6 +32,10 @@ alias emacs=_emacs
 export GIT_EDITOR='TMPDIR='"${HOME}"'/.local/tmp /usr/bin/emacsclient -t -c -a jed --socket-name='"${HOME}"'/.local/tmp/emacs.socket'
 
 alias free="free -h --giga"
+function _git_grep() {
+    git rev-list --all | xargs git grep -e "${@}"
+}
+alias gg=_git_grep
 alias gitui='EDITOR=/usr/bin/emacs\ -Q VISUAL=/usr/bin/emacs\ -Q gitui'
 alias less="less -XFRi"
 
@@ -49,7 +53,7 @@ alias redshift='/usr/bin/redshift -l 51.5:0.0 -m randr'  # UK
 alias remmina='flatpak run org.remmina.Remmina'
 alias skype="flatpak run com.skype.Client"
 alias spotify="spt"
-alias tree="tree --ignore-case"
+alias tree="tree --ignore-case -I venv -I 'venv*'"
 alias venv='python -m venv venv-$(python --version | cut -f 2 -d" " | cut -f 1-2 -d ".") && ln -s venv-$(python --version | cut -f 2 -d" " | cut -f 1-2 -d ".") venv && source venv/bin/activate && pip install -U pip build wheel Cython ptpython'
 alias zotero='env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/zotero-snap_zotero-snap.desktop /snap/bin/zotero-snap -c "$(dirname $(readlink -f %k))/zotero -url %U"'
 
