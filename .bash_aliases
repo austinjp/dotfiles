@@ -39,8 +39,8 @@ alias gg=_git_grep
 alias gitui='EDITOR=/usr/bin/emacs\ -Q VISUAL=/usr/bin/emacs\ -Q gitui'
 alias less="less -XFRi"
 
-function _man() { man "${@}" | bat -l man ; }
-alias man=_man
+function _batman() { /usr/bin/man "${@}" | bat -l man ; }
+alias man=_batman
 
 alias mv="mv -i"
 alias p="pnpm"
