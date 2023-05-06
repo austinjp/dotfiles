@@ -7,6 +7,9 @@ alias bat='batcat --theme $(is_terminal_dark.sh && echo gruvbox-dark || echo One
 # alias chromium='flatpak run com.github.Eloston.UngoogledChromium'
 # alias chromium='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=/app/bin/chromium --file-forwarding com.github.Eloston.UngoogledChromium @@u %U @@'
 
+calc() { printf "%s\n" $(echo "$@" | sed -r -e 's,\s+,,g') | bc -l ; }
+alias c=calc
+
 alias cp="cp -i"
 alias diff='diff --color=auto --width=$(tput cols)'
 alias db="_OLD_VIRTUAL_PATH= VIRTUAL_ENV= devbox"
@@ -44,8 +47,17 @@ alias man=_batman
 
 alias mv="mv -i"
 alias p="pnpm"
-alias pgrep="pgrep -fila"
-alias podman='_podman(){ type __podman_init_completion >/dev/null 2>/dev/null || source <(\podman completion bash) ; \podman "${@}" ; }; _podman'
+
+function _pgrep() {
+    _pids=$(\pgrep -fil "${@}" | ag -i "${@}" | cut -d' ' -f 1 | tr $'\n' ',' | sed -e 's/,$//g')
+    if [[ "${_pids}" ]]; then
+        \ps ww --format 'pid,time,command' --pid "${_pids}"
+    fi
+}
+alias pgrep=_pgrep
+
+function _podman(){ type __podman_init_completion >/dev/null 2>/dev/null || source <(\podman completion bash) ; \podman "${@}" ; }
+alias podman=_podman
 
 # Redshift alias, hard-coded location.
 alias redshift='/usr/bin/redshift -l 51.5:0.0 -m randr'  # UK
