@@ -92,7 +92,7 @@ fi
 # Added 2021-08-11
 # source ~/.bashrc.oh-my-bash
 
-export PAGER='less'
+export PAGER='less -XFRi'
 
 # Added 2019-09-12: use specific ssh key in Git:
 # export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_bitbucket"
