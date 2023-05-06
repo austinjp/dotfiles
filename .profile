@@ -30,6 +30,9 @@ fi
 . "$HOME/.cargo/env"
 
 
+# Update timezone. Added 2023-03-20 (but see update below)
+# to try fixing random read-only disk issues!
+# 
 # TIMTEZONE/TZ settings. If changing this:
 #   1. Edit this file.
 #   2. Start a shell, and check $TZ
@@ -37,5 +40,10 @@ fi
 #   4. Check/edit /etc/ntp.conf
 #   5. Probably reboot!
 # For valid values of TZ, run tzelect.
-TZ='Europe/London'
-export TZ
+# 
+# Updated 2023-03-31
+# 
+# To set timezone for whole box:
+#   sudo dpkg-reconfigure tzdata
+# TZ='Europe/London'
+# export TZ
