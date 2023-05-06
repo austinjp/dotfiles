@@ -1,9 +1,8 @@
 from os import environ
-from pathlib import Path
-
 
 
 if "PTPYTHON_CONFIG_HOME" not in environ:
+    from pathlib import Path
     environ["PTPYTHON_CONFIG_HOME"] = str(Path.home() / ".config/ptpython")
 
 try:
