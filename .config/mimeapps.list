@@ -1,12 +1,31 @@
 [Added Associations]
-text/plain=userapp-emacs-2DK4R1.desktop;
+text/plain=jed.desktop;userapp-emacs-2DK4R1.desktop;
 text/css=vim.desktop;
-x-scheme-handler/http=xfce4-web-browser.desktop;
-x-scheme-handler/https=xfce4-web-browser.desktop;
-application/epub+zip=org.gnome.Evince.desktop;
+x-scheme-handler/http=xfce4-web-browser.desktop;firefox.desktop;
+x-scheme-handler/https=xfce4-web-browser.desktop;firefox.desktop;
+application/epub+zip=calibre-ebook-viewer.desktop;atril.desktop;org.gnome.Evince.desktop;
+application/zip=xfce4-file-manager.desktop;
+image/png=pinta_pinta.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice6.4-writer.desktop;
+text/x-tex=libreoffice6.4-writer.desktop;
+x-scheme-handler/chrome=firefox.desktop;
+text/html=firefox.desktop;
+application/x-extension-htm=firefox.desktop;
+application/x-extension-html=firefox.desktop;
+application/x-extension-shtml=firefox.desktop;
+application/xhtml+xml=firefox.desktop;
+application/x-extension-xhtml=firefox.desktop;
+application/x-extension-xht=firefox.desktop;
 
 [Default Applications]
-x-scheme-handler/http=xfce4-web-browser.desktop
-x-scheme-handler/https=xfce4-web-browser.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
 x-scheme-handler/msteams=teams.desktop
-
+x-scheme-handler/chrome=firefox.desktop
+text/html=firefox.desktop
+application/x-extension-htm=firefox.desktop
+application/x-extension-html=firefox.desktop
+application/x-extension-shtml=firefox.desktop
+application/xhtml+xml=firefox.desktop
+application/x-extension-xhtml=firefox.desktop
+application/x-extension-xht=firefox.desktop
