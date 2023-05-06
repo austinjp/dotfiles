@@ -49,7 +49,10 @@ chromium
 *.sqlite3
 *.sqlite3*
 cni
+.config/Caprine
 .config/dconf
+.config/gh/hosts.yml
+.config/godot
 .config/gtk-3.0
 .config/libreoffice
 .config/Google
@@ -67,9 +70,17 @@ cni
 .config/onedrive/.config.backup
 .config/onedrive/.config.hash
 .config/papis/
+.config/spotify-tui/client.yml
 .config/teams/
 .config/zoomus.conf
-spotifyd/
+.config/Recoll.org
+.config/spotifyd/
+.recoll/history
+.recoll/idxstatus.txt
+.recoll/missing
+.recoll/ptrans
+.recoll/webcache
+.recoll/xapiandb
 
 # Backup files.
 *~
