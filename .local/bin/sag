@@ -3,9 +3,9 @@
 # Sorted ag = sag :)
 
 if [ "${3}" ]; then
-    ag --color --group --filename "${2}" $(ag -l "${1}" "${3}" | sort)
+    ag -l "${1}" "${3}" | sort | xargs -d '\n' ag --color --group "${2}"
 elif [ "${2}" ]; then
-    ag --color --group --filename "${1}" $(ag -l "${1}" "${2}" | sort)
+    ag -l "${1}" "${2}" | sort | xargs -d '\n' ag --color --group "${1}"
 else
     echo "Requires 2 or 3 args." 1>&2
     exit 1
