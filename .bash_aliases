@@ -38,8 +38,19 @@ alias free="free -h --giga"
 function _git_grep() {
     git rev-list --all | xargs git grep -e "${@}"
 }
+
+function _gauth() {
+    if [ "${@}" ]; then
+        \gauth | ag -i "${@}" | sed -r -e 's/\s+/ /g' | cut -d' ' -f 6 | xclip -i -selection primary
+    else
+        \gauth
+    fi
+}
+alias gauth=_gauth
+
 alias gg=_git_grep
 alias gitui='EDITOR=/usr/bin/emacs\ -Q VISUAL=/usr/bin/emacs\ -Q gitui'
+
 alias less="less -XFRi"
 
 function _batman() { /usr/bin/man "${@}" | bat -l man ; }
@@ -66,7 +77,19 @@ alias remmina='flatpak run org.remmina.Remmina'
 alias skype="flatpak run com.skype.Client"
 alias spotify="spt"
 alias tree="tree --ignore-case -I venv -I 'venv*'"
-alias venv='python -m venv venv-$(python --version | cut -f 2 -d" " | cut -f 1-2 -d ".") && ln -s venv-$(python --version | cut -f 2 -d" " | cut -f 1-2 -d ".") venv && source venv/bin/activate && pip install -U pip build wheel Cython ptpython'
+
+function venv() {
+    v=$(python --version | cut -f 2 -d" " | cut -f 1-2 -d ".")
+    if [ "${@}" ]; then v="${@}" ; fi
+    p=python
+    if [ "${v}" ]; then p=python"${v}" ; fi
+    echo "Running ${p} -m venv venv-${v}"
+    "${p}" -m venv venv-"${v}" && \
+        ln -s venv-"${v}" venv && \
+        source venv/bin/activate && \
+        pip install -U pip build wheel Cython ptpython
+}
+
 alias zotero='env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/zotero-snap_zotero-snap.desktop /snap/bin/zotero-snap -c "$(dirname $(readlink -f %k))/zotero -url %U"'
 
 # enable color support of ls and also add handy aliases
