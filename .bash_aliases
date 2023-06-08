@@ -23,7 +23,7 @@ alias du='du -s -m -P -H'
 
 function _emacs() {
     mkdir -p "${HOME}"/.local/tmp
-    emacs_daemon_is_running=$(pgrep emacs | ag '( \-\-daemon| \-\-bg\-daemon| \-\-fg\-daemon)');
+    emacs_daemon_is_running=$(\pgrep -fila emacs | ag '( \-\-daemon| \-\-bg\-daemon| \-\-fg\-daemon)');
     if [[ "${emacs_daemon_is_running}" ]]; then
         :
     else
@@ -60,7 +60,7 @@ alias mv="mv -i"
 alias p="pnpm"
 
 function _pgrep() {
-    _pids=$(\pgrep -fil "${@}" | ag -i "${@}" | cut -d' ' -f 1 | tr $'\n' ',' | sed -e 's/,$//g')
+    _pids=$(\pgrep -fila "${@}" | ag -i "${@}" | cut -d' ' -f 1 | tr $'\n' ',' | sed -e 's/,$//g')
     if [[ "${_pids}" ]]; then
         \ps ww --format 'pid,time,command' --pid "${_pids}"
     fi
@@ -76,20 +76,8 @@ alias redshift='/usr/bin/redshift -l 51.5:0.0 -m randr'  # UK
 alias remmina='flatpak run org.remmina.Remmina'
 alias skype="flatpak run com.skype.Client"
 alias spotify="spt"
-alias tree="tree --ignore-case -I venv -I 'venv*'"
-
-function venv() {
-    v=$(python --version | cut -f 2 -d" " | cut -f 1-2 -d ".")
-    if [ "${@}" ]; then v="${@}" ; fi
-    p=python
-    if [ "${v}" ]; then p=python"${v}" ; fi
-    echo "Running ${p} -m venv venv-${v}"
-    "${p}" -m venv venv-"${v}" && \
-        ln -s venv-"${v}" venv && \
-        source venv/bin/activate && \
-        pip install -U pip build wheel Cython ptpython
-}
-
+alias tree="tree --gitignore --ignore-case -I venv -I 'venv*'"
+alias venv='make_venv -s && source venv/bin/activate'
 alias zotero='env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/zotero-snap_zotero-snap.desktop /snap/bin/zotero-snap -c "$(dirname $(readlink -f %k))/zotero -url %U"'
 
 # enable color support of ls and also add handy aliases
