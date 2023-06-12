@@ -28,6 +28,9 @@ HIGHLIGHT = 1;
 % Display column and line numbers in status bar.
 LINENUMBERS = 1;
 
+% Wrap long lines.
+WRAP_DEFAULT = 200;
+
 % Add newline to file when writing if one not present.
 ADD_NEWLINE = 1;
 
