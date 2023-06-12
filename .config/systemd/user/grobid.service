@@ -1,0 +1,12 @@
+[Unit]
+Description=Grobid service over HTTP
+
+[Service]
+Type=simple
+WorkingDirectory=%h/grobid
+ExecStart=%h/grobid/gradlew run
+RestartSec=120
+Restart=always
+
+[Install]
+WantedBy=default.target
