@@ -317,5 +317,9 @@
     (message "No selection!")))
 (global-set-key (kbd "M-c") 'copy-selected)
 
+;; Hide/show menu bar using F10.
+(menu-bar-mode -1) ; start hidden
+(global-set-key [f10] 'toggle-menu-bar-mode-from-frame)
+
 ;; ======================================================================
 
