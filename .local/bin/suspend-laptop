@@ -1,3 +1,4 @@
 #!/bin/bash
 
-sudo systemctl start systemd-suspend
+# sudo systemctl start systemd-suspend
+systemctl suspend -i
