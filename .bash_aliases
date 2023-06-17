@@ -77,7 +77,7 @@ alias remmina='flatpak run org.remmina.Remmina'
 alias skype="flatpak run com.skype.Client"
 alias spotify="spt"
 alias tree="tree --gitignore --ignore-case -I venv -I 'venv*'"
-alias venv='make_venv -s && source venv/bin/activate'
+alias venv='make_venv -s && source venv/bin/activate && ln -sr venv/bin/activate -t .'
 alias zotero='env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/zotero-snap_zotero-snap.desktop /snap/bin/zotero-snap -c "$(dirname $(readlink -f %k))/zotero -url %U"'
 
 # enable color support of ls and also add handy aliases
