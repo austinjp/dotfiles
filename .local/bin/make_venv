@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -euo pipefail
+
+version=$(python --version | cut -f 2 -d" " | cut -f 1-2 -d ".")
+
+VALID_ARGS=$(getopt -o 'v:p:s' --long 'version:prompt:symlink' -- "${@}")
+if [[ $? -ne 0 ]]; then
+    exit 1;
+fi
+
+do_symlink=
+prompt=
+
+eval set -- "${VALID_ARGS}"
+while [ : ]; do
+    case "${1}" in
+        -v|--version)
+            version="${2}"
+            shift 2
+            ;;
+        -p|--prompt)
+            prompt="${2}"
+            shift 2
+            ;;
+        -s|--symlink)
+            do_symlink=yes
+            shift
+            ;;
+        --)
+            shift;
+            break
+            ;;
+    esac
+done
+
+if [ ! "${prompt}" ]; then
+    prompt="${version}"
+fi
+
+p='/usr/bin/python'"${version}"
+cmd="${p} -m venv --prompt='${prompt}' venv-${version}"
+
+echo "Running ${cmd}"
+
+eval $cmd
+
+if [ "${do_symlink}" ]; then
+    echo "Making symlink."
+    ln -s venv-"${version}" venv
+fi
+
+echo "Upgrading tools..."
+source venv-"${version}"/bin/activate
+pip install -U pip build setuptools wheel Cython ptpython
