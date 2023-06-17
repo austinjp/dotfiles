@@ -1,0 +1,161 @@
+#!/bin/bash
+
+# Utility vars to prevent confusion :)
+yes=0
+no=1
+
+# Keep track of empty/unused items
+anything_to_delete="${no}"
+declare -a empty_buckets
+
+
+rule() {
+    for i in $(seq 1 $(tput cols)); do
+        echo -n "${1}"
+    done
+    echo
+}
+
+box() {
+    t="| ${1} |"
+    for i in $(seq 1 "${#t}") ; do
+        if [ $i -eq 1 ] || [ $i -eq "${#t}" ] ; then
+            echo -n "+"
+        else
+            echo -n "-"
+        fi
+    done
+    echo
+}
+
+
+boxtop() {
+    box "${1}"
+}
+
+boxmid() {
+    echo "| ${1} |"
+}
+
+boxbase() {
+    box "${1}"
+}
+
+title() {
+    echo
+    boxtop "${1}"
+    boxmid "${1}"
+    boxbase "${1}"
+    echo
+}
+
+
+query_aws() {
+    echo "Querying AWS..."
+    echo
+
+    for r in $(
+                  aws resourcegroupstaggingapi get-resources | \
+                      ag --nonumbers ResourceARN | \
+                      tr -d '"' | \
+                      tr -d ' ' | \
+                      sed -r -e 's/^ResourceARN://' | \
+                      column -t -s ':' -o':' | \
+                      cut -f 3 -d':' | \
+                      tr -d ' ' | \
+                      sed -e 's/elasticfilesystem/efs/g' | \
+                      sed -r -e 's/^catalog$/servicecatalog/g' | \
+                      sort | uniq | sort
+              ) ; do
+
+        case "${r}" in
+            cloudformation)
+                rule "·"
+                title "${r}"
+                aws cloudformation list-stacks | jq . --sort-keys --color-output --unbuffered
+                ;;
+            codebuild)
+                :
+                ;;
+            codecommit)
+                :
+                ;;
+            codepipeline)
+                :
+                ;;
+            ec2)
+                :
+                ;;
+            efs)
+                :
+                ;;
+            events)
+                :
+                ;;
+            lambda)
+                :
+                ;;
+            s3)
+                rule "·"
+                title "${r}"
+                for bucket in $(aws s3api list-buckets --output json | jq .Buckets[].Name | tr -d '"') ; do
+                    echo "    Bucket: ${bucket}"
+                    # local num_obj=$(aws s3api list-objects --bucket austinplunkett.com --query 'Contents[].{Key: Key}' | jq .[].Key | wc -l)
+                    num_obj=$(aws s3 ls --recursive s3://"${bucket}" | wc -l)
+                    if [  "${num_obj}" -eq 0 ] ; then
+                        echo "        ...is empty."
+                        empty_buckets+=("${bucket}")
+                        anything_to_delete="${yes}"
+                    else
+                        echo "        ...is NOT empty, contains ${num_obj} objects."
+                    fi
+                    echo
+                done
+                :
+                ;;
+            sagemaker)
+                :
+                ;;
+            servicecatalog)
+                :
+                ;;
+            *)
+                :
+                ;;
+        esac
+    done
+}
+
+
+final_report() {
+    rule "="
+    title "Final report"
+    if [ "${anything_to_delete}" == "${yes}" ] ; then
+        echo 
+        echo "You **MAY** want to delete the following items:"
+        echo
+
+        json='{'
+
+        if [ "${empty_buckets}" != "" ] ; then
+            json="${json}"'"Buckets":'
+            bucket_list="[]"
+            for bucket in "${empty_buckets[@]}" ; do
+                bucket_list=$(echo "${bucket_list}" | jq '. |= . + [{"Name":"'"${bucket}"'"}]' -c -M)
+            done
+            json="${json}"$(echo "${bucket_list}" | jq . -M --indent 4 | sed -r -e 's/^/    /g')
+        fi
+
+        json="${json}"'}'
+
+        echo
+        echo $json | jq .
+    fi
+}
+
+run_funcs() {
+    query_aws
+    final_report
+}
+
+run_funcs
