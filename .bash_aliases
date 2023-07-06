@@ -22,6 +22,8 @@ alias dotfile='_dotfile(){ git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/
 alias du='du -s -m -P -H'
 
 function _emacs() {
+    # Change the terminal/tab title:
+    printf '\033]2;%s\033\\' 'Emacs'
     mkdir -p "${HOME}"/.local/tmp
     emacs_daemon_is_running=$(\pgrep -fila emacs | ag '( \-\-daemon| \-\-bg\-daemon| \-\-fg\-daemon)');
     if [[ "${emacs_daemon_is_running}" ]]; then
@@ -38,6 +40,8 @@ alias free="free -h --giga"
 function _git_grep() {
     git rev-list --all | xargs git grep -e "${@}"
 }
+alias gg=_git_grep
+alias gitui='EDITOR=/usr/bin/emacs\ -Q VISUAL=/usr/bin/emacs\ -Q gitui'
 
 function _gauth() {
     if [ "${@}" ]; then
@@ -47,9 +51,6 @@ function _gauth() {
     fi
 }
 alias gauth=_gauth
-
-alias gg=_git_grep
-alias gitui='EDITOR=/usr/bin/emacs\ -Q VISUAL=/usr/bin/emacs\ -Q gitui'
 
 alias less="less -XFRi"
 
