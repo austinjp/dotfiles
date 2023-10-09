@@ -63,7 +63,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(basic-mode fold-this quarto-mode haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
+   '(multiple-cursors basic-mode fold-this quarto-mode haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -320,6 +320,9 @@
 ;; Hide/show menu bar using F10.
 (menu-bar-mode -1) ; start hidden
 (global-set-key [f10] 'toggle-menu-bar-mode-from-frame)
+
+;; Multiple cursors.
+(global-set-key (kbd "C-M-j") 'mc/mark-all-dwim)
 
 ;; ======================================================================
 
