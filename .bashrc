@@ -177,7 +177,7 @@ export PATH="${PATH}:${GOBIN}"
 # See https://github.com/justjanne/powerline-go
 function _update_ps1() {
     # PS1="$($GOPATH/bin/powerline-go -error $? -jobs $(jobs -p | wc -l))"
-    PS1="$($GOPATH/bin/powerline-go -cwd-max-depth 4 -cwd-mode semifancy -error $? -hostname-only-if-ssh -truncate-segment-width 20 -newline)"
+    PS1="$($GOPATH/bin/powerline-go -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit -condensed -git-mode fancy -cwd-max-depth 4 -cwd-mode semifancy -error $? -hostname-only-if-ssh -truncate-segment-width 20 -newline)"
 
     # Uncomment the following line to automatically clear errors after showing
     # them once. This not only clears the error for powerline-go, but also for
