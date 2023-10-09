@@ -45,7 +45,7 @@ alias gitui='EDITOR=/usr/bin/emacs\ -Q VISUAL=/usr/bin/emacs\ -Q gitui'
 
 function _gauth() {
     if [ "${@}" ]; then
-        \gauth | ag -i "${@}" | sed -r -e 's/\s+/ /g' | cut -d' ' -f 6 | xclip -i -selection primary
+        \gauth | ag -i '^'"${@}" | head -n 1 | sed -r -e 's/\s+/ /g' | cut -d' ' -f 6 | xclip -i -r -selection primary
     else
         \gauth
     fi
