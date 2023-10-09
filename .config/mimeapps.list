@@ -16,6 +16,10 @@ application/x-extension-shtml=firefox.desktop;
 application/xhtml+xml=firefox.desktop;
 application/x-extension-xhtml=firefox.desktop;
 application/x-extension-xht=firefox.desktop;
+application/octet-stream=com.github.PintaProject.Pinta.desktop;jed.desktop;
+image/jpeg=display-im6.q16.desktop;
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=libreoffice6.4-calc.desktop;
+application/x-bibtex=jed.desktop;
 
 [Default Applications]
 x-scheme-handler/http=firefox.desktop
