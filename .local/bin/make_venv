@@ -4,11 +4,12 @@ set -euo pipefail
 
 version=$(python --version | cut -f 2 -d" " | cut -f 1-2 -d ".")
 
-VALID_ARGS=$(getopt -o 'v:p:s' --long 'version:prompt:symlink' -- "${@}")
+VALID_ARGS=$(getopt -o 'v:p:st' --long 'version:,prompt:,symlink,not-system-packages' -- "${@}")
 if [[ $? -ne 0 ]]; then
     exit 1;
 fi
 
+do_syspkg=yes
 do_symlink=
 prompt=
 
@@ -27,6 +28,10 @@ while [ : ]; do
             do_symlink=yes
             shift
             ;;
+        -t|--not-system-packages)
+            do_syspkg=""
+            shift
+            ;;
         --)
             shift;
             break
@@ -39,10 +44,20 @@ if [ ! "${prompt}" ]; then
 fi
 
 p='/usr/bin/python'"${version}"
-cmd="${p} -m venv --prompt='${prompt}' venv-${version}"
+s=''
+if [ "S{do_syspkg}" ]; then
+    s='--system-site-packages'
+fi
 
+
+# Currently, run venv twice.
+
+cmd="${p} -m venv ${s} --symlinks --upgrade --upgrade-deps --prompt='${prompt}' venv-${version}"
 echo "Running ${cmd}"
+eval $cmd
 
+cmd="${p} -m venv ${s} --symlinks --prompt='${prompt}' venv-${version}"
+echo "Running ${cmd}"
 eval $cmd
 
 if [ "${do_symlink}" ]; then
@@ -52,4 +67,5 @@ fi
 
 echo "Upgrading tools..."
 source venv-"${version}"/bin/activate
-pip install -U pip build setuptools wheel Cython ptpython
+pip install --upgrade pip setuptools
+pip install --ignore-installed build setuptools wheel Cython ptpython
