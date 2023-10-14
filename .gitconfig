@@ -5,13 +5,13 @@
 [core]
     autocrlf = input
     # pager = less -XFRS
-    pager = delta $(delta_theme_switch.sh) 
+    pager = delta $(~/.local/bin/delta_theme_switch.sh) 
 
 [credential]
     helper = store
 
 [interactive]
-    diffFilter = delta $(delta_theme_switch.sh) --color-only --features=interactive
+    diffFilter = delta $(~/.local/bin/delta_theme_switch.sh) --color-only --features=interactive
 
 [include]
     path = /home/austinjp/.config/delta/themes.gitconfig
