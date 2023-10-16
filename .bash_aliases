@@ -1,5 +1,7 @@
 #!/bin/bash
+
 # alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
+alias ag='ag --pager="less -XFRi"'
 alias bat='batcat --theme $(is_terminal_dark.sh && echo gruvbox-dark || echo OneHalfLight) --decorations never --pager="less -XFRi"'
 # alias cast="mkchromecast"
 # alias chromecast="mkchromecast"
@@ -29,7 +31,7 @@ function _emacs() {
     if [[ "${emacs_daemon_is_running}" ]]; then
         :
     else
-        TMPDIR="${HOME}"/.local/tmp /usr/bin/emacs --daemon="${HOME}"/.local/tmp/emacs.socket ;
+        TMPDIR="${HOME}"/.local/tmp /usr/bin/emacs --with-x-toolkit=lucid --daemon="${HOME}"/.local/tmp/emacs.socket ;
     fi
     TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -t -c -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}" ;
 }
@@ -53,6 +55,8 @@ function _gauth() {
 alias gauth=_gauth
 
 alias less="less -XFRi"
+
+alias libreoffice="/media/austinjp/nvme/opt/libreoffice6.4/program/soffice"
 
 function _batman() { /usr/bin/man "${@}" | bat -l man ; }
 alias man=_batman
@@ -79,7 +83,8 @@ alias skype="flatpak run com.skype.Client"
 alias spotify="spt"
 alias tree="tree --gitignore --ignore-case -I venv -I 'venv*'"
 alias venv='make_venv -s && source venv/bin/activate && ln -sr venv/bin/activate -t .'
-alias zotero='env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/zotero-snap_zotero-snap.desktop /snap/bin/zotero-snap -c "$(dirname $(readlink -f %k))/zotero -url %U"'
+# alias zotero='env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/zotero-snap_zotero-snap.desktop /snap/bin/zotero-snap -c "$(dirname $(readlink -f %k))/zotero -url %U"'
+alias zotero='flatpak --filesystem=/media/austinjp/nvme/home/austinjp/ run org.zotero.Zotero'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
