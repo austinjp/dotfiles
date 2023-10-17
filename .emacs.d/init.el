@@ -63,7 +63,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(multiple-cursors basic-mode fold-this quarto-mode haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
+   '(eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -122,7 +122,7 @@
 (require 'lorem-ipsum)
 
 ;; Manually kick-start quarto-mode for Quarto files.
-(require 'quarto-mode)
+;; (require 'quarto-mode)
 
 ;; ======================================================================
 
