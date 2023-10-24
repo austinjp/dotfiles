@@ -1,4 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
+
+# Added 2023-10-14 to "fix" error messages after uninstalling a thing.
+unset LD_PRELOAD
+
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -102,18 +106,18 @@ export PAGER='less -XFRi'
 # add keys to gnome-keyring, the GUI key auth thing.
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/keyring/ssh"
 
-export PATH="${PATH}:~/bin/"
+PATH="${PATH}:~/bin/"
 
 # Added 2020-01-08 for Android Studio
 # as per https://facebook.github.io/react-native/docs/getting-started
 export ANDROID_HOME="${HOME}/Android/Sdk"
-export PATH="${PATH}:$ANDROID_HOME/emulator"
-export PATH="${PATH}:$ANDROID_HOME/tools"
-export PATH="${PATH}:$ANDROID_HOME/tools/bin"
-export PATH="${PATH}:$ANDROID_HOME/platform-tools"
+PATH="${PATH}:$ANDROID_HOME/emulator"
+PATH="${PATH}:$ANDROID_HOME/tools"
+PATH="${PATH}:$ANDROID_HOME/tools/bin"
+PATH="${PATH}:$ANDROID_HOME/platform-tools"
 
 # Added 2020-02-09 for pip user installs.
-export PATH="${PATH}:~/.local/bin/"
+PATH="${PATH}:~/.local/bin/"
 
 # tabtab source for packages
 # uninstall by removing these lines
@@ -121,21 +125,21 @@ export PATH="${PATH}:~/.local/bin/"
 
 export $(gnome-keyring-daemon --daemonize --start)
 
-export PATH="${HOME}/perl5/bin${PATH:+:${PATH}}"
+PATH="${HOME}/perl5/bin${PATH:+:${PATH}}"
 export PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
 export PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
 export PERL_MB_OPT="--install_base \"${HOME}/perl5\""
 export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
 
 # Added 2020-11-25
-export PATH="${PATH}:${HOME}/go/bin:node_modules/.bin"
+PATH="${PATH}:${HOME}/go/bin:node_modules/.bin"
 
 # Added 2021-01-18 as per https://wiki.postmarketos.org/wiki/Installing_pmbootstrap
 eval "$(register-python-argcomplete pmbootstrap)"
 
 # Added 2021-02-11
 # for yarn global add (installs)
-export PATH="${PATH}:${HOME}/.yarn/bin/"
+PATH="${PATH}:${HOME}/.yarn/bin/"
 
 # Added 2021-06-06
 # mainly for 'git commit'.
@@ -146,9 +150,6 @@ export PYTHONSTARTUP="${HOME}/.pythonrc.py"
 
 # Added 2021-09026 mainly to get libimobiledevice (and libplist) working
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
-
-# Added 2022-03-09 for nim (via choosenim).
-export PATH="${PATH}:${HOME}/.nimble/bin"
 
 # Added 2022-03-25
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -163,15 +164,15 @@ export PATH="${PATH}:${HOME}/.nimble/bin"
 export DELTA_PAGER="less -XFRS"
 
 # Added 2022-06-15 for functiontrace server.
-export PATH="${PATH}:${HOME}/.cargo/bin"
+PATH="${PATH}:${HOME}/.cargo/bin"
 
 # Added 2022-07-16 for latest pandoc-crossref build.
-export PATH="${PATH}:${HOME}/.cabal/bin"
+PATH="${PATH}:${HOME}/.cabal/bin"
 
 # Added 2022-09-12 for go
 export GOPATH="${HOME}"/.local/lib/go/
 export GOBIN="${HOME}"/.local/lib/go/bin/
-export PATH="${PATH}:${GOBIN}"
+PATH="${PATH}:${GOBIN}"
 
 # Added 2022-09-12 for powerline-go
 # See https://github.com/justjanne/powerline-go
@@ -200,8 +201,8 @@ fi
 # Changed 2023-03-20
 # ALL TIMEZONE/TZ STUFF HAS BEEN MOVED TO ~/.profile
 
-# Added 2022-09-22
-export PATH="${HOME}/.nimble/bin:${PATH}"
+# Added 2022-09-22 (and 2022-03-09) for nim (via choosenim).
+# PATH="${PATH}:${HOME}/.nimble/bin"
 
 # Added 2022-10-01 for Rust/Cargo/etc.
 source "${HOME}/.cargo/env"
@@ -234,13 +235,29 @@ fi
 # Added 2023-01-31 during re-install of pnpm.
 # pnpm
 export PNPM_HOME="${HOME}/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+PATH="${PNPM_HOME}:${PATH}"
 # pnpm end
+
+# Added 2023-10-14 to "fix" error messages after uninstalling a thing.
+unset LD_PRELOAD
+
+# Added 2023-10-14 to "fix" error messages after uninstalling a thing.
+unset LD_PRELOAD
+
+# Added 2023-10-23
+PATH="${PATH}:${HOME}/.luarocks/bin/"
+
+# Added 2023-10-14 temporarily
+PATH="${PATH}:/media/austinjp/nvme/opt/libreoffice6.4/program/"
+
+
+export PATH
+
 
 # Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="${HOME}/.sdkman"
 [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
-# Do not add anything below here, see sdkman above.
-. "$HOME/.cargo/env"
+# # Do not add anything below here, see sdkman above.
+# . "$HOME/.cargo/env"
