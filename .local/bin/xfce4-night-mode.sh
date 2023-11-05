@@ -155,17 +155,25 @@ case "$mode" in
     day)
         if is_terminal_dark.sh ; then
             sed -i'' -e '/^ColorForeground.*/d' ~/.config/xfce4/terminal/terminalrc
-            sed -i'' -e '/^ColorBackground.*/d' ~/.config/xfce4/terminal/terminalrc
             echo 'ColorForeground=#000000' >> ~/.config/xfce4/terminal/terminalrc
+            sed -i'' -e '/^ColorBackground.*/d' ~/.config/xfce4/terminal/terminalrc
             echo 'ColorBackground=#ffffff' >> ~/.config/xfce4/terminal/terminalrc
+            sed -i'' -e '/^ColorSelection\=.*/d' ~/.config/xfce4/terminal/terminalrc
+	    echo 'ColorSelection=#f9f9f0f06b6b'  >> ~/.config/xfce4/terminal/terminalrc
+            sed -i'' -e '/^ColorSelectionBackground.*/d' ~/.config/xfce4/terminal/terminalrc
+            echo 'ColorSelectionBackground=#f9f9f0f06b6b'  >> ~/.config/xfce4/terminal/terminalrc
         fi
         ;;
     night)
         if ! is_terminal_dark.sh ; then
             sed -i'' -e '/^ColorForeground.*/d' ~/.config/xfce4/terminal/terminalrc
-            sed -i'' -e '/^ColorBackground.*/d' ~/.config/xfce4/terminal/terminalrc
             echo 'ColorForeground=#f9f6f0' >> ~/.config/xfce4/terminal/terminalrc
+            sed -i'' -e '/^ColorBackground.*/d' ~/.config/xfce4/terminal/terminalrc
             echo 'ColorBackground=#000000' >> ~/.config/xfce4/terminal/terminalrc
+            sed -i'' -e '/^ColorSelection\=.*/d' ~/.config/xfce4/terminal/terminalrc
+	    echo 'ColorSelection=#330000'  >> ~/.config/xfce4/terminal/terminalrc
+            sed -i'' -e '/^ColorSelectionBackground.*/d' ~/.config/xfce4/terminal/terminalrc
+	    echo 'ColorSelectionBackground=#570900000000'  >> ~/.config/xfce4/terminal/terminalrc
         fi
         ;;
     *)
