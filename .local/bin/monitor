@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+
+# set -euo pipefail
+
+this_name=$(basename $(echo $0))
+
+default_ignore='.*(\.tmp|\.gsf\-.*|\.\#.*|\.~.*|\.bak|~$)'
+
+function usage() {
+    echo "Usage:"
+    echo "    $this_name dir -- COMMAND"
+    echo "    $this_name -d dir -- COMMAND"
+    echo "    $this_name -i '(\.bak|\.tmp)' -d dir -- COMMAND"
+    echo ""
+    echo "Valid options:"
+    echo "    -h|--help                     Show this help."
+    echo "    -d|--dir|-s|--source|--src    Directory to monitor."
+    echo "    -i|--ignore                   File glob to ignore, default:"
+    echo "                                  ${default_ignore}"
+    echo ""
+}
+
+VALID_ARGS=$(getopt -o hi:d:s: --long help,ignore,dir:,src:,source: -- "${@}")
+
+if [[ $? -ne 0 ]]; then
+    usage
+    exit 1
+fi
+
+ignore="${default_ignore}"
+cmd=
+
+eval set -- "${VALID_ARGS}"
+while [ : ]; do
+    case "${1}" in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        -d|--dir|-s|--src|--source)
+            src="${2}"
+            shift 2
+            ;;
+        -i|--ignore)
+            ignore="${2}"
+            shift 2
+            ;;
+        --)
+            shift;
+            break
+            ;;
+    esac
+done
+
+if [ -z "${src}" ]; then
+    src="${1}"
+    shift
+fi
+
+if [ ! -r "${src}" ]; then
+    echo "Cannot read source dir '${src}'."
+    echo "Quitting!"
+    exit 1
+fi
+
+cmd="${@}"
+{
+    rel='./'$(realpath $(readlink -qe "${src}") --relative-to $(readlink -qe "${src}"/../) 2>/dev/null)
+    [ -r "${rel}" ]
+} || {
+    rel="${src}"
+}
+
+echo "Monitoring files in ${rel}..."
+echo "Running '${cmd}' on changes."
+
+while true ; do (
+    inotifywait -r "${src}" -e attrib,modify,create,delete,move --exclude "${ignore}" | \
+        while read path _ file ; do
+            echo "${path}${file}" modified!
+            echo "Running '${cmd}'"
+            eval "${cmd}"
+        done
+)
+done
