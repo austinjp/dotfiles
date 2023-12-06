@@ -57,6 +57,7 @@ alias gauth=_gauth
 alias less="less -XFRi"
 
 alias libreoffice="/media/austinjp/nvme/opt/libreoffice6.4/program/soffice"
+alias soffice=libreoffice
 
 function _batman() { /usr/bin/man "${@}" | bat -l man ; }
 alias man=_batman

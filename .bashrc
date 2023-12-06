@@ -163,9 +163,6 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
 # Added 2022-04-18 for delta git pager.
 export DELTA_PAGER="less -XFRS"
 
-# Added 2022-06-15 for functiontrace server.
-PATH="${PATH}:${HOME}/.cargo/bin"
-
 # Added 2022-07-16 for latest pandoc-crossref build.
 PATH="${PATH}:${HOME}/.cabal/bin"
 
@@ -205,6 +202,7 @@ fi
 # PATH="${PATH}:${HOME}/.nimble/bin"
 
 # Added 2022-10-01 for Rust/Cargo/etc.
+PATH="${PATH}:${HOME}/.cargo/bin"
 source "${HOME}/.cargo/env"
 
 # Added 2020-11-23
@@ -247,11 +245,12 @@ unset LD_PRELOAD
 # Added 2023-10-23
 PATH="${PATH}:${HOME}/.luarocks/bin/"
 
-# Added 2023-10-14 temporarily
-PATH="${PATH}:/media/austinjp/nvme/opt/libreoffice6.4/program/"
-
-
 export PATH
+
+# Added 2023-11-27 temporarily: disable left control, shift, and caps-lock keys.
+xmodmap -e 'keycode 37='
+xmodmap -e 'keycode 50='
+xmodmap -e 'keycode 66='
 
 
 # Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
@@ -260,4 +259,6 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 # # Do not add anything below here, see sdkman above.
-# . "$HOME/.cargo/env"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
