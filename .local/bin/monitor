@@ -4,7 +4,7 @@
 
 this_name=$(basename $(echo $0))
 
-default_ignore='.*(\.tmp|\.gsf\-.*|\.\#.*|\.~.*|\.bak|~$)'
+default_ignore='.*(\.git|\.git.*|\.tmp|\.gsf\-.*|\.\#.*|\.~.*|\.bak|~$)'
 
 function usage() {
     echo "Usage:"
