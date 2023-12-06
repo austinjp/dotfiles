@@ -1,0 +1,4 @@
+#!/bin/bash
+
+\ag -l "${@}" | sort | uniq -i -s 50 | rev | sort | uniq -i -w 40 | rev | sort
+
