@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -euo pipefail
+
+name="${@}"
+
+if [ ! "${name}" ] ; then
+    echo "Need single argument: name. Quitting." >&2
+    exit 1
+fi
+
+make_venv -s -v 3.11 -p "${name}"
+source venv/bin/activate
+ln -sr venv/bin/activate -t .
+
+pip install --require-virtualenv --no-input maturin
+
+mkdir -p "${name}_py"
+mkdir -p "${name}_rs"
+
+cd "${name}_rs"
+
+maturin init --name "${name}" --bindings pyo3
+
+cd -
