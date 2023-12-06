@@ -9,7 +9,7 @@ if [[ $? -ne 0 ]]; then
     exit 1;
 fi
 
-do_syspkg=yes
+do_syspkg=
 do_symlink=
 prompt=
 
@@ -28,8 +28,8 @@ while [ : ]; do
             do_symlink=yes
             shift
             ;;
-        -t|--not-system-packages)
-            do_syspkg=""
+        -t|--system-packages)
+            do_syspkg=yes
             shift
             ;;
         --)
@@ -45,7 +45,7 @@ fi
 
 p='/usr/bin/python'"${version}"
 s=''
-if [ "S{do_syspkg}" ]; then
+if [ "S{do_syspkg}" = "yes" ]; then
     s='--system-site-packages'
 fi
 
