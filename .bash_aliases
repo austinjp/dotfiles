@@ -59,6 +59,8 @@ alias less="less -XFRi"
 alias libreoffice="/media/austinjp/nvme/opt/libreoffice6.4/program/soffice"
 alias soffice=libreoffice
 
+alias localsend='flatpak run org.localsend.localsend_app'
+
 function _batman() { /usr/bin/man "${@}" | bat -l man ; }
 alias man=_batman
 
