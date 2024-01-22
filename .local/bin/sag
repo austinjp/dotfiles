@@ -2,12 +2,32 @@
 
 # Sorted ag = sag :)
 
-if [ "${3}" ]; then
-    ag -l "${1}" "${3}" | sort | xargs -d '\n' ag --color --group "${2}"
-elif [ "${2}" ]; then
-    ag -l "${1}" "${2}" | sort | xargs -d '\n' ag --color --group "${1}"
-else
-    echo "Requires 2 or 3 args." 1>&2
-    exit 1
-fi
+# if [ "${3}" ]; then
+#     ag -l "${1}" "${3}" | sort | xargs -d '\n' ag --color --group "${2}"
+# elif [ "${2}" ]; then
+#     ag -l "${1}" "${2}" | sort | xargs -d '\n' ag --color --group "${1}"
+# else
+#     echo "Requires 2 or 3 args." 1>&2
+#     exit 1
+# fi
+
+IFS=$'\n'
+
+declare -A seen
+
+{
+    while read f ; do
+        b=$(basename "${f}")
+        # if [[ ! -v seen[$b]] ]] ; then
+        if [ "${seen[$b]}" ] ; then
+            :
+        else
+            seen["${b}"]="${f}"
+            echo "${f}"
+        fi
+    done < <(
+        # Sort by length
+        ag -l "${@}" | awk '{ print length, $0 }' | sort -n -s | cut -d" " -f2-
+    )
+} | sort
 
