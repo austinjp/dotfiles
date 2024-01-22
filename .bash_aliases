@@ -38,6 +38,8 @@ function _emacs() {
 alias emacs=_emacs
 export GIT_EDITOR='TMPDIR='"${HOME}"'/.local/tmp /usr/bin/emacsclient.emacs -t -c -a jed --socket-name='"${HOME}"'/.local/tmp/emacs.socket'
 
+alias fd='fd --color=never --follow --glob --no-ignore'
+
 alias free="free -h --giga"
 function _git_grep() {
     git rev-list --all | xargs git grep -e "${@}"
