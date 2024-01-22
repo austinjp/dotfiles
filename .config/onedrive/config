@@ -1,5 +1,5 @@
 sync_dir = "/home/austinjp/OneDrive"
-skip_dir = "venv|venv*|*venv*|__pycache__|site-packages|node_modules|*backup*|personal"
+skip_dir = "venv|venv*|*venv*|__pycache__|site-packages|node_modules|*backup*|personal|.git"
 skip_dotfiles = "true"
 skip_file = "~*|.~*|*.tmp|*.mp3|*.mp4|*.tar.*|*hmy-backup*|*.png|duplicity*|*.lock"
 skip_symlinks = "false"
