@@ -63,7 +63,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
+   '(jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -73,6 +73,8 @@
  '(font-lock-builtin-face ((((type tty)) (:foreground "cyan"))))
  '(font-lock-function-name-face ((t (:foreground "color-33"))))
  '(font-lock-string-face ((((type tty)) (:foreground "blue"))))
+ '(jinx-highlight ((t (:inherit isearch :background "red"))))
+ '(jinx-misspelled ((t (:inherit error :foreground "color-178" :underline t))))
  '(markdown-comment-face ((t (:inherit font-lock-comment-face :foreground "color-201"))))
  '(markdown-markup-face ((t (:inherit shadow :foreground "color-245" :slant normal :weight normal))))
  '(minibuffer-prompt ((((type tty)) (:foreground "cyan"))))
