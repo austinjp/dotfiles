@@ -158,7 +158,7 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
 [ -f ~/.config/nnn/nnn-autocompletion.bash ] && source ~/.config/nnn/nnn-autocompletion.bash
 
 # Added during installation of broot https://dystroy.org/broot/install-br/
-# source /home/austinjp/.config/broot/launcher/bash/br
+# source "${HOME}"/.config/broot/launcher/bash/br
 
 # Added 2022-04-18 for delta git pager.
 export DELTA_PAGER="less -XFRS"
@@ -230,10 +230,13 @@ if test -f "${HOME}/.keys.sh"; then
     source "${HOME}/.keys.sh"
 fi
 
-# Added 2023-01-31 during re-install of pnpm.
+# Added 2023-12-18 during re-install of pnpm.
 # pnpm
 export PNPM_HOME="${HOME}/.local/share/pnpm"
-PATH="${PNPM_HOME}:${PATH}"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 # pnpm end
 
 # Added 2023-10-14 to "fix" error messages after uninstalling a thing.
@@ -252,6 +255,8 @@ xmodmap -e 'keycode 37='
 xmodmap -e 'keycode 50='
 xmodmap -e 'keycode 66='
 
+# Added 2024-01-15 for adb and fastboot.
+export PATH="${PATH}:${HOME}/adb-fastboot"
 
 # Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
