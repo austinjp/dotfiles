@@ -1,4 +1,14 @@
 #!/bin/bash
 
+echo
+echo "Suspending system now..."
+echo
+
 # sudo systemctl start systemd-suspend
-systemctl suspend -i
+# sudo pm-suspend
+
+# export _d=$(date -d '1 hour ago' +'%Y-%m-%d %H:%M:%S')
+# systemctl suspend -i && journalctl --output short-iso --since "${_d}" --system --follow --grep '(systemd|kernel|boot)' -n 10
+
+{ journalctl --output short-iso --system --grep '(systemd|kernel|boot)' -n 10 | grep -v 'No entries' ; } || :
+systemctl suspend -i && journalctl --output short-iso --system --follow --grep '(systemd|kernel|boot|suspend)'
