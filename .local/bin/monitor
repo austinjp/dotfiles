@@ -8,12 +8,13 @@ default_ignore='.*(\.git|\.git.*|\.tmp|\.gsf\-.*|\.\#.*|\.~.*|\.bak|~$)'
 
 function usage() {
     echo "Usage:"
-    echo "    $this_name dir -- COMMAND"
-    echo "    $this_name -d dir -- COMMAND"
-    echo "    $this_name -i '(\.bak|\.tmp)' -d dir -- COMMAND"
+    echo "    $this_name dir -c COMMAND"
+    echo "    $this_name -d dir -c COMMAND1 -c COMMAND2"
+    echo "    $this_name -i '(\.bak|\.tmp)' -d dir -c COMMAND"
     echo ""
     echo "Valid options:"
     echo "    -h|--help                     Show this help."
+    echo "    -c|--command                  COMMAND to run. Can be repeated."
     echo "    -d|--dir|-s|--source|--src    Directory to monitor."
     echo "    -p|--pass-filnames-as-arg     COMMAND will be *followed* by the"
     echo "                                  name(s) of the files detected."
@@ -22,7 +23,7 @@ function usage() {
     echo ""
 }
 
-VALID_ARGS=$(getopt -o hpi:d:s: --long help,pass-filenames-as-arg,ignore,dir:,src:,source: -- "${@}")
+VALID_ARGS=$(getopt -o c:hpi:d:s: --long help,command:,,pass-filenames-as-arg,ignore,dir:,src:,source: -- "${@}")
 
 if [[ $? -ne 0 ]]; then
     usage
@@ -31,7 +32,9 @@ fi
 
 ignore="${default_ignore}"
 pass_filenames=
-cmd=
+
+# Kudos https://stackoverflow.com/a/20761893
+cmds=()
 
 eval set -- "${VALID_ARGS}"
 while [ : ]; do
@@ -39,6 +42,10 @@ while [ : ]; do
         -h|--help)
             usage
             exit 0
+            ;;
+        -c|--command)
+            cmds+=("${2}")
+            shift 2
             ;;
         -d|--dir|-s|--src|--source)
             src="${2}"
@@ -59,6 +66,8 @@ while [ : ]; do
     esac
 done
 
+declare -a cmds
+
 if [ -z "${src}" ]; then
     src="${1}"
     shift
@@ -70,7 +79,6 @@ if [ ! -r "${src}" ]; then
     exit 1
 fi
 
-cmd="${@}"
 {
     rel='./'$(realpath $(readlink -qe "${src}") --relative-to $(readlink -qe "${src}"/../) 2>/dev/null)
     [ -r "${rel}" ]
@@ -79,19 +87,21 @@ cmd="${@}"
 }
 
 echo "Monitoring files in ${rel}..."
-echo "Running '${cmd}' on changes."
+# echo "Running '${cmd}' on changes."
 
 while true ; do (
     inotifywait -r "${src}" -e attrib,modify,create,delete,move --exclude "${ignore}" | \
         while read path _ file ; do
             echo "${path}${file}" modified!
-            if [ "${pass_filenames}" ] ; then
-                echo "Running ${cmd} '${path}${file}'"
-                eval "${cmd} '${path}${file}'"
-            else
-                echo "Running ${cmd}"
-                eval "${cmd}"
-            fi
+            for cmd in "${cmds[@]}"; do
+                if [ "${pass_filenames}" ] ; then
+                    echo "Running ${cmd} '${path}${file}'"
+                    eval "${cmd} ${path}${file}"
+                else
+                    echo "Running ${cmd}"
+                    eval "${cmd}"
+                fi
+            done
         done
 )
 done
