@@ -1,0 +1,35 @@
+#!/usr/bin/env /bin/bash
+
+rnd1=$(od -An -N 10 -d /dev/urandom | tr -d '[[:space:]]' | grep -Po '^..........')
+rnd2=$(od -An -N 10 -d /dev/urandom | tr -d '[[:space:]]' | grep -Po '^..........')
+title="post-hibernate-memory-monitor-${rnd1}-${rnd2}"
+
+xterm \
+    -xrm 'xterm*VT100.initialFont:5' \
+    -T "${title}" \
+    -e "watch -n 0.3 \"grep --color=none -P '^Swap(Total|Free)' /proc/meminfo\"" &
+
+
+# See entry in /etc/sudoers.d/post-hibernate
+# See see /usr/local/bin/post-hibernate which simply runs 'swapoff -av'
+# See /etc/systemd/system/post-hibernate.service, contents of that are:
+# [Unit]
+# Description=Run post-hibernate-wrapper
+# After=hibernate.target hybrid-sleep.target suspend-then-hibernate.target
+# 
+# [Service]
+# ExecStart=/home/austinjp/.local/bin/post-hibernate-wrapper
+# User=austinjp
+# Environment=DISPLAY=:0.0
+# 
+# [Install]
+# WantedBy=hibernate.target hybrid-sleep.target suspend-then-hibernate.target
+
+sudo post-hibernate && {
+    /usr/bin/pgrep -f "${rnd1}-${rnd2}" >/dev/null 2>/dev/null && {
+        term_pid=$(/usr/bin/pgrep -f "${rnd1}-${rnd2}" 2>/dev/null | head -n 1) ;
+        if [[ ! "${term_pid}" = "" ]]; then
+            kill -9 "${term_pid}" >/dev/null 2>/dev/null
+        fi
+    }
+}
