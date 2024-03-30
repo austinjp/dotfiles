@@ -56,6 +56,10 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+function bottom_prompt {
+    tput cup $(($LINES-1)) 0
+}
+
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[[01;32m\]\u@\h\[[00m\]:\[[01;34m\]\w\[[00m\]\$ '
 else
@@ -135,7 +139,7 @@ export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
 PATH="${PATH}:${HOME}/go/bin:node_modules/.bin"
 
 # Added 2021-01-18 as per https://wiki.postmarketos.org/wiki/Installing_pmbootstrap
-eval "$(register-python-argcomplete pmbootstrap)"
+# eval "$(register-python-argcomplete pmbootstrap)"
 
 # Added 2021-02-11
 # for yarn global add (installs)
@@ -201,9 +205,9 @@ fi
 # Added 2022-09-22 (and 2022-03-09) for nim (via choosenim).
 # PATH="${PATH}:${HOME}/.nimble/bin"
 
-# Added 2022-10-01 for Rust/Cargo/etc.
-PATH="${PATH}:${HOME}/.cargo/bin"
-source "${HOME}/.cargo/env"
+# # Added 2022-10-01 for Rust/Cargo/etc.
+# PATH="${PATH}:${HOME}/.cargo/bin"
+# source "${HOME}/.cargo/env"
 
 # Added 2020-11-23
 # Dynamic Python cache dirs based on env vars set by virtualenv.
@@ -258,12 +262,12 @@ xmodmap -e 'keycode 66='
 # Added 2024-01-15 for adb and fastboot.
 export PATH="${PATH}:${HOME}/adb-fastboot"
 
-# Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="${HOME}/.sdkman"
-[[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
-
-# # Do not add anything below here, see sdkman above.
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# # Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
+# #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# export SDKMAN_DIR="${HOME}/.sdkman"
+# [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
+# 
+# # # Do not add anything below here, see sdkman above.
