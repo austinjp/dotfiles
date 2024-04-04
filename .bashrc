@@ -185,6 +185,11 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/keyring/ssh"
 
 # ==============================================================================
 
+export $(gnome-keyring-daemon --daemonize --start)
+
+
+# ==============================================================================
+
 PATH="${PATH}:${HOME}/bin/"
 
 
@@ -213,11 +218,6 @@ PATH="${PATH}:${HOME}/.local/bin/"
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/__tabtab.bash ] && . ~/.config/tabtab/__tabtab.bash || true
 
-
-# ==============================================================================
-
-# export $(gnome-keyring-daemon --daemonize --start)
-[[ $(\pgrep -fila 'gnome-keyring-daemon') ]] || export $(gnome-keyring-daemon --daemonize --start)
 
 # ==============================================================================
 
