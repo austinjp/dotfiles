@@ -16,12 +16,15 @@ alias cp="cp -i"
 alias diff='diff --color=auto --width=$(tput cols)'
 alias db="_OLD_VIRTUAL_PATH= VIRTUAL_ENV= devbox"
 alias df='df -B 1MB'
-alias docker="podman"
 
 # Using functions helps avoid issues with $@ being defined elsewhere.
 alias dotfile='_dotfile(){ git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/.dotfiles/ "${@}";}; _dotfile'
 
 alias du='du -s -m -P -H'
+
+
+# ==============================================================================
+# Emacs stuff.
 
 EMACS_ALT='nano'
 function _emacs() {
@@ -38,6 +41,10 @@ function _emacs() {
 }
 alias emacs=_emacs
 export GIT_EDITOR='TMPDIR='"${HOME}"'/.local/tmp /usr/bin/emacsclient.emacs -t -c -a '"${EMACS_ALT}"' --socket-name='"${HOME}"'/.local/tmp/emacs.socket'
+
+# End of Emacs stuff.
+# ==============================================================================
+
 
 alias fd='fd --color=never --follow --glob --no-ignore'
 
@@ -59,7 +66,7 @@ alias gauth=_gauth
 
 alias less="less -XFRi"
 
-# alias libreoffice="/media/austinjp/nvme/opt/libreoffice6.4/program/soffice"
+# alias libreoffice="/opt/libreoffice6.4/program/soffice"
 # alias soffice=libreoffice
 
 alias localsend='flatpak run org.localsend.localsend_app'
@@ -68,6 +75,7 @@ function _batman() { /usr/bin/man "${@}" | bat -l man ; }
 alias man=_batman
 
 alias mv="mv -i"
+
 alias p="pnpm"
 
 function _pgrep() {
@@ -79,8 +87,13 @@ function _pgrep() {
 }
 alias pgrep=_pgrep
 
+
+unset docker
+unset podman
 function _podman(){ type __podman_init_completion >/dev/null 2>/dev/null || source <(\podman completion bash) ; \podman "${@}" ; }
 alias podman=_podman
+alias docker=podman
+
 
 # Redshift alias, hard-coded location.
 alias redshift='/usr/bin/redshift -l 51.5:0.0 -m randr'  # UK
@@ -94,7 +107,7 @@ alias vpn="expressvpn"
 
 alias venv='make_venv -s -v 3.11 && source venv/bin/activate && ln -sr venv/bin/activate -t .'
 # alias zotero='env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/zotero-snap_zotero-snap.desktop /snap/bin/zotero-snap -c "$(dirname $(readlink -f %k))/zotero -url %U"'
-alias zotero='flatpak --filesystem=/media/austinjp/nvme/home/austinjp/ run org.zotero.Zotero'
+alias zotero='flatpak --filesystem=/home/austinjp/ run org.zotero.Zotero'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -125,3 +138,27 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 function hr() {
     printf %"$(tput cols 2>/dev/null || echo 80)"s | tr " " "_"
 }
+
+# ==============================================================================
+# Delay some aliases/functions/etc until they are requested, to prevent slow shell startup.
+
+unset nvm
+function nvm() {
+    [[ "${NVM_BIN}" ]] || {
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+        nvm "${@}"
+    }
+}
+
+# Added 2022-03-09 via sdkman.io, to get Android and svelte-native working.
+unset sdk
+function sdk() {
+    export SDKMAN_DIR="${HOME}/.sdkman"
+    [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
+    sdk "${@}"
+}
+
+# End of delays.
+# ==============================================================================
