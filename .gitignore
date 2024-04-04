@@ -9,21 +9,26 @@ token*
 .config/Signal
 .config/kleopatrarc
 
+
 # gauth
 .config/gauth.*
+
 
 # Syncthing -- should set this up by hand per machine.
 .config/syncthing
 .config/systemd/user/default.target.wants/syncthing.service
 .config/systemd/user/syncthing.service
 
+
 # Emacs
 .emacs.d/*
 !.emacs.d/init.el
 
+
 # XFCE
 xfce/
 xfce4/
+
 
 # OneDrive
 .config/onedrive/items.sqlite3
@@ -32,8 +37,10 @@ xfce4/
 .config/onedrive/.config.backup
 .config/onedrive/.config.hash
 
+
 # Ungoogled Chromium
 chromium
+
 
 # Directories created by sdk (see sdkman.io)
 .sdkman/archives/
@@ -45,12 +52,15 @@ chromium
 .sdkman/tmp/
 .sdkman/var/
 
+
 # Retain the symlink to the current version of Java selected using sdk.
 !.sdkman/candidates/java/current
+
 
 # Backup files.
 *~
 *.bak
+
 
 # Misc
 *.sqlite
