@@ -1,0 +1,19 @@
+[Unit]
+Description=Proxpi - local caching proxy for PyPI.
+StartLimitIntervalSec=60
+StartLimitBurst=4
+
+[Service]
+ExecStart=%h/proxpi/proxpi.sh
+Restart=on-failure
+RestartSec=5
+SuccessExitStatus=3 4
+RestartForceExitStatus=3 4
+
+# Hardening
+SystemCallArchitectures=native
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target
