@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Also see:
+#     /etc/systemd/logind.conf
+#     /etc/UPower/UPower.conf
+#     /etc/systemd/sleep.conf
+# And use `systemctl edit systemd-logind.service` to edit (using joe):
+#     /etc/systemd/system/systemd-logind.service.d/override.conf
+
 echo
 echo "Suspending system now..."
 echo
@@ -9,6 +16,9 @@ echo
 
 # export _d=$(date -d '1 hour ago' +'%Y-%m-%d %H:%M:%S')
 # systemctl suspend -i && journalctl --output short-iso --since "${_d}" --system --follow --grep '(systemd|kernel|boot)' -n 10
+
+# Note to self: how to invert grep:
+# journalctl --grep '^(.(?!redshift))*$'
 
 { journalctl --output short-iso --system --grep '(systemd|kernel|boot)' -n 10 | grep -v 'No entries' ; } || :
 systemctl suspend -i && journalctl --output short-iso --system --follow --grep '(systemd|kernel|boot|suspend)'
