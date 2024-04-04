@@ -216,8 +216,8 @@ PATH="${PATH}:${HOME}/.local/bin/"
 
 # ==============================================================================
 
-which gnome-keyring-daemon 2>&1 >/dev/null && export $(gnome-keyring-daemon --daemonize --start)
-
+# export $(gnome-keyring-daemon --daemonize --start)
+[[ $(\pgrep -fila 'gnome-keyring-daemon') ]] || export $(gnome-keyring-daemon --daemonize --start)
 
 # ==============================================================================
 
