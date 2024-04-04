@@ -23,6 +23,7 @@ alias dotfile='_dotfile(){ git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/
 
 alias du='du -s -m -P -H'
 
+EMACS_ALT='nano'
 function _emacs() {
     # Change the terminal/tab title:
     printf '\033]2;%s\033\\' 'Emacs'
@@ -33,10 +34,10 @@ function _emacs() {
     else
         TMPDIR="${HOME}"/.local/tmp /usr/bin/emacs --daemon="${HOME}"/.local/tmp/emacs.socket ;
     fi
-    TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient.emacs -t -c -a jed --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}" ;
+    TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient.emacs -t -c -a "${EMACS_ALT}" --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}" ;
 }
 alias emacs=_emacs
-export GIT_EDITOR='TMPDIR='"${HOME}"'/.local/tmp /usr/bin/emacsclient.emacs -t -c -a jed --socket-name='"${HOME}"'/.local/tmp/emacs.socket'
+export GIT_EDITOR='TMPDIR='"${HOME}"'/.local/tmp /usr/bin/emacsclient.emacs -t -c -a '"${EMACS_ALT}"' --socket-name='"${HOME}"'/.local/tmp/emacs.socket'
 
 alias fd='fd --color=never --follow --glob --no-ignore'
 
@@ -58,8 +59,8 @@ alias gauth=_gauth
 
 alias less="less -XFRi"
 
-alias libreoffice="/media/austinjp/nvme/opt/libreoffice6.4/program/soffice"
-alias soffice=libreoffice
+# alias libreoffice="/media/austinjp/nvme/opt/libreoffice6.4/program/soffice"
+# alias soffice=libreoffice
 
 alias localsend='flatpak run org.localsend.localsend_app'
 
@@ -120,3 +121,7 @@ function lsc() {
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+function hr() {
+    printf %"$(tput cols 2>/dev/null || echo 80)"s | tr " " "_"
+}
