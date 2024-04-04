@@ -37,8 +37,11 @@ chromium
 
 # Directories created by sdk (see sdkman.io)
 .sdkman/archives/
+.sdkman/bin/
 .sdkman/candidates/java/
+.sdkman/contrib/
 .sdkman/libexec/
+.sdkman/src/
 .sdkman/tmp/
 .sdkman/var/
 
