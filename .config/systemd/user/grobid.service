@@ -1,12 +1,23 @@
+# Kudos: https://github.com/G30-Consultants/grobid-systemd
 [Unit]
-Description=Grobid service over HTTP
+Description=GROBID
+# After=network.target
+# StartLimitIntervalSec=60
+# StartLimitBurst=4
 
 [Service]
 Type=simple
-WorkingDirectory=%h/grobid
-ExecStart=%h/grobid/gradlew run
-RestartSec=120
-Restart=always
+ExecStart=/usr/bin/podman run --rm --gpus all --init --ulimit core=0 -p 8070:8070 grobid/grobid:0.8.0
+ExecStop=
+Restart=on-failure
+WorkingDirectory=/tmp/
+SyslogIdentifier=grobid
+# RestartSec=60
+
+# Hardening
+# SystemCallArchitectures=native
+# MemoryDenyWriteExecute=true
+# NoNewPrivileges=true
 
 [Install]
 WantedBy=default.target
