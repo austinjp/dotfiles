@@ -42,6 +42,17 @@ shopt -s checkwinsize
 
 
 # ==============================================================================
+
+# Added 2022-09-12 for go
+# Needs to be before powerline-go stuff below.
+[[ -s "${HOME}/.local/lib/go/" ]] && {
+    export GOPATH="${HOME}"/.local/lib/go/
+    export GOBIN="${HOME}"/.local/lib/go/bin/
+    PATH="${PATH}:${GOBIN}"
+}
+
+
+# ==============================================================================
 # Prompt stuff.
 
 # set variable identifying the chroot you work in (used in the prompt below)
@@ -102,15 +113,15 @@ function _update_ps1() {
         # sure this is what you want.
         # set "?"
     else
-        PS1=$(
-            echo '\033[0;32;1m' $(pwd | sed -re 's,^'${HOME}',\~,g') '\033[0m' ;
-            echo ;
-            # echo -n $(pwd | sed -re 's,^'${HOME}',\~,g') ;
-            # echo -e '\033[0m' ;
-            # echo -e '\033[0;36;1m\$ \033[0m' ;
-            # echo
-            # echo -ne '\033[0m'$'\n\033[0;36;1m \$ \033[0m')"
-           )
+        # PS1=$(
+        #     echo '\033[0;32;1m' $(pwd | sed -re 's,^'${HOME}',\~,g') '\033[0m' ;
+        #     echo ;
+        #     # echo -n $(pwd | sed -re 's,^'${HOME}',\~,g') ;
+        #     # echo -e '\033[0m' ;
+        #     # echo -e '\033[0;36;1m\$ \033[0m' ;
+        #     # echo
+        #     # echo -ne '\033[0m'$'\n\033[0;36;1m \$ \033[0m')"
+        #    )
         PS1="\[\e[0;95m\]"$(pwd | sed -re 's,^'${HOME}',\~,g')"\[\e[0m\]"$'\n'"\[\e[0;36m\]"'$ '"\[\e[0m\]"
     fi
 }
@@ -232,12 +243,6 @@ PATH="${PATH}:${HOME}/.local/bin/"
 
 # ==============================================================================
 
-# Added 2020-11-25
-PATH="${PATH}:${HOME}/go/bin:node_modules/.bin"
-
-
-# ==============================================================================
-
 # Added 2021-01-18 as per https://wiki.postmarketos.org/wiki/Installing_pmbootstrap
 # eval "$(register-python-argcomplete pmbootstrap)"
 
@@ -292,16 +297,6 @@ PATH="${PATH}:${HOME}/.cabal/bin"
 
 # ==============================================================================
 
-# Added 2022-09-12 for go
-[[ -s "${HOME}/.local/list/go/" ]] && {
-    export GOPATH="${HOME}"/.local/lib/go/
-    export GOBIN="${HOME}"/.local/lib/go/bin/
-    PATH="${PATH}:${GOBIN}"
-}
-
-
-# ==============================================================================
-
 # Changed 2023-03-20
 # ALL TIMEZONE/TZ STUFF HAS BEEN MOVED TO ~/.profile
 
@@ -352,10 +347,10 @@ source () {
 
 # Added 2023-12-18 during re-install of pnpm.
 # pnpm
-export PNPM_HOME="${HOME}/.local/share/pnpm"
-case ":${PATH}:" in
-    *":${PNPM_HOME}:"*) ;;
-    *) PATH="${PNPM_HOME}:${PATH}" ;;
+export PNPM_HOME="/home/austinjp/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
 
@@ -395,3 +390,6 @@ PATH="${PATH}:${HOME}/.rvm/bin"
 # Remove anything from PATH that doesn't exist.
 
 export PATH=$(for d in $(echo "${PATH}" | cut -d':' -f 1,-999 --output-delimiter=$'\n') ; do [[ -s "${d}" ]] && echo $d ; done | tr $'\n' ':' | sed -re 's/\:$//')
+
+# Add any node modules.
+export PATH="${PATH}:node_modules/.bin"
