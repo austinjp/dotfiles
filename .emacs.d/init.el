@@ -63,7 +63,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
+   '(go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -121,15 +121,16 @@
   (setq use-package-always-ensure 't))
 
 ;; Kick-start a bunch of packages:
-;; lorem-ipsum.el
+
 (require 'lorem-ipsum)
-;; Quarto-mode for Quarto files.
 ;; (require 'quarto-mode)
+;; (require 'cython-mode)
+
+;; Associate some filename endings with modes.
 (add-to-list 'auto-mode-alist '("\\.qmd" . quarto-mode))
-;; Cython mode.
 (add-to-list 'auto-mode-alist '("\\.pyx" . cython-mode))
 (add-to-list 'auto-mode-alist '("\\.pxd" . cython-mode))
-;; (require 'cython-mode)
+(add-to-list 'auto-mode-alist '("\\.json5" . javascript-mode))
 
 ;; ======================================================================
 
@@ -313,6 +314,7 @@
        `((".*" ,"~/.local/tmp/" t)))
 
 ;; Indentation.
+(setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 (defun infer-indentation-style ()
   ;; if our source file uses tabs, we use tabs, if spaces spaces, and if        
