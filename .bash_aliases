@@ -105,7 +105,7 @@ alias tree="tree --gitignore --ignore-case -I venv -I 'venv*'"
 
 alias vpn="expressvpn"
 
-alias venv='make_venv -s -v 3.11 && source venv/bin/activate && ln -sr venv/bin/activate -t .'
+alias venv='make_venv -s -v 3.10 && source venv/bin/activate && ln -sr venv/bin/activate -t .'
 # alias zotero='env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/zotero-snap_zotero-snap.desktop /snap/bin/zotero-snap -c "$(dirname $(readlink -f %k))/zotero -url %U"'
 alias zotero='flatpak --filesystem=/home/austinjp/ run org.zotero.Zotero'
 
