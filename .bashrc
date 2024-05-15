@@ -393,3 +393,10 @@ export PATH=$(for d in $(echo "${PATH}" | cut -d':' -f 1,-999 --output-delimiter
 
 # Add any node modules.
 export PATH="${PATH}:node_modules/.bin"
+
+
+# ==============================================================================
+
+# Direnv.
+
+eval "$(direnv hook bash)"
