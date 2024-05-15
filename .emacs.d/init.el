@@ -12,7 +12,8 @@
 ;;  6. Load custom packages.
 ;;  7. Eglot config.
 ;;  8. Eldoc config.
-;;  9. Miscellaneous.
+;;  9. Golang config.
+;; 10. Miscellaneous.
 ;;
 
 ;;; Code:
@@ -131,6 +132,7 @@
 (add-to-list 'auto-mode-alist '("\\.pyx" . cython-mode))
 (add-to-list 'auto-mode-alist '("\\.pxd" . cython-mode))
 (add-to-list 'auto-mode-alist '("\\.json5" . javascript-mode))
+(add-to-list 'auto-mode-alist '("\\.go" . go-mode))
 
 ;; ======================================================================
 
@@ -258,7 +260,18 @@
 
 ;; ======================================================================
 
-;; 9. Miscellaneous.
+;; 9. Golang config.
+
+;; Automatically run gofmt on save.
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+;; Automatically run goimports on save.
+(setq gofmt-command "goimports")
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+;; ======================================================================
+
+;; 10. Miscellaneous.
 
 ;; Kudos https://github.com/martenlienen/dotfiles/blob/e4f7c47/home/.emacs.d/straight/repos/mlextras/ml-init.org
 
@@ -338,6 +351,21 @@
 
 ;; Multiple cursors.
 (global-set-key (kbd "C-M-j") 'mc/mark-all-dwim)
+
+;; Allow emacs and emacsclient to respond to mouse.
+;; Kudos: https://stackoverflow.com/a/6798279
+(defun my-terminal-config (&optional frame)
+  "Establish settings for the current terminal."
+  (if (not frame) ;; The initial call.
+      (xterm-mouse-mode 1)
+    ;; Otherwise called via after-make-frame-functions.
+    (if xterm-mouse-mode
+        ;; Re-initialise the mode in case of a new terminal.
+        (xterm-mouse-mode 1))))
+;; Evaluate both now (for non-daemon emacs) and upon frame creation
+;; (for new terminals via emacsclient).
+(my-terminal-config)
+(add-hook 'after-make-frame-functions 'my-terminal-config)
 
 ;; ======================================================================
 
