@@ -64,7 +64,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
+   '(biomejs-format lsp-mode go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode))
+ ;; '(prettier-js-args nil)
+ ;; '(prettier-js-command "/home/austinjp/.local/share/pnpm/prettier")
+ ;; '(prettier-js-show-errors 'echo)
+ )
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -128,11 +132,16 @@
 ;; (require 'cython-mode)
 
 ;; Associate some filename endings with modes.
-(add-to-list 'auto-mode-alist '("\\.qmd" . quarto-mode))
-(add-to-list 'auto-mode-alist '("\\.pyx" . cython-mode))
-(add-to-list 'auto-mode-alist '("\\.pxd" . cython-mode))
+; Cython mode
+(add-to-list 'auto-mode-alist '("\\.pyx"   . cython-mode))
+(add-to-list 'auto-mode-alist '("\\.pxd"   . cython-mode))
+; Quarto mode.
+(add-to-list 'auto-mode-alist '("\\.qmd"   . quarto-mode))
+; JavaScript mode.
 (add-to-list 'auto-mode-alist '("\\.json5" . javascript-mode))
-(add-to-list 'auto-mode-alist '("\\.go" . go-mode))
+(add-to-list 'auto-mode-alist '("\\.mjs"   . javascript-mode))
+; Go-lang mode.
+(add-to-list 'auto-mode-alist '("\\.go"    . go-mode))
 
 ;; ======================================================================
 
@@ -366,6 +375,28 @@
 ;; (for new terminals via emacsclient).
 (my-terminal-config)
 (add-hook 'after-make-frame-functions 'my-terminal-config)
+
+;; Prettier for JavaScript.
+;; (require 'prettier-js)
+;; (add-hook 'js-mode-hook 'prettier-js-mode)
+;; (add-hook 'js2-mode-hook 'prettier-js-mode)
+;; (add-hook 'multi-web-mode-hook 'prettier-js-mode)
+
+;; Biome for JavaScript formatting.
+(require 'biomejs-format)
+(add-hook 'js-mode-hook 'biomejs-format-mode)
+(add-hook 'js2-mode-hook 'biomejs-format-mode)
+;; (add-hook 'web-mode-hook 'biomejs-format-mode)
+;; (add-hook 'multi-web-mode-hook 'biomejs-format-mode)
+(setq biomejs-format-biome-args
+      '(
+        "format"
+        "--trailing-comma" "all"
+        "--bracket-spacing" "true"
+        "--javascript-formatter-indent-width" "4"
+        "--indent-style" "space"
+        )
+      )
 
 ;; ======================================================================
 
