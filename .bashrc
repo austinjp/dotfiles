@@ -102,32 +102,34 @@ esac
 
 # Added 2022-09-12 for powerline-go
 # See https://github.com/justjanne/powerline-go
-function _update_ps1() {
+function _update_ps1_powerline() {
     # PS1="$($GOPATH/bin/powerline-go -error $? -jobs $(jobs -p | wc -l))"
-    if [ -f "$GOPATH/bin/powerline-go" ]; then
-        PS1="$($GOPATH/bin/powerline-go -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit -condensed -git-mode fancy -cwd-max-depth 4 -cwd-mode semifancy -error $? -hostname-only-if-ssh -truncate-segment-width 20 -newline)"
+    PS1=$("${GOPATH}"/bin/powerline-go -error "${?}" -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit -condensed -git-mode fancy -cwd-max-depth 4 -cwd-mode semifancy -hostname-only-if-ssh -truncate-segment-width 20 -newline)
 
-        # Uncomment the following line to automatically clear errors after showing
-        # them once. This not only clears the error for powerline-go, but also for
-        # everything else you run in that shell. Don't enable this if you're not
-        # sure this is what you want.
-        # set "?"
-    else
-        # PS1=$(
-        #     echo '\033[0;32;1m' $(pwd | sed -re 's,^'${HOME}',\~,g') '\033[0m' ;
-        #     echo ;
-        #     # echo -n $(pwd | sed -re 's,^'${HOME}',\~,g') ;
-        #     # echo -e '\033[0m' ;
-        #     # echo -e '\033[0;36;1m\$ \033[0m' ;
-        #     # echo
-        #     # echo -ne '\033[0m'$'\n\033[0;36;1m \$ \033[0m')"
-        #    )
-        PS1="\[\e[0;95m\]"$(pwd | sed -re 's,^'${HOME}',\~,g')"\[\e[0m\]"$'\n'"\[\e[0;36m\]"'$ '"\[\e[0m\]"
-    fi
+    # Uncomment the following line to automatically clear errors after showing
+    # them once. This not only clears the error for powerline-go, but also for
+    # everything else you run in that shell. Don't enable this if you're not
+    # sure this is what you want.
+    # set "?"
 }
-if [ "$TERM" != "linux" ]; then
+function _update_ps1() {
+    PS1="\[\e[0;95m\]"$(pwd | sed -re 's,^'${HOME}',\~,g')"\[\e[0m\]"$'\n'"\[\e[0;36m\]"'$ '"\[\e[0m\]"
+    # PS1=$(
+    #     echo '\033[0;32;1m' $(pwd | sed -re 's,^'${HOME}',\~,g') '\033[0m' ;
+    #     echo ;
+    #     # echo -n $(pwd | sed -re 's,^'${HOME}',\~,g') ;
+    #     # echo -e '\033[0m' ;
+    #     # echo -e '\033[0;36;1m\$ \033[0m' ;
+    #     # echo
+    #     # echo -ne '\033[0m'$'\n\033[0;36;1m \$ \033[0m')"
+    #    )
+}
+if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+    PROMPT_COMMAND="_update_ps1_powerline; $PROMPT_COMMAND"
+else
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
+
 # Workaround for nix-shell --pure
 if [ "$IN_NIX_SHELL" == "pure" ]; then
     if [ -x "${HOME}/.nix-profile/bin/powerline-go" ]; then
