@@ -64,6 +64,8 @@ function _gauth() {
 }
 alias gauth=_gauth
 
+alias hf="huggingface-cli"
+
 alias less="less -XFRi"
 
 # alias libreoffice="/opt/libreoffice6.4/program/soffice"
