@@ -12,22 +12,22 @@ esac
 # ==============================================================================
 
 # Added 2023-10-14 to "fix" error messages after uninstalling a thing.
-unset LD_PRELOAD
+# unset LD_PRELOAD
 
 
 # ==============================================================================
 
-# don't put duplicate lines or lines starting with space in the history.
+# Don't add duplicate lines to the history.
 
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoredups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+export HISTSIZE=1000
+export HISTFILESIZE=2000
 
 
 # ==============================================================================
@@ -42,6 +42,16 @@ shopt -s checkwinsize
 
 
 # ==============================================================================
+
+# Pagers. Defined early so aliases etc can use these env vars.
+
+export PAGER='less -XFRi'
+
+# Added 2022-04-18 for delta git pager.
+export DELTA_PAGER="less -XFRS"
+
+# ==============================================================================
+
 
 # Added 2022-09-12 for go
 # Needs to be before powerline-go stuff below.
@@ -182,11 +192,6 @@ fi
 
 # ==============================================================================
 
-export PAGER='less -XFRi'
-
-
-# ==============================================================================
-
 # Added 2019-09-12: use specific ssh key in Git:
 # export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_bitbucket"
 # Updated 2020-04-10
@@ -287,12 +292,6 @@ export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
 
 # ==============================================================================
 
-# Added 2022-04-18 for delta git pager.
-export DELTA_PAGER="less -XFRS"
-
-
-# ==============================================================================
-
 # Added 2022-07-16 for latest pandoc-crossref build.
 PATH="${PATH}:${HOME}/.cabal/bin"
 
@@ -300,7 +299,23 @@ PATH="${PATH}:${HOME}/.cabal/bin"
 # ==============================================================================
 
 # Changed 2023-03-20
-# ALL TIMEZONE/TZ STUFF HAS BEEN MOVED TO ~/.profile
+# Update timezone. Added 2023-03-20 (but see update below)
+# to try fixing random read-only disk issues!
+# 
+# TIMTEZONE/TZ settings. If changing this:
+#   1. Edit this file.
+#   2. Start a shell, and check $TZ
+#   3. Run timedatectl set-timezone "${TZ}"
+#   4. Check/edit /etc/ntp.conf
+#   5. Probably reboot!
+# For valid values of TZ, run tzelect.
+# 
+# Updated 2023-03-31
+# 
+# To set timezone for whole box:
+#   sudo dpkg-reconfigure tzdata
+# TZ='Europe/London'
+# export TZ
 
 
 # ==============================================================================
@@ -312,31 +327,32 @@ PATH="${PATH}:${HOME}/.cabal/bin"
 # ==============================================================================
 
 # # Added 2022-10-01 for Rust/Cargo/etc.
-# PATH="${PATH}:${HOME}/.cargo/bin"
-# source "${HOME}/.cargo/env"
+# [[ -s "${HOME}/.cargo/bin" ]] && PATH="${PATH}:${HOME}/.cargo/bin"
+# [[ -s "${HOME}/.cargo/env" ]] && . "${HOME}/.cargo/env"
 
 
 # ==============================================================================
 
+# Ensure Python's .pyc files and __pycache__ folders don't clutter working dir.
+export PYTHONPYCACHEPREFIX="${HOME}/.cache/python"
+
 # Added 2020-11-23
+# Removed 2024-05-30 because it didn't play well with direnv.
 # Dynamic Python cache dirs based on env vars set by virtualenv.
 # source() approach courtesy https://stackoverflow.com/a/9497416
-unset PYTHONPYCACHEPREFIX
-source () { 
-    if builtin source "$@"
-    then
-        if [[ ! -z "${VIRTUAL_ENV}" ]] && [[ ! -z "${_OLD_VIRTUAL_PATH}" ]]
-        then
-            export PYTHONPYCACHEPREFIX="/tmp/pycache/"$(echo $(cd $VIRTUAL_ENV/.. 1>/dev/null ; pwd ; cd - 1>/dev/null))
-            . <(pip completion --bash) # Add pip completions for bash. Note: don't use "source"! :)
-        else
-            unset PYTHONPYCACHEPREFIX
-        fi
-        return 0
-    else
-        return $?
-    fi
-}
+# source () { 
+#     if builtin source "$@"
+#     then
+#         if [[ ! -z "${VIRTUAL_ENV}" ]] && [[ ! -z "${_OLD_VIRTUAL_PATH}" ]]
+#         then
+#             export PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX}/"$(echo $(cd $VIRTUAL_ENV/.. 1>/dev/null ; pwd ; cd - 1>/dev/null))
+#             . <(pip completion --bash) # Add pip completions for bash. Note: don't use "source"! :)
+#         fi
+#         return 0
+#     else
+#         return $?
+#     fi
+# }
 
 
 # ==============================================================================
@@ -384,8 +400,8 @@ PATH="${PATH}:${HOME}/adb-fastboot"
 # ==============================================================================
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-PATH="${PATH}:${HOME}/.rvm/bin"
-
+# [[ -s "${HOME}/.rvm/bin" ]] & PATH="${PATH}:${HOME}/.rvm/bin"
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # ==============================================================================
 
@@ -393,8 +409,11 @@ PATH="${PATH}:${HOME}/.rvm/bin"
 
 export PATH=$(for d in $(echo "${PATH}" | cut -d':' -f 1,-999 --output-delimiter=$'\n') ; do [[ -s "${d}" ]] && echo $d ; done | tr $'\n' ':' | sed -re 's/\:$//')
 
+# ==============================================================================
+
 # Add any node modules.
-export PATH="${PATH}:node_modules/.bin"
+# Update: Use direnv for this.
+# export PATH="${PATH}:node_modules/.bin"
 
 
 # ==============================================================================
@@ -402,3 +421,6 @@ export PATH="${PATH}:node_modules/.bin"
 # Direnv.
 
 eval "$(direnv hook bash)"
+
+# ==============================================================================
+
