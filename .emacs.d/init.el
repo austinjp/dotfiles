@@ -64,11 +64,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(biomejs-format lsp-mode go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode))
- ;; '(prettier-js-args nil)
- ;; '(prettier-js-command "/home/austinjp/.local/share/pnpm/prettier")
- ;; '(prettier-js-show-errors 'echo)
- )
+   '(prettier-rc prettier-js prettier biomejs-format lsp-mode go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -142,6 +138,8 @@
 (add-to-list 'auto-mode-alist '("\\.mjs"   . javascript-mode))
 ; Go-lang mode.
 (add-to-list 'auto-mode-alist '("\\.go"    . go-mode))
+; Using sh-mode for direnv files.
+(add-to-list 'auto-mode-alist '("\\.envrc"    . sh-mode))
 
 ;; ======================================================================
 
@@ -377,26 +375,27 @@
 (add-hook 'after-make-frame-functions 'my-terminal-config)
 
 ;; Prettier for JavaScript.
-;; (require 'prettier-js)
-;; (add-hook 'js-mode-hook 'prettier-js-mode)
-;; (add-hook 'js2-mode-hook 'prettier-js-mode)
-;; (add-hook 'multi-web-mode-hook 'prettier-js-mode)
+(require 'prettier-js)
+(add-hook 'js-mode-hook 'prettier-js-mode)
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+(add-hook 'multi-web-mode-hook 'prettier-js-mode)
+(add-hook 'web-mode-hook 'prettier-js-mode)
 
-;; Biome for JavaScript formatting.
-(require 'biomejs-format)
-(add-hook 'js-mode-hook 'biomejs-format-mode)
-(add-hook 'js2-mode-hook 'biomejs-format-mode)
-;; (add-hook 'web-mode-hook 'biomejs-format-mode)
-;; (add-hook 'multi-web-mode-hook 'biomejs-format-mode)
-(setq biomejs-format-biome-args
-      '(
-        "format"
-        "--trailing-comma" "all"
-        "--bracket-spacing" "true"
-        "--javascript-formatter-indent-width" "4"
-        "--indent-style" "space"
-        )
-      )
+;; ;; Biome for JavaScript formatting.
+;; (require 'biomejs-format)
+;; (add-hook 'js-mode-hook 'biomejs-format-mode)
+;; (add-hook 'js2-mode-hook 'biomejs-format-mode)
+;; ;; (add-hook 'web-mode-hook 'biomejs-format-mode)
+;; ;; (add-hook 'multi-web-mode-hook 'biomejs-format-mode)
+;; (setq biomejs-format-biome-args
+;;       '(
+;;         "format"
+;;         "--trailing-comma" "all"
+;;         "--bracket-spacing" "true"
+;;         "--javascript-formatter-indent-width" "4"
+;;         "--indent-style" "space"
+;;         )
+;;       )
 
 ;; ======================================================================
 
