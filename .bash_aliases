@@ -76,6 +76,9 @@ alias localsend='flatpak run org.localsend.localsend_app'
 function _batman() { /usr/bin/man "${@}" | bat -l man ; }
 alias man=_batman
 
+# Make a dir and cd into it.
+function mcd () { mkdir -p "${1}" && cd "${1}" ; }
+
 alias mv="mv -i"
 
 alias p="pnpm"
