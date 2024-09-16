@@ -90,6 +90,7 @@ cni
 .config/kdeconnect
 .config/kde.org/kdeconnect.app.conf
 .config/libreoffice
+.config/litecli/*
 .config/onedrive/.config.backup
 .config/onedrive/.config.hash
 .config/papis/
