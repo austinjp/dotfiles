@@ -64,7 +64,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(prettier-rc prettier-js prettier biomejs-format lsp-mode go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode)))
+   '(prettier-rc prettier-js prettier biomejs-format lsp-mode go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode))
+ '(undo-limit 10000)
+ '(undo-tree-limit 10000)
+ '(undo-tree-outer-limit 10000)
+ '(undo-tree-strong-limit 10000))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -79,6 +83,7 @@
  '(markdown-comment-face ((t (:inherit font-lock-comment-face :foreground "color-201"))))
  '(markdown-markup-face ((t (:inherit shadow :foreground "color-245" :slant normal :weight normal))))
  '(minibuffer-prompt ((((type tty)) (:foreground "cyan"))))
+ '(mode-line-buffer-id ((t (:foreground "color-232" :weight bold))))
  '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "red"))))
  '(rainbow-delimiters-base-face ((t (:inherit nil))))
  '(rainbow-delimiters-depth-1-face ((t (:inherit rainbow-delimiters-base-face :foreground "color-40"))))
@@ -124,18 +129,21 @@
 ;; Kick-start a bunch of packages:
 
 (require 'lorem-ipsum)
-;; (require 'quarto-mode)
 ;; (require 'cython-mode)
 
 ;; Associate some filename endings with modes.
 ; Cython mode
 (add-to-list 'auto-mode-alist '("\\.pyx"   . cython-mode))
 (add-to-list 'auto-mode-alist '("\\.pxd"   . cython-mode))
-; Quarto mode.
-(add-to-list 'auto-mode-alist '("\\.qmd"   . quarto-mode))
+
+;; ; Quarto mode.
+;; (add-to-list 'auto-mode-alist '("\\.qmd"   . quarto-mode))
+;; (require 'quarto-mode)
+
 ; JavaScript mode.
 (add-to-list 'auto-mode-alist '("\\.json5" . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.mjs"   . javascript-mode))
+(add-to-list 'auto-mode-alist '("\\.avsc"  . javascript-mode))
 ; Go-lang mode.
 (add-to-list 'auto-mode-alist '("\\.go"    . go-mode))
 ; Using sh-mode for direnv files.
@@ -213,7 +221,9 @@
   :init
   (global-undo-tree-mode)
   )
+
 (setq undo-tree-auto-save-history t)
+
 (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 
 ;; ======================================================================
@@ -290,6 +300,9 @@
 
 ;; Append a newline at the end of files
 (setq require-final-newline t)
+
+;; Remove trailing whitespace. Kudos https://github.com/fxbois/web-mode/issues/283#issuecomment-47773112
+(add-hook 'local-write-file-hooks (lambda () (delete-trailing-whitespace) nil))
 
 ;; Enable X clipboards
 (setf x-select-enable-clipboard t
@@ -398,4 +411,3 @@
 ;;       )
 
 ;; ======================================================================
-
