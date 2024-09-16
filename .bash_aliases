@@ -2,7 +2,15 @@
 
 # alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
 alias ag='ag --pager="less -XFRi"'
+
+
+alias _avro2json='java -jar ~/.local/share/json2avro-validator-0.2.3-SNAPSHOT.jar -m avro2json'
+function avro2json() { _avro2json "${@}" | ag -v 'schema\.avro\.AvroValidator' ; }
+
 alias bat='batcat --theme $(is_terminal_dark.sh && echo gruvbox-dark || echo OneHalfLight) --decorations never --pager="less -XFRi"'
+
+alias cal="ncal -M -b -h"
+
 # alias cast="mkchromecast"
 # alias chromecast="mkchromecast"
 
@@ -46,7 +54,7 @@ export GIT_EDITOR='TMPDIR='"${HOME}"'/.local/tmp /usr/bin/emacsclient.emacs -t -
 # ==============================================================================
 
 
-alias fd='fd --color=never --follow --glob --no-ignore'
+alias fd='fdfind --color=never --follow --glob --no-ignore'
 
 alias free="free -h --giga"
 function _git_grep() {
@@ -143,6 +151,16 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 function hr() {
     printf %"$(tput cols 2>/dev/null || echo 80)"s | tr " " "_"
 }
+
+# Combine which and bat, something I do plenty!
+wat() { bat $(which "${1}") ; }
+
+
+# Carbonyl renders Chrome into the terminal, similar to browsh.
+function carbonyl() {
+    podman run --rm -ti fathyb/carbonyl "${@}"
+}
+
 
 # ==============================================================================
 # Delay some aliases/functions/etc until they are requested, to prevent slow shell startup.
