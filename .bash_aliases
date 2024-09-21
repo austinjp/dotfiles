@@ -161,6 +161,21 @@ function carbonyl() {
     podman run --rm -ti fathyb/carbonyl "${@}"
 }
 
+# Detect if a Python virtual env is *available* (not neccesarily in use).
+function find_py_venv() {
+    {
+        find -maxdepth 3 -type f -name activate -exec ag -l --unrestricted VIRTUAL_ENV {} \; 2>/dev/null || :
+    } | sort --version-sort | head -n 1
+}
+
+function auto_activate_py_venv() {
+    PV=$(find_py_venv)
+    if [[ "${PV}" != "" ]] ; then
+        source "${PV}"
+    fi
+    unset PV
+}
+
 
 # ==============================================================================
 # Delay some aliases/functions/etc until they are requested, to prevent slow shell startup.
