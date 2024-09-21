@@ -330,7 +330,7 @@ PATH="${PATH}:${HOME}/.cabal/bin"
 # Ensure Python's .pyc files and __pycache__ folders don't clutter working dir.
 export PYTHONPYCACHEPREFIX="${HOME}/.cache/python"
 
-# Added 2020-11-23
+# Added 2020-11-23 (but see direnv stuff towards end).
 # Removed 2024-05-30 because it didn't play well with direnv.
 # Dynamic Python cache dirs based on env vars set by virtualenv.
 # source() approach courtesy https://stackoverflow.com/a/9497416
