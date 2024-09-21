@@ -139,9 +139,9 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Prefix output of ls -1 with a running count.
+# Prefix output of (sorted) ls -1 with a running count.
 function lsc() {
-    ls -1 "${@}" | awk 'BEGIN { a=0; } { b=++a; print b"\t"$1 }'
+    \ls -1 "${@}" | sort --version-sort | awk 'BEGIN { a=0; } { b=++a; print b"\t"$1 }'
 }
 
 # Add an "alert" alias for long running commands.  Use like so:
