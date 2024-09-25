@@ -55,7 +55,7 @@ export DELTA_PAGER="less -XFRS"
 # Updated 2024-06-05
 # Add go bins to PATH without setting GOPATH or GOROOT which should
 # apparently remain unset: https://stackoverflow.com/a/68226616
-PATH="${PATH}:${HOME}"/.local/lib/go/bin
+PATH="${PATH}:/usr/local/go/bin:${HOME}/go/bin"
 
 # ==============================================================================
 # Prompt stuff.
@@ -108,7 +108,7 @@ esac
 # Added 2022-09-12 for powerline-go
 # See https://github.com/justjanne/powerline-go
 function _update_ps1_powerline() {
-    PS1=$("${HOME}"/.local/lib/go/bin/powerline-go -error "${?}" -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit -condensed -git-mode fancy -cwd-max-depth 4 -cwd-mode semifancy -hostname-only-if-ssh -truncate-segment-width 20 -newline)
+    PS1=$(powerline-go -error "${?}" -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit -condensed -git-mode fancy -cwd-max-depth 4 -cwd-mode semifancy -hostname-only-if-ssh -truncate-segment-width 20 -newline)
 
     # Uncomment the following line to automatically clear errors after showing
     # them once. This not only clears the error for powerline-go, but also for
@@ -128,7 +128,7 @@ function _update_ps1() {
     #     # echo -ne '\033[0m'$'\n\033[0;36;1m \$ \033[0m')"
     #    )
 }
-if [ "$TERM" != "linux" ] && [ -f "${HOME}"/.local/lib/go/bin/powerline-go ]; then
+if [ "$TERM" != "linux" ] && [[ $(which powerline-go) ]]; then
     PROMPT_COMMAND="_update_ps1_powerline; $PROMPT_COMMAND"
 else
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
@@ -390,6 +390,15 @@ xmodmap -e 'keycode 37 50 66='
 # Added 2024-01-15 for adb and fastboot.
 PATH="${PATH}:${HOME}/adb-fastboot"
 
+
+# ==============================================================================
+
+# # Added 2024-09-25 for https://github.com/sugarme/gotch
+# # which is used for Go transformers and tokenizers.
+# export GOTCH_LIBTORCH="/usr/lib/x86_64-linux-gnu"
+# export LIBRARY_PATH="$LIBRARY_PATH:$GOTCH_LIBTORCH/lib"
+# export CPATH="$CPATH:$GOTCH_LIBTORCH/lib:$GOTCH_LIBTORCH/include:$GOTCH_LIBTORCH/include/torch/csrc/api/include"
+# export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$GOTCH_LIBTORCH/lib"
 
 # ==============================================================================
 
