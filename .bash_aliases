@@ -57,11 +57,6 @@ export GIT_EDITOR='TMPDIR='"${HOME}"'/.local/tmp /usr/bin/emacsclient.emacs -t -
 alias fd='fdfind --color=never --follow --glob --no-ignore'
 
 alias free="free -h --giga"
-function _git_grep() {
-    git rev-list --all | xargs git grep -e "${@}"
-}
-alias gg=_git_grep
-alias gitui='EDITOR=/usr/bin/emacs\ -Q VISUAL=/usr/bin/emacs\ -Q gitui'
 
 function _gauth() {
     if [ "${@}" ]; then
@@ -71,6 +66,16 @@ function _gauth() {
     fi
 }
 alias gauth=_gauth
+
+function _git_grep() {
+    git rev-list --all | xargs git grep -e "${@}"
+}
+alias gg=_git_grep
+
+# Glow is a markdown viewer with syntax highlighting.
+alias glow='glow -n -p -w 0'
+alias markdown=glow
+alias md=markdown
 
 alias hf="huggingface-cli"
 
@@ -120,6 +125,12 @@ alias vpn="expressvpn"
 
 alias venv='make_venv -s -v 3.10 && source venv/bin/activate && ln -sr venv/bin/activate -t .'
 # alias zotero='env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/zotero-snap_zotero-snap.desktop /snap/bin/zotero-snap -c "$(dirname $(readlink -f %k))/zotero -url %U"'
+
+function weaviate-serve() {
+    # Note: versions 1.26.4 and 1.26.5 did not work for me.
+    podman run --name weaviate -p 8080:8080 -p 50051:50051 cr.weaviate.io/semitechnologies/weaviate:1.26.3
+}
+
 alias zotero='flatpak --filesystem=/home/austinjp/ run org.zotero.Zotero'
 
 # enable color support of ls and also add handy aliases
