@@ -113,6 +113,12 @@ alias podman=_podman
 alias docker=podman
 
 
+# Ensure the venv python is used when invoking pydoc, so all expected modules are available.
+function pydoc () {
+    /usr/bin/env python -m pydoc "${@}"
+}
+
+
 # Redshift alias, hard-coded location.
 alias redshift='/usr/bin/redshift -l 51.5:0.0 -m randr'  # UK
 
