@@ -39,7 +39,7 @@ function _emacs() {
     # Change the terminal/tab title:
     printf '\033]2;%s\033\\' 'Emacs'
     mkdir -p "${HOME}"/.local/tmp
-    emacs_daemon_is_running=$(\pgrep -fila emacs | ag '( \-\-daemon| \-\-bg\-daemon| \-\-fg\-daemon)');
+    emacs_daemon_is_running=$(\pgrep -fila emacs | ag '( \-\-daemon| \-\-bg\-daemon| \-\-fg\-daemon)' | ag -v 'dirmngr' | ag -v 'gpg\-agent');
     if [[ "${emacs_daemon_is_running}" ]]; then
         :
     else

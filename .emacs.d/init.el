@@ -1,7 +1,7 @@
 ;;; .emacs --- My .emacs file.
 
 ;;; Commentary:
-;; 
+;;
 ;; What's in here:
 ;;
 ;;  1. Some inspiration.
@@ -64,7 +64,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(prettier-rc prettier-js prettier biomejs-format lsp-mode go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode flymake-css yaml-mode undo-tree rainbow-delimiters eglot sideline-flymake sideline markdown-mode multi-web-mode json-mode company cmake-mode))
+   '(gnu-elpa-keyring-update prettier-rc prettier-js prettier biomejs-format lsp-mode go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode yaml-mode undo-tree rainbow-delimiters eglot sideline markdown-mode multi-web-mode json-mode company cmake-mode))
  '(undo-limit 10000)
  '(undo-tree-limit 10000)
  '(undo-tree-outer-limit 10000)
@@ -178,29 +178,29 @@
    )
   )
 
-;; (b) Sideline to display messages from Flymake.
-
-(use-package sideline-flymake)
-(use-package sideline
-  :hook
-  (flymake-mode-hook . sideline-mode)
-  :init
-  (global-sideline-mode)
-  (setq
-   sideline-backends-right '(sideline-flymake)
-   sideline-flymake-display-errors-whole-line 'line ; or 'point to show errors only on point
-   ;; sideline-backends-skip-current-line t         ; don't display on current line
-   sideline-order-right 'down                       ; or 'up
-   sideline-format-left "%s   "                     ; format for left aligment
-   sideline-format-right "   %s"                    ; format for right aligment
-   sideline-priority 100                            ; overlays' priority
-   sideline-display-backend-name 'f                 ; display the backend name
-   )
-  )
-
-;; (c) Flymake bits and bobs.
-
-(use-package flymake-css)
+;; ;; (b) Sideline to display messages from Flymake.
+;;
+;; (use-package sideline-flymake)
+;; (use-package sideline
+;;   :hook
+;;   (flymake-mode-hook . sideline-mode)
+;;   :init
+;;   (global-sideline-mode)
+;;   (setq
+;;    sideline-backends-right '(sideline-flymake)
+;;    sideline-flymake-display-errors-whole-line 'line ; or 'point to show errors only on point
+;;    ;; sideline-backends-skip-current-line t         ; don't display on current line
+;;    sideline-order-right 'down                       ; or 'up
+;;    sideline-format-left "%s   "                     ; format for left aligment
+;;    sideline-format-right "   %s"                    ; format for right aligment
+;;    sideline-priority 100                            ; overlays' priority
+;;    sideline-display-backend-name 'f                 ; display the backend name
+;;    )
+;;   )
+;;
+;; ;; (c) Flymake bits and bobs.
+;;
+;; (use-package flymake-css)
 
 ;; (d) Misc.
 
@@ -228,12 +228,15 @@
 
 ;; ======================================================================
 
-;; 7. Eglot config. Currently disabled!
+;; 7. Eglot config.
 
-;; (use-package eglot)
-;; 
-;; ;; Tell Eglot which language servers are available.
-;; (with-eval-after-load 'eglot
+(use-package eglot)
+
+;; Tell Eglot which language servers are available.
+
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(go-mode . ("gopls" "serve")))
 ;;   (add-to-list 'eglot-server-programs
 ;;                '(js-mode . ("typescript-language-server" "--stdio")))
 ;;   (add-to-list 'eglot-server-programs
@@ -246,12 +249,13 @@
 ;;                '(sh-mode . ("bash-language-server" "start")))
 ;;   (add-to-list 'eglot-server-programs
 ;;                '(shell-script-mode . ("bash-language-server" "start")))
-;;   )
-;; 
+)
+
 ;; ;; Enable generally:
 ;; ;; (add-hook 'prog-mode-hook 'eglot-ensure)
-;; 
-;; ;; Alternatively enable individually:
+
+;; Alternatively enable individually:
+(add-hook 'go-mode-hook 'eglot-ensure)
 ;; (add-hook 'sh-mode-hook 'eglot-ensure)
 ;; (add-hook 'shell-script-mode-hook 'eglot-ensure)
 ;; ;; (add-hook 'python-mode-hook 'eglot-ensure)
@@ -259,8 +263,8 @@
 ;; ;; etc.
 
 ;; Keep eglot away from some stuff:
-;; (add-to-list 'eglot-stay-out-of 'flymake)
-;; (add-to-list 'eglot-stay-out-of "company")
+(add-to-list 'eglot-stay-out-of 'flymake)
+(add-to-list 'eglot-stay-out-of "company")
 
 ;; ======================================================================
 
@@ -286,11 +290,15 @@
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
 
+
 ;; ======================================================================
 
 ;; 10. Miscellaneous.
 
 ;; Kudos https://github.com/martenlienen/dotfiles/blob/e4f7c47/home/.emacs.d/straight/repos/mlextras/ml-init.org
+
+;; Show current function in status line.
+(which-function-mode 1)
 
 ;; Line breaks at 88 characters, default for black.
 (setq-default fill-column 88)
@@ -350,8 +358,8 @@
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 (defun infer-indentation-style ()
-  ;; if our source file uses tabs, we use tabs, if spaces spaces, and if        
-  ;; neither, we use the current indent-tabs-mode                               
+  ;; if our source file uses tabs, we use tabs, if spaces spaces, and if
+  ;; neither, we use the current indent-tabs-mode
   (let ((space-count (how-many "^  " (point-min) (point-max)))
         (tab-count (how-many "^\t" (point-min) (point-max))))
     (if (> space-count tab-count) (setq indent-tabs-mode nil))
