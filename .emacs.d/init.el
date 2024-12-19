@@ -64,7 +64,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(gnu-elpa-keyring-update prettier-rc prettier-js prettier biomejs-format lsp-mode go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode yaml-mode undo-tree rainbow-delimiters eglot sideline markdown-mode multi-web-mode json-mode company cmake-mode))
+   '(exec-path-from-shell gnu-elpa-keyring-update prettier-rc prettier-js prettier lsp-mode go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode yaml-mode undo-tree rainbow-delimiters eglot sideline markdown-mode multi-web-mode json-mode company cmake-mode))
  '(undo-limit 10000)
  '(undo-tree-limit 10000)
  '(undo-tree-outer-limit 10000)
@@ -109,6 +109,17 @@
 
 (setq package-enable-at-startup nil)
 (require 'package)
+
+;; The following are an attempt at getting node (via nvm) into the PATH
+;; so prettier can run it. See https://github.com/purcell/exec-path-from-shell
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+(when (daemonp)
+  (exec-path-from-shell-initialize))
+(require 'exec-path-from-shell)
+(dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LANGUAGE" "LC_CTYPE" "PATH" "NODE_PATH"))
+  (add-to-list 'exec-path-from-shell-variables var))
+;; End of prettier/node/nvm path stuff.
 
 (eval-when-compile
   (setq custom-paths '())
@@ -401,6 +412,11 @@
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 (add-hook 'multi-web-mode-hook 'prettier-js-mode)
 (add-hook 'web-mode-hook 'prettier-js-mode)
+(setq prettier-js-args
+      '(
+        "--use-tabs"
+        )
+      )
 
 ;; ;; Biome for JavaScript formatting.
 ;; (require 'biomejs-format)
