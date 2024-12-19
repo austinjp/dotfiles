@@ -1,1 +1,27 @@
 . ~/.bash_aliases
+
+# The following kudos https://github.com/direnv/direnv/issues/73
+
+# Clear existing aliases when entering a directory
+rm -rf "$PWD/.envrc-aliases"
+
+export_alias() {
+    local name="${1}"
+    shift
+
+    # local rest="${@}"
+    # shift
+
+    local alias_dir="${PWD}"/.envrc-aliases
+    local target="${alias_dir}/${name}"
+    local oldpath="${PATH}"
+    if ! [[ ":${PATH}:" == *":${alias_dir}:"* ]]; then
+        mkdir -p "${alias_dir}"
+        PATH_add "${alias_dir}"
+    fi
+
+    echo "#!/usr/bin/env bash" > "${target}"
+    echo "PATH=$oldpath" >> "${target}"
+    echo "${@}" >> "${target}"
+    chmod +x "${target}"
+}
