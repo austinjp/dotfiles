@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
-alias ag='ag --pager="less -XFRi"'
-
+unalias ag 2>/dev/null
 
 alias _avro2json='java -jar ~/.local/share/json2avro-validator-0.2.3-SNAPSHOT.jar -m avro2json'
-function avro2json() { _avro2json "${@}" | ag -v 'schema\.avro\.AvroValidator' ; }
+function avro2json() { _avro2json "${@}" | \ag -v 'schema\.avro\.AvroValidator' ; }
 
 alias bat='batcat --theme $(is_terminal_dark.sh && echo gruvbox-dark || echo OneHalfLight) --decorations never --pager="less -XFRi"'
 
@@ -30,6 +28,10 @@ alias dotfile='_dotfile(){ git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME/
 
 alias du='du -s -m -P -H'
 
+function title() {
+    # Set terminal title in tab/titlebar.
+    printf '\033]2;%s\033\\' "${@}"
+}
 
 # ==============================================================================
 # Emacs stuff.
@@ -37,9 +39,10 @@ alias du='du -s -m -P -H'
 EMACS_ALT='nano'
 function _emacs() {
     # Change the terminal/tab title:
-    printf '\033]2;%s\033\\' 'Emacs'
+    title 'Emacs'
+
     mkdir -p "${HOME}"/.local/tmp
-    emacs_daemon_is_running=$(\pgrep -fila emacs | ag '( \-\-daemon| \-\-bg\-daemon| \-\-fg\-daemon)' | ag -v 'dirmngr' | ag -v 'gpg\-agent');
+    emacs_daemon_is_running=$(\pgrep -fila emacs | grep 'emacs \-\-daemon')
     if [[ "${emacs_daemon_is_running}" ]]; then
         :
     else
@@ -60,7 +63,7 @@ alias free="free -h --giga"
 
 function _gauth() {
     if [ "${@}" ]; then
-        \gauth | ag -i '^'"${@}" | head -n 1 | sed -r -e 's/\s+/ /g' | cut -d' ' -f 6 | xclip -i -r -selection primary
+        \gauth | \ag -i '^'"${@}" | head -n 1 | sed -r -e 's/\s+/ /g' | cut -d' ' -f 6 | xclip -i -r -selection primary
     else
         \gauth
     fi
@@ -78,6 +81,8 @@ alias markdown=glow
 alias md=markdown
 
 alias hf="huggingface-cli"
+
+alias lazygit='title "git" ; \lazygit'
 
 alias less="less -XFRi"
 
@@ -97,7 +102,7 @@ alias mv="mv -i"
 alias p="pnpm"
 
 function _pgrep() {
-    _pids=$(\pgrep -fila "${@}" | ag -i "${@}" | cut -d' ' -f 1 | tr $'\n' ',' | sed -e 's/,$//g')
+    _pids=$(\pgrep -fila "${@}" | \ag -i "${@}" | cut -d' ' -f 1 | tr $'\n' ',' | sed -e 's/,$//g')
     if [[ "${_pids}" ]]; then
         # \ps axw --format 'user,pid,pcpu,%mem,time,command' --pid "${_pids}"
         \ps auxwww q "${_pids}" | \less -XFRSi
@@ -217,3 +222,6 @@ function sdk() {
 
 # End of delays.
 # ==============================================================================
+
+# alias ag='ag --css --html --js --json --markdown --python --sass --shell --yaml -t'
+alias ag='ag --pager="less -XFRi"'
