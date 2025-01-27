@@ -1,0 +1,29 @@
+theme = "Firefly Traditional"
+
+# This is for lazygit+delta.
+palette = "235=#004400"
+
+# Prevent ghostty updating title (but allow shell to do it).
+shell-integration-features = "no-title"
+
+# Font.
+font-family = "Noto Mono For Powerline"
+font-size = 10
+
+# Disable font ligatures.
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
+gtk-wide-tabs = false
+# adw-toolbar-style = raised
+bold-is-bright = true
+cursor-style-blink = false
+clipboard-paste-protection = false
+
+cursor-color = ff0000
+
+# Window decorations
+gtk-adwaita = false
+gtk-titlebar = false
+window-decoration = true
