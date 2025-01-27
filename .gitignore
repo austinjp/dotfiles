@@ -95,6 +95,7 @@ cni
 .config/onedrive/.config.hash
 .config/papis/
 .config/pulse
+.config/sncli/
 .config/spotify-tui/client.yml
 .config/spotifyd/
 .config/teams/
@@ -127,3 +128,15 @@ cni
 .javacpp/cache
 ..bfg-report/*
 
+
+.config/Beeper/
+.config/Genymobile/
+.config/Session/
+.config/attu/
+.config/balenaEtcher/
+.config/configstore/
+.config/deluge/
+.config/jgit/
+.config/see-cat/
+.config/see/
+.config/semi_technologies/
