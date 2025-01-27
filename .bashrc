@@ -2,11 +2,11 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# # If not running interactively, don't do anything
+# case $- in
+#     *i*) ;;
+#       *) return;;
+# esac
 
 
 # ==============================================================================
@@ -108,7 +108,7 @@ esac
 # Added 2022-09-12 for powerline-go
 # See https://github.com/justjanne/powerline-go
 function _update_ps1_powerline() {
-    PS1=$(powerline-go -error "${?}" -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit -condensed -git-mode fancy -cwd-max-depth 4 -cwd-mode semifancy -hostname-only-if-ssh -truncate-segment-width 20 -newline)
+    PS1=$(powerline-go -error "${?}" -modules venv,user,host,ssh,cwd,perms,git,hg,jobs,exit -condensed -git-mode compact -cwd-max-depth 4 -cwd-mode semifancy -hostname-only-if-ssh -truncate-segment-width 20 -newline)
 
     # Uncomment the following line to automatically clear errors after showing
     # them once. This not only clears the error for powerline-go, but also for
@@ -383,7 +383,7 @@ PATH="${PATH}:${HOME}/.luarocks/bin/"
 # ==============================================================================
 
 # Added 2023-11-27 temporarily: disable left control, shift, and caps-lock keys.
-xmodmap -e 'keycode 37 50 66='
+xmodmap -e 'keycode 37 50 66=' 2>/dev/null
 
 # ==============================================================================
 
