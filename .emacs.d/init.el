@@ -64,7 +64,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(exec-path-from-shell gnu-elpa-keyring-update prettier-rc prettier-js prettier lsp-mode go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode yaml-mode undo-tree rainbow-delimiters eglot sideline markdown-mode multi-web-mode json-mode company cmake-mode))
+   '(quarto-mode exec-path-from-shell gnu-elpa-keyring-update prettier-rc prettier-js prettier lsp-mode go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode yaml-mode undo-tree rainbow-delimiters eglot sideline markdown-mode multi-web-mode json-mode company cmake-mode))
  '(undo-limit 10000)
  '(undo-tree-limit 10000)
  '(undo-tree-outer-limit 10000)
@@ -147,9 +147,9 @@
 (add-to-list 'auto-mode-alist '("\\.pyx"   . cython-mode))
 (add-to-list 'auto-mode-alist '("\\.pxd"   . cython-mode))
 
-;; ; Quarto mode.
-;; (add-to-list 'auto-mode-alist '("\\.qmd"   . quarto-mode))
-;; (require 'quarto-mode)
+; Quarto mode.
+(add-to-list 'auto-mode-alist '("\\.qmd"   . poly-quarto-mode))
+(require 'quarto-mode)
 
 ; JavaScript mode.
 (add-to-list 'auto-mode-alist '("\\.json5" . javascript-mode))
