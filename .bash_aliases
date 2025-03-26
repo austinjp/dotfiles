@@ -82,6 +82,8 @@ alias md=markdown
 
 alias hf="huggingface-cli"
 
+function jless () { jq . "${@}" | bat -l json ; }
+
 alias lazygit='title "git" ; \lazygit'
 
 alias less="less -XFRi"
