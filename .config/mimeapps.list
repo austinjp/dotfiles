@@ -1,11 +1,11 @@
 [Added Associations]
-text/plain=jed.desktop;userapp-emacs-2DK4R1.desktop;
+text/plain=gnumeric.desktop;jed.desktop;userapp-emacs-2DK4R1.desktop;
 text/css=vim.desktop;
 x-scheme-handler/http=xfce4-web-browser.desktop;firefox.desktop;userapp-Firefox-2XMIL2.desktop;
 x-scheme-handler/https=xfce4-web-browser.desktop;firefox.desktop;userapp-Firefox-2XMIL2.desktop;
 application/epub+zip=org.gnome.Evince.desktop;mupdf.desktop;calibre-ebook-viewer.desktop;atril.desktop;
 application/zip=thunar.desktop;xfce4-file-manager.desktop;
-image/png=pinta_pinta.desktop;
+image/png=eom.desktop;pinta_pinta.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice6.4-writer.desktop;
 text/x-tex=libreoffice6.4-writer.desktop;
 x-scheme-handler/chrome=firefox.desktop;userapp-Firefox-2XMIL2.desktop;
@@ -17,9 +17,10 @@ application/xhtml+xml=firefox.desktop;userapp-Firefox-2XMIL2.desktop;
 application/x-extension-xhtml=firefox.desktop;userapp-Firefox-2XMIL2.desktop;
 application/x-extension-xht=firefox.desktop;userapp-Firefox-2XMIL2.desktop;
 application/octet-stream=com.github.PintaProject.Pinta.desktop;jed.desktop;
-image/jpeg=display-im6.q16.desktop;
-application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=libreoffice6.4-calc.desktop;
+image/jpeg=com.github.PintaProject.Pinta.desktop;eom.desktop;display-im6.q16.desktop;
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=gnumeric.desktop;libreoffice6.4-calc.desktop;
 application/x-bibtex=jed.desktop;
+application/vnd.api+json=org.xfce.mousepad.desktop;
 
 [Default Applications]
 x-scheme-handler/http=userapp-Firefox-2XMIL2.desktop
