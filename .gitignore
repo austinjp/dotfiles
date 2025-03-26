@@ -129,6 +129,7 @@ cni
 ..bfg-report/*
 
 
+.config/Authy*
 .config/Beeper/
 .config/Genymobile/
 .config/Session/
