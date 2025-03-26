@@ -255,8 +255,8 @@
     # minus-style = black phage-austin.pink
     # minus-emph-style = black phage-austin.dark-pink
     # minus-non-emph-style = minus-style
-    # plus-style = black phage-austin.green
-    # plus-emph-style = black phage-austin.dark-green
+    # plus-style = black phage-austin.dark-green
+    # plus-emph-style = black phage-austin.dark-green-2
     plus-non-emph-style = plus-style
     minus-empty-line-marker-style = minus-style
     plus-empty-line-marker-style = plus-style
