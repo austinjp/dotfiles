@@ -192,12 +192,14 @@ fi
 # Using ~/.ssh/config file instead.
 # The following line ensures ssh-add can be used to
 # add keys to gnome-keyring, the GUI key auth thing.
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/keyring/ssh"
+
+# Removed 2025-03-26 because this is provided by gnome-keyring-daemon below.
+# export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/keyring/ssh"
 
 
 # ==============================================================================
 
-export $(gnome-keyring-daemon --daemonize --start)
+export $(gnome-keyring-daemon --daemonize --start --replace 2>/dev/null)
 
 
 # ==============================================================================
