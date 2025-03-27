@@ -385,7 +385,7 @@ PATH="${PATH}:${HOME}/.luarocks/bin/"
 # ==============================================================================
 
 # Added 2023-11-27 temporarily: disable left control, shift, and caps-lock keys.
-xmodmap -e 'keycode 37 50 66=' 2>/dev/null
+# xmodmap -e 'keycode 37 50 66=' 2>/dev/null
 
 # ==============================================================================
 
