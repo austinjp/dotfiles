@@ -1,0 +1,43 @@
+#!/bin/bash
+
+HR () { 
+    echo $(printf %"$(tput cols 2> /dev/null || echo 80)"s | tr " " "_")$'\n'
+}
+
+{
+    echo "Checking for broken dependencies..."
+    sudo apt-get check
+    HR
+} && {
+    echo "Running dpkg audit..."
+    sudo dpkg --audit
+    HR
+} && {
+    echo "Listing held packages..."
+    sudo apt-mark showhold
+    HR
+}
+
+echo "Try the following":
+echo
+echo 'sudo apt-get -o Debug::pkgProblemResolver=true install <package>'
+echo
+echo 'sudo apt-get install -f'
+echo
+echo 'apt-cache policy <package>'
+echo
+
+HR
+
+codename=$(lsb_release -s -c 2>/dev/null)
+
+echo "You could try DOWNGRADING some package PACKAGE like so:"
+echo "sudo apt install '?installed?source-package(^PACKAGE$)/${codename}-updates'"
+
+echo
+echo "Show recursive dependencies like so:"
+echo "apt-rdepends <PACKAGE>"
+
+echo
+echo "But it's probably simpler to visualise a <PACKAGE> like so:"
+echo 'debtree --with-suggests <PACKAGE> | dot -T png -o /tmp/out.png && display /tmp/out.png'
