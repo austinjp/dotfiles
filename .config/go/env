@@ -1,0 +1,3 @@
+CGO_ENABLED=1
+GO111MODULE=auto
+GOPRIVATE=github.com/scout-ac/scout-api/middlewares/contentType:github.com/scout-ac/scout-api/middlewares:github.com/scout-ac/scout-api/middlewares/contentType

@@ -137,7 +137,11 @@ cni
 .config/balenaEtcher/
 .config/configstore/
 .config/deluge/
+.config/go/telemetry/
 .config/jgit/
 .config/see-cat/
 .config/see/
 .config/semi_technologies/
+.config/transmission/
+
+.hplip/
