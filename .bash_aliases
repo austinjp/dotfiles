@@ -63,7 +63,14 @@ alias free="free -h --giga"
 
 function _gauth() {
     if [ "${@}" ]; then
-        \gauth | \ag -i '^'"${@}" | head -n 1 | sed -r -e 's/\s+/ /g' | cut -d' ' -f 6 | xclip -i -r -selection primary
+        xsel --clear --primary
+        xsel --clear --secondary
+        xsel --clear --clipboard
+        otc=$(\gauth | \ag -i '^'"${@}" | head -n 1 | sed -r -e 's/\s+/ /g' | cut -d' ' -f 4)
+        echo "${otc}" | xsel --trim -i --primary
+        echo "${otc}" | xsel --trim -i --secondary
+        echo "${otc}" | xsel --trim -i --clipboard
+        echo "${otc}"
     else
         \gauth
     fi
