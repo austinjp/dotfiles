@@ -110,14 +110,14 @@ alias mv="mv -i"
 
 alias p="pnpm"
 
-function _pgrep() {
+function _my_pgrep() {
     _pids=$(\pgrep -fila "${@}" | \ag -i "${@}" | cut -d' ' -f 1 | tr $'\n' ',' | sed -e 's/,$//g')
     if [[ "${_pids}" ]]; then
         # \ps axw --format 'user,pid,pcpu,%mem,time,command' --pid "${_pids}"
         \ps auxwww q "${_pids}" | \less -XFRSi
     fi
 }
-alias pgrep=_pgrep
+alias pgrep=_my_pgrep
 
 
 unset docker
