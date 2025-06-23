@@ -199,7 +199,7 @@ fi
 
 # ==============================================================================
 
-export $(gnome-keyring-daemon --daemonize --start --replace 2>/dev/null)
+export $(gnome-keyring-daemon --daemonize --start 2>/dev/null)
 
 
 # ==============================================================================
