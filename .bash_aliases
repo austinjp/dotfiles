@@ -54,7 +54,7 @@ function cpu_monitor() {
 # ==============================================================================
 # Emacs stuff.
 
-EMACS_ALT='nano'
+EMACS_ALT='jed'
 function _emacs() {
     # Change the terminal/tab title:
     title 'Emacs'
