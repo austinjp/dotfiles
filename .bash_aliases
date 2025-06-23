@@ -18,6 +18,30 @@ alias cal="ncal -M -b -h"
 calc() { printf "%s\n" $(echo "$@" | sed -r -e 's,\s+,,g') | bc -l ; }
 alias c=calc
 
+function cd() {
+    # Kudos https://askubuntu.com/a/1465614
+
+    # Before leaving a dir, unset any local aliases.
+    if [[ -f ./.aliases ]]; then
+        kill_list=$(sed -re 's/^alias ([^=]+).+/\1/g' ./.aliases | tr $'\n' ' ')
+        echo "Reverting aliases: ${kill_list}"
+        unalias $kill_list || :
+        # Then restore all previous aliases:
+        source ~/.bash_aliases
+    fi
+
+    # Do the actual "cd".
+    [[ -z "$*" ]] && builtin cd $HOME >/dev/null
+    [[ -n "$*" ]] && builtin cd "$*"  >/dev/null
+
+    # After entering the dir, set local aliases.
+    if [[ -f ./.aliases ]]; then
+        add_list=$(sed -re 's/^alias ([^=]+).+/\1/g' ./.aliases | tr $'\n' ' ')
+        echo "Aliasing: ${add_list}"
+        source ./.aliases || :
+    fi
+}
+
 alias cp="cp -i"
 alias diff='diff --color=auto --width=$(tput cols)'
 alias db="_OLD_VIRTUAL_PATH= VIRTUAL_ENV= devbox"
