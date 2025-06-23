@@ -431,3 +431,11 @@ eval "$(direnv hook bash)"
 
 
 . "$HOME/.cargo/env"
+# ==============================================================================
+
+# After entering the dir, set local aliases.
+if [[ -f ./.aliases ]]; then
+    add_list=$(sed -re 's/^alias ([^=]+).+/\1/g' ./.aliases | tr $'\n' ' ')
+    echo "Aliasing: ${add_list}"
+    source ./.aliases || :
+fi
