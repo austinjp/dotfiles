@@ -64,7 +64,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(quarto-mode exec-path-from-shell gnu-elpa-keyring-update prettier-rc prettier-js prettier lsp-mode go-mode jinx dockerfile-mode noxml-fold cargo-mode cargo rust-mode cython-mode eldoc multiple-cursors basic-mode fold-this haxe-mode lua-mode magit js2-mode yaml-mode undo-tree rainbow-delimiters eglot sideline markdown-mode multi-web-mode json-mode company cmake-mode))
+   '(protobuf-mode basic-mode company eglot exec-path-from-shell fold-this gnu-elpa-keyring-update go-mode js2-mode json-mode lsp-mode markdown-mode multi-web-mode noxml-fold rainbow-delimiters sideline undo-tree yaml-mode))
  '(undo-limit 10000)
  '(undo-tree-limit 10000)
  '(undo-tree-outer-limit 10000)
@@ -76,20 +76,18 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(font-lock-builtin-face ((((type tty)) (:foreground "royalblue3"))))
- '(font-lock-keyword-face ((((type tty)) (:foreground "green4"))))
  '(font-lock-function-name-face ((t (:foreground "color-33"))))
+ '(font-lock-keyword-face ((((type tty)) (:foreground "green4"))))
  '(font-lock-string-face ((((type tty)) (:foreground "purple"))))
- '(jinx-highlight ((t (:inherit isearch :background "firebrick2"))))
- '(jinx-misspelled ((t (:inherit error :foreground "firebrick1" :underline t))))
  '(markdown-comment-face ((t (:inherit font-lock-comment-face :foreground "coral1"))))
  '(markdown-markup-face ((t (:inherit shadow :foreground "royalblue1" :slant normal :weight normal))))
  '(minibuffer-prompt ((((type tty)) (:foreground "red"))))
  '(mode-line-buffer-id ((t (:foreground "black" :weight bold))))
- '(rainbow-delimiters-base-face ((t (:inherit nil))))
  '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "red"))))
+ '(rainbow-delimiters-base-face ((t (:inherit nil))))
  '(rainbow-delimiters-depth-1-face ((t (:inherit rainbow-delimiters-base-face :foreground "green"))))
  '(rainbow-delimiters-depth-2-face ((t (:inherit rainbow-delimiters-base-face :foreground "orange"))))
-'(rainbow-delimiters-depth-3-face ((t (:inherit rainbow-delimiters-base-face :foreground "cyan4"))))
+ '(rainbow-delimiters-depth-3-face ((t (:inherit rainbow-delimiters-base-face :foreground "cyan4"))))
  '(rainbow-delimiters-depth-4-face ((t (:inherit rainbow-delimiters-depth-1-face))))
  '(rainbow-delimiters-depth-5-face ((t (:inherit rainbow-delimiters-depth-2-face))))
  '(rainbow-delimiters-depth-6-face ((t (:inherit rainbow-delimiters-depth-3-face))))
@@ -109,31 +107,38 @@
 ;; (package-initialize)
 
 (setq package-enable-at-startup nil)
+
 (require 'package)
 
 ;; The following are an attempt at getting node (via nvm) into the PATH
 ;; so prettier can run it. See https://github.com/purcell/exec-path-from-shell
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+
 (when (daemonp)
   (exec-path-from-shell-initialize))
+
 (require 'exec-path-from-shell)
-(dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LANGUAGE" "LC_CTYPE" "PATH" "NODE_PATH"))
+
+(dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG"
+	       "LANGUAGE" "LC_CTYPE" "PATH" "NODE_PATH"))
   (add-to-list 'exec-path-from-shell-variables var))
+
 ;; End of prettier/node/nvm path stuff.
 
 (eval-when-compile
   (setq custom-paths '())
   (dolist (p '("elpa" "packages" "site-lisp"))
-    (add-to-list 'custom-paths (expand-file-name p user-emacs-directory))
-    (add-to-list 'load-path (expand-file-name p user-emacs-directory))
-    )
-  (unless (package-installed-p 'use-package)
+    (add-to-list 'custom-paths (expand-file-name p
+						 user-emacs-directory))
+    (add-to-list 'load-path (expand-file-name p user-emacs-directory)))
+  (unless
+      (package-installed-p 'use-package)
     (package-refresh-contents)
-    (package-install 'use-package)
-    )
-  )
+    (package-install 'use-package)))
+
 (require 'use-package)
+
 (use-package use-package
   :config
   (setq use-package-always-ensure 't))
@@ -141,36 +146,40 @@
 ;; Kick-start a bunch of packages:
 
 (require 'lorem-ipsum)
+
 ;; (require 'cython-mode)
 
 ;; Associate some filename endings with modes.
-; Cython mode
-(add-to-list 'auto-mode-alist '("\\.pyx"   . cython-mode))
-(add-to-list 'auto-mode-alist '("\\.pxd"   . cython-mode))
+;; Cython mode
+;; (add-to-list 'auto-mode-alist '("\\.pyx"   . cython-mode))
+;; (add-to-list 'auto-mode-alist '("\\.pxd"   . cython-mode))
 
-; Quarto mode.
-(add-to-list 'auto-mode-alist '("\\.qmd"   . poly-quarto-mode))
-(require 'quarto-mode)
+;; Quarto mode.
+;; (add-to-list 'auto-mode-alist '("\\.qmd"   . poly-quarto-mode))
+;; (require 'quarto-mode)
 
-; JavaScript mode.
+;; JavaScript mode.
 (add-to-list 'auto-mode-alist '("\\.json5" . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.mjs"   . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.avsc"  . javascript-mode))
-; Go-lang mode.
+
+;; Go-lang mode.
 (add-to-list 'auto-mode-alist '("\\.go"    . go-mode))
-; Using sh-mode for direnv files.
-(add-to-list 'auto-mode-alist '("\\.envrc"    . sh-mode))
+
+;; Using sh-mode for direnv files.
+(add-to-list 'auto-mode-alist '("\\.envrc" . sh-mode))
 
 ;; ======================================================================
 
 ;; 5. Online package repositories.
 
 (add-to-list 'package-archives
-             '("MELPA" . "https://melpa.org/packages/") 't)
+	     '("MELPA" . "https://melpa.org/packages/") 't)
+
 ;; (add-to-list 'package-archives
 ;;              '("MELPA Stable" . "https://stable.melpa.org/packages/") 't)
 (add-to-list 'package-archives
-             '("ELPA" . "https://elpa.gnu.org/packages/") 't)
+	     '("ELPA" . "https://elpa.gnu.org/packages/") 't)
 
 ;; ======================================================================
 
@@ -186,9 +195,7 @@
    company-idle-delay 0
    company-minimum-prefix-length 2
    company-show-quick-access t
-   company-selection-wrap-around t
-   )
-  )
+   company-selection-wrap-around t))
 
 ;; ;; (b) Sideline to display messages from Flymake.
 ;;
@@ -218,21 +225,23 @@
 
 ;; (use-package web-mode :mode "\\.html\\.?")
 (use-package js2-mode)
+
 (use-package json-mode)
+
 (use-package multi-web-mode)
+
 (use-package markdown-mode)
+
 (use-package yaml-mode)
 
 (use-package rainbow-delimiters
   :config
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-  (setf rainbow-delimiters-max-face-count 6)
-  )
+  (setf rainbow-delimiters-max-face-count 6))
 
 (use-package undo-tree
   :init
-  (global-undo-tree-mode)
-  )
+  (global-undo-tree-mode))
 
 (setq undo-tree-auto-save-history t)
 
@@ -248,26 +257,27 @@
 
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(go-mode . ("gopls" "serve")))
-;;   (add-to-list 'eglot-server-programs
-;;                '(js-mode . ("typescript-language-server" "--stdio")))
-;;   (add-to-list 'eglot-server-programs
-;;                '(js2-mode . ("typescript-language-server" "--stdio")))
-;;   (add-to-list 'eglot-server-programs
-;;                '(json-mode . ("typescript-language-server" "--stdio")))
-;;   ;; (add-to-list 'eglot-server-programs
-;;   ;;              '(python-mode . ("pylsp")))
-;;   (add-to-list 'eglot-server-programs
-;;                '(sh-mode . ("bash-language-server" "start")))
-;;   (add-to-list 'eglot-server-programs
-;;                '(shell-script-mode . ("bash-language-server" "start")))
-)
+	       '(go-mode . ("gopls" "serve")))
+  ;;   (add-to-list 'eglot-server-programs
+  ;;                '(js-mode . ("typescript-language-server" "--stdio")))
+  ;;   (add-to-list 'eglot-server-programs
+  ;;                '(js2-mode . ("typescript-language-server" "--stdio")))
+  ;;   (add-to-list 'eglot-server-programs
+  ;;                '(json-mode . ("typescript-language-server" "--stdio")))
+  ;;   ;; (add-to-list 'eglot-server-programs
+  ;;   ;;              '(python-mode . ("pylsp")))
+  ;;   (add-to-list 'eglot-server-programs
+  ;;                '(sh-mode . ("bash-language-server" "start")))
+  ;;   (add-to-list 'eglot-server-programs
+  ;;                '(shell-script-mode . ("bash-language-server" "start")))
+  )
 
 ;; ;; Enable generally:
 ;; ;; (add-hook 'prog-mode-hook 'eglot-ensure)
 
 ;; Alternatively enable individually:
 (add-hook 'go-mode-hook 'eglot-ensure)
+
 ;; (add-hook 'sh-mode-hook 'eglot-ensure)
 ;; (add-hook 'shell-script-mode-hook 'eglot-ensure)
 ;; ;; (add-hook 'python-mode-hook 'eglot-ensure)
@@ -276,20 +286,20 @@
 
 ;; Keep eglot away from some stuff:
 (add-to-list 'eglot-stay-out-of 'flymake)
+
 (add-to-list 'eglot-stay-out-of "company")
 
 ;; ======================================================================
 
-;; 8. Eldoc config.
-
-;; Prevent eldoc expanding the echo area.
-;; (setq eldoc-echo-area-use-multiline-p nil)
-
-(use-package eldoc
-  :config
-  (setf eldoc-idle-delay 0.2)
-  (setq eldoc-echo-area-use-multiline-p nil)
-  )
+;; ;; 8. Eldoc config.
+;;
+;; ;; Prevent eldoc expanding the echo area.
+;; ;; (setq eldoc-echo-area-use-multiline-p nil)
+;;
+;; (use-package eldoc
+;;   :config
+;;   (setf eldoc-idle-delay 0.2)
+;;   (setq eldoc-echo-area-use-multiline-p nil))
 
 ;; ======================================================================
 
@@ -300,14 +310,20 @@
 
 ;; Automatically run goimports on save.
 (setq gofmt-command "goimports")
-(add-hook 'before-save-hook 'gofmt-before-save)
 
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; ======================================================================
 
 ;; 10. Miscellaneous.
 
 ;; Kudos https://github.com/martenlienen/dotfiles/blob/e4f7c47/home/.emacs.d/straight/repos/mlextras/ml-init.org
+
+;; Table navigation in markdown tables
+;; (add-hook 'markdown-mode-hook
+;;           (lambda ()
+;;             (local-set-key "M-<up>" 'table-backward-cell)
+;;             (local-set-key "M-<down>" 'table-forward-cell)))
 
 ;; Show current function in status line.
 (which-function-mode 1)
@@ -322,7 +338,8 @@
 (setq require-final-newline t)
 
 ;; Remove trailing whitespace. Kudos https://github.com/fxbois/web-mode/issues/283#issuecomment-47773112
-(add-hook 'local-write-file-hooks (lambda () (delete-trailing-whitespace) nil))
+(add-hook 'local-write-file-hooks (lambda ()
+				    (delete-trailing-whitespace) nil))
 
 ;; Enable X clipboards
 (setf x-select-enable-clipboard t
@@ -345,16 +362,21 @@
 
 ;; Key-bindings for window resizing.
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
+
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
 ;; Backups.
-(setq backup-by-copying t      ; don't clobber symlinks
+(setq backup-by-copying t               ; don't clobber symlinks
       delete-old-versions t
       kept-new-versions 6
       kept-old-versions 2
-      version-control t)       ; use versioned backups
+      version-control t)
+
+					; use versioned backups
 
 ;; (setq backup-directory-alist
 ;;       `((".*" . ,temporary-file-directory)))
@@ -362,20 +384,26 @@
 ;;       `((".*" ,temporary-file-directory t)))
 
 (setq backup-directory-alist
-       '(("." . "~/.local/tmp/")))
+      '(("." . "~/.local/tmp/")))
+
 (setq auto-save-file-name-transforms
-       `((".*" ,"~/.local/tmp/" t)))
+      `((".*" ,"~/.local/tmp/" t)))
 
 ;; Indentation.
 (setq-default tab-width 4)
+
 (setq-default indent-tabs-mode nil)
-(defun infer-indentation-style ()
-  ;; if our source file uses tabs, we use tabs, if spaces spaces, and if
+
+(defun infer-indentation-style () ;; if our source file uses tabs, we use tabs, if spaces spaces, and if
   ;; neither, we use the current indent-tabs-mode
-  (let ((space-count (how-many "^  " (point-min) (point-max)))
-        (tab-count (how-many "^\t" (point-min) (point-max))))
-    (if (> space-count tab-count) (setq indent-tabs-mode nil))
-    (if (> tab-count space-count) (setq indent-tabs-mode t))))
+  (let ((space-count (how-many "^  " (point-min)
+			       (point-max)))
+	(tab-count (how-many "^\t" (point-min)
+			     (point-max))))
+    (if (> space-count tab-count)
+	(setq indent-tabs-mode nil))
+    (if (> tab-count space-count)
+	(setq indent-tabs-mode t))))
 
 ;; Copy to X clipboard using M-c (left alt c).
 (defun copy-selected (beg end)
@@ -383,14 +411,17 @@
   (if (region-active-p)
       (shell-command-on-region beg end "xsel -b")
     (message "No selection!")))
+
 (global-set-key (kbd "M-c") 'copy-selected)
 
 ;; Hide/show menu bar using F10.
-(menu-bar-mode -1) ; start hidden
+(menu-bar-mode -1)
+
+					; start hidden
 (global-set-key [f10] 'toggle-menu-bar-mode-from-frame)
 
 ;; Multiple cursors.
-(global-set-key (kbd "C-M-j") 'mc/mark-all-dwim)
+;; (global-set-key (kbd "C-M-j") 'mc/mark-all-dwim)
 
 ;; Allow emacs and emacsclient to respond to mouse.
 ;; Kudos: https://stackoverflow.com/a/6798279
@@ -400,39 +431,38 @@
       (xterm-mouse-mode 1)
     ;; Otherwise called via after-make-frame-functions.
     (if xterm-mouse-mode
-        ;; Re-initialise the mode in case of a new terminal.
-        (xterm-mouse-mode 1))))
+	;; Re-initialise the mode in case of a new terminal.
+	(xterm-mouse-mode 1))))
+
 ;; Evaluate both now (for non-daemon emacs) and upon frame creation
 ;; (for new terminals via emacsclient).
 (my-terminal-config)
+
 (add-hook 'after-make-frame-functions 'my-terminal-config)
 
-;; Prettier for JavaScript.
-(require 'prettier-js)
-(add-hook 'js-mode-hook 'prettier-js-mode)
-(add-hook 'js2-mode-hook 'prettier-js-mode)
-(add-hook 'multi-web-mode-hook 'prettier-js-mode)
-(add-hook 'web-mode-hook 'prettier-js-mode)
-(setq prettier-js-args
-      '(
-        "--use-tabs"
-        )
-      )
-
-;; ;; Biome for JavaScript formatting.
-;; (require 'biomejs-format)
-;; (add-hook 'js-mode-hook 'biomejs-format-mode)
-;; (add-hook 'js2-mode-hook 'biomejs-format-mode)
-;; ;; (add-hook 'web-mode-hook 'biomejs-format-mode)
-;; ;; (add-hook 'multi-web-mode-hook 'biomejs-format-mode)
-;; (setq biomejs-format-biome-args
-;;       '(
-;;         "format"
-;;         "--trailing-comma" "all"
-;;         "--bracket-spacing" "true"
-;;         "--javascript-formatter-indent-width" "4"
-;;         "--indent-style" "space"
-;;         )
-;;       )
+;; ;; Prettier for JavaScript.
+;; (require 'prettier-js)
+;; (add-hook 'js-mode-hook 'prettier-js-mode)
+;; (add-hook 'js2-mode-hook 'prettier-js-mode)
+;; (add-hook 'multi-web-mode-hook 'prettier-js-mode)
+;; (add-hook 'web-mode-hook 'prettier-js-mode)
+;;
+;; (setq prettier-js-args
+;;       '("--use-tabs"))
+;; ;; ;; Biome for JavaScript formatting.
+;; ;; (require 'biomejs-format)
+;; ;; (add-hook 'js-mode-hook 'biomejs-format-mode)
+;; ;; (add-hook 'js2-mode-hook 'biomejs-format-mode)
+;; ;; ;; (add-hook 'web-mode-hook 'biomejs-format-mode)
+;; ;; ;; (add-hook 'multi-web-mode-hook 'biomejs-format-mode)
+;; ;; (setq biomejs-format-biome-args
+;; ;;       '(
+;; ;;         "format"
+;; ;;         "--trailing-comma" "all"
+;; ;;         "--bracket-spacing" "true"
+;; ;;         "--javascript-formatter-indent-width" "4"
+;; ;;         "--indent-style" "space"
+;; ;;         )
+;; ;;       )
 
 ;; ======================================================================
