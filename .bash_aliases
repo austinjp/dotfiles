@@ -33,6 +33,24 @@ function title() {
     printf '\033]2;%s\033\\' "${@}"
 }
 
+
+function monitor_thing() {
+    process="${1}"
+    field="${2}"
+    delay="${3}"
+    watch -n "${delay}" "{ { \ps auxww q $(\pgrep -fila ${process} | \ag -i ${process} | cut -d' ' -f 1 | tr $'\n' ',' | sed -e 's/,$//g') | \ag -v '^USER' | sed -re 's/\s+/ /g' | cut -d' ' -f ${field} | tr $'\n' '+' ; } | sed -re 's/\+$//' ; echo ; } | bc -l"
+}
+
+function memory_monitor() {
+    field=4
+    monitor_thing "${1}" "${field}" "0.3"
+}
+
+function cpu_monitor() {
+    field=3
+    monitor_thing "${1}" "${field}" "0.3"
+}
+
 # ==============================================================================
 # Emacs stuff.
 
