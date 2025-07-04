@@ -8,7 +8,7 @@
 [core]
     autocrlf = input
     # pager = less -XFRS
-    pager = delta $(~/.local/bin/delta_theme_switch.sh) --color-only --pager="less -Ri"
+    pager = delta $(~/.local/bin/delta_theme_switch.sh) --color-only --pager='less -Ri'
 
 [credential]
     helper = store
