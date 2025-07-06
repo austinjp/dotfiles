@@ -162,7 +162,7 @@ export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/flatpak/exports/share:${HOME}/.l
 unalias -a
 [[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
 
-# make less more friendly for non-text input files, see lesspipe(1)
+# Make `less` friendlier for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 
@@ -422,10 +422,10 @@ export PATH=$(for d in $(echo "${PATH}" | cut -d':' -f 1,-999 --output-delimiter
 
 
 # ==============================================================================
+# The Fuck.
 
-# Direnv.
-
-eval "$(direnv hook bash)"
+eval "$(thefuck --alias)"
+alias f=fuck
 
 # ==============================================================================
 
