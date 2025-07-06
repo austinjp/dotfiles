@@ -428,49 +428,6 @@ eval "$(thefuck --alias)"
 alias f=fuck
 
 # ==============================================================================
+# Direnv.
 
-function _aliases_add() {
-    source ./.aliases 2>/dev/null || :
-}
-
-function cd() {
-    # Kudos https://askubuntu.com/a/1465614
-
-    # Before leaving dir, unset aliases.
-    if [[ -f ./.aliases ]]; then
-        # Remove custom aliases
-        kill_list=$(sed -re 's/^alias ([^=]+).+/\1/g' ./.aliases | tr $'\n' ' ')
-        echo "Reverting aliases: ${kill_list}"
-        unalias $kill_list || :
-
-        # Then restore all previous aliases:
-        source ~/.bash_aliases 2>/dev/null || :
-    fi
-
-    # Do the actual "cd".
-    [[ -z "$*" ]] && builtin cd $HOME >/dev/null || :
-    [[ -n "$*" ]] && builtin cd "$*"  >/dev/null || :
-
-    # Add local aliases.
-    if [[ -f ./.aliases ]]; then
-        add_list=$(sed -re 's/^alias ([^=]+).+/\1/g' ./.aliases | tr $'\n' ' ')
-        echo "Aliasing: ${add_list}"
-        _aliases_add
-    fi
-}
-
-# Hook to ensure aliases are added whenever prompt is displayed.
-_aliases_hook() {
-    # This inspired by (ripped off from) direnv.
-    local previous_exit_status=$?;
-    trap -- '' SIGINT;
-
-    _aliases_add
-
-    trap - SIGINT;
-    return $previous_exit_status;
-};
-
-if ! [[ "${PROMPT_COMMAND:-}" =~ _aliases_hook ]]; then
-    PROMPT_COMMAND="_aliases_hook${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
-fi
+eval "$(direnv hook bash)"
