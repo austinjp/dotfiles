@@ -59,6 +59,9 @@ function _emacs() {
     # Change the terminal/tab title:
     title 'Emacs'
 
+	# INFURIATING! Ensure standard tab size to ensure cursor/rendering is okay.
+	tabs -8
+
     mkdir -p "${HOME}"/.local/tmp
     emacs_daemon_is_running=$(\pgrep -fila emacs | grep 'emacs \-\-daemon')
     if [[ "${emacs_daemon_is_running}" ]]; then
@@ -66,10 +69,11 @@ function _emacs() {
     else
         TMPDIR="${HOME}"/.local/tmp /usr/bin/emacs --daemon="${HOME}"/.local/tmp/emacs.socket ;
     fi
-    TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient.emacs -t -c -a "${EMACS_ALT}" --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}" ;
+    TMPDIR="${HOME}"/.local/tmp /usr/bin/emacsclient -t -c -a "${EMACS_ALT}" --socket-name="${HOME}"/.local/tmp/emacs.socket "${@}" ;
 }
 alias emacs=_emacs
-export GIT_EDITOR='TMPDIR='"${HOME}"'/.local/tmp /usr/bin/emacsclient.emacs -t -c -a '"${EMACS_ALT}"' --socket-name='"${HOME}"'/.local/tmp/emacs.socket'
+# export GIT_EDITOR='TMPDIR='"${HOME}"'/.local/tmp /usr/bin/emacsclient -t -c -a '"${EMACS_ALT}"' --socket-name='"${HOME}"'/.local/tmp/emacs.socket'
+export GIT_EDITOR=_emacs
 
 # End of Emacs stuff.
 # ==============================================================================
