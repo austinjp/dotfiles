@@ -422,6 +422,13 @@ export PATH=$(for d in $(echo "${PATH}" | cut -d':' -f 1,-999 --output-delimiter
 
 
 # ==============================================================================
+# bun
+
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+# ==============================================================================
 # The Fuck.
 
 eval "$(thefuck --alias)"
