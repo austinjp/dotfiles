@@ -83,6 +83,8 @@ alias fd='fdfind --color=never --follow --glob --no-ignore'
 
 alias free="free -h --giga"
 
+alias go=go1.24.4
+
 function _gauth() {
     if [ "${@}" ]; then
         xsel --clear --primary
