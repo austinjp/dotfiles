@@ -438,6 +438,15 @@ alias f=fuck
 # Direnv.
 
 eval "$(direnv hook bash)"
+
+
+# ==============================================================================
+# Automatic aliases.
+
+function _aliases() {
+    [[ -f .aliases && -r .aliases ]] && source .aliases 2>/dev/null || : ;
+}
+export PROMPT_COMMAND="_aliases ; ${PROMPT_COMMAND}"
 # ==============================================================================
 # Tabs size: 4 instead of 8
 
