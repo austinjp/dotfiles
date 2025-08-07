@@ -169,14 +169,14 @@ alias vpn="expressvpn"
 
 alias venv='make_venv -v 3.11 && source venv/bin/activate'
 
-# alias zotero='env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/zotero-snap_zotero-snap.desktop /snap/bin/zotero-snap -c "$(dirname $(readlink -f %k))/zotero -url %U"'
-
 function weaviate-serve() {
     # Note: versions 1.26.4 and 1.26.5 did not work for me.
     podman run --name weaviate -p 8080:8080 -p 50051:50051 cr.weaviate.io/semitechnologies/weaviate:1.26.3
 }
 
-alias zotero='flatpak --filesystem=/home/austinjp/ run org.zotero.Zotero'
+# Reminder to self: Zotero is in ~/.local/bin/ so zotero-plugin .envrc can refer to it.
+# alias zotero='env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/zotero-snap_zotero-snap.desktop /snap/bin/zotero-snap -c "$(dirname $(readlink -f %k))/zotero -url %U"'
+# alias zotero='flatpak --filesystem=/home/austinjp/ run org.zotero.Zotero'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
