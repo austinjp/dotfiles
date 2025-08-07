@@ -431,3 +431,13 @@ alias f=fuck
 # Direnv.
 
 eval "$(direnv hook bash)"
+# ==============================================================================
+# Tabs size: 4 instead of 8
+
+tabs -4
+
+
+# ==============================================================================
+# Attempting to fix issues with Emacs mangling characters.
+
+export TERMINFO="/usr/share/terminfo"
