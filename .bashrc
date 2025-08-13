@@ -444,6 +444,12 @@ eval "$(direnv hook bash)"
 
 
 # ==============================================================================
+# Ensure some apps know to use Podman instead of Docker.
+
+export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
+
+
+# ==============================================================================
 # Automatic aliases.
 
 function _aliases() {
