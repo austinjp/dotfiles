@@ -464,8 +464,11 @@ export PROMPT_COMMAND="_aliases ; ${PROMPT_COMMAND}"
 
 tabs -4
 
-
-# ==============================================================================
 # Attempting to fix issues with Emacs mangling characters.
 
 export TERMINFO="/usr/share/terminfo"
+
+# ==============================================================================
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
