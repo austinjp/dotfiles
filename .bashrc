@@ -452,10 +452,13 @@ export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
 # ==============================================================================
 # Automatic aliases.
 
+# eval $(aliases --hook)
 function _aliases() {
     [[ -f .aliases && -r .aliases ]] && source .aliases 2>/dev/null || : ;
 }
 export PROMPT_COMMAND="_aliases ; ${PROMPT_COMMAND}"
+
+
 # ==============================================================================
 # Tabs size: 4 instead of 8
 
