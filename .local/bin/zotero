@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+flatpak --filesystem=/home/austinjp/ run org.zotero.Zotero
