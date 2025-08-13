@@ -8,12 +8,13 @@
 ;;  2. Notes and decisions.
 ;;  3. Custom variables and faces.
 ;;  4. Paths and package installation.
-;;  5. Online package repositories.
-;;  6. Load custom packages.
-;;  7. Eglot config.
-;;  8. Eldoc config.
-;;  9. Golang config.
-;; 10. Miscellaneous.
+;;  5. Language modes.
+;;  6. Online package repositories.
+;;  7. Load custom packages.
+;;  8. Eglot config.
+;;  9. Eldoc config.
+;; 10. Golang config.
+;; 11. Miscellaneous.
 ;;
 
 ;;; Code:
@@ -30,7 +31,7 @@
 
 ;; 2. Notes and decisions.
 
-;; Assumes Emacs version 27.1 on Linux.
+;; Assumes Emacs version 29.3 on Linux.
 
 ;; To byte-compile ~/.emacs.d directory, kill Emacs the run the following.
 ;; This will speed up subsequent startup times. Note the leading backslash
@@ -63,8 +64,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(go-ts-mode-indent-offset 4)
+ '(indent-tabs-mode t)
  '(package-selected-packages
-   '(protobuf-mode basic-mode company eglot exec-path-from-shell fold-this gnu-elpa-keyring-update go-mode js2-mode json-mode lsp-mode markdown-mode multi-web-mode noxml-fold rainbow-delimiters sideline undo-tree yaml-mode))
+   '(yaml-mode eglot nerd-icons-completion nerd-icons-corfu corfu-terminal kind-icon corfu quelpa treesit-fold treesit protobuf-mode basic-mode exec-path-from-shell fold-this gnu-elpa-keyring-update markdown-mode multi-web-mode noxml-fold rainbow-delimiters undo-tree))
+ '(tab-width 4)
  '(undo-limit 10000)
  '(undo-tree-limit 10000)
  '(undo-tree-outer-limit 10000)
@@ -76,14 +80,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(font-lock-builtin-face ((((type tty)) (:foreground "royalblue3"))))
- '(font-lock-function-name-face ((t (:foreground "color-33"))))
+ '(font-lock-function-name-face ((t (:foreground "green"))))
  '(font-lock-keyword-face ((((type tty)) (:foreground "green4"))))
  '(font-lock-string-face ((((type tty)) (:foreground "purple"))))
  '(markdown-comment-face ((t (:inherit font-lock-comment-face :foreground "coral1"))))
  '(markdown-markup-face ((t (:inherit shadow :foreground "royalblue1" :slant normal :weight normal))))
- '(minibuffer-prompt ((((type tty)) (:foreground "red"))))
- '(mode-line-buffer-id ((t (:foreground "black" :weight bold))))
- '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "red"))))
+ '(minibuffer-prompt ((((type tty)) (:foreground nil))))
+ '(mode-line-buffer-id ((t (:foreground nil :weight bold))))
+ '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "brightred"))))
  '(rainbow-delimiters-base-face ((t (:inherit nil))))
  '(rainbow-delimiters-depth-1-face ((t (:inherit rainbow-delimiters-base-face :foreground "green"))))
  '(rainbow-delimiters-depth-2-face ((t (:inherit rainbow-delimiters-base-face :foreground "orange"))))
@@ -112,13 +116,13 @@
 
 ;; The following are an attempt at getting node (via nvm) into the PATH
 ;; so prettier can run it. See https://github.com/purcell/exec-path-from-shell
+(require 'exec-path-from-shell)
+
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
 (when (daemonp)
   (exec-path-from-shell-initialize))
-
-(require 'exec-path-from-shell)
 
 (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG"
 	       "LANGUAGE" "LC_CTYPE" "PATH" "NODE_PATH"))
@@ -137,18 +141,21 @@
     (package-refresh-contents)
     (package-install 'use-package)))
 
+;; Kick-start a few packages:
+
 (require 'use-package)
 
 (use-package use-package
   :config
   (setq use-package-always-ensure 't))
 
-;; Kick-start a bunch of packages:
-
 (require 'lorem-ipsum)
 
-;; (require 'cython-mode)
+;; ======================================================================
 
+;; 5. Language modes.
+
+;; (require 'cython-mode)
 ;; Associate some filename endings with modes.
 ;; Cython mode
 ;; (add-to-list 'auto-mode-alist '("\\.pyx"   . cython-mode))
@@ -158,16 +165,40 @@
 ;; (add-to-list 'auto-mode-alist '("\\.qmd"   . poly-quarto-mode))
 ;; (require 'quarto-mode)
 
-;; JavaScript mode.
-(add-to-list 'auto-mode-alist '("\\.json5" . javascript-mode))
-(add-to-list 'auto-mode-alist '("\\.mjs"   . javascript-mode))
-(add-to-list 'auto-mode-alist '("\\.avsc"  . javascript-mode))
+;; JavaScript, JSON, Typescript etc modes.
+(add-to-list 'auto-mode-alist '("\\.mjs"   . js-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.json5" . js-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.avsc"  . js-ts-mode))
 
-;; Go-lang mode.
-(add-to-list 'auto-mode-alist '("\\.go"    . go-mode))
+(add-to-list 'auto-mode-alist '("\\.ts"    . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx"   . tsx-ts-mode))
+
+
+;; Go-lang modes.
+(add-to-list 'auto-mode-alist '("\\.go"    . go-ts-mode))
+(add-to-list 'auto-mode-alist '("go.mod"   . go-mod-ts-mode))
 
 ;; Using sh-mode for direnv files.
 (add-to-list 'auto-mode-alist '("\\.envrc" . sh-mode))
+
+;; HTML mode.
+(add-to-list 'auto-mode-alist '("\\.html"  . html-mode))
+
+;; Javascript mode.
+(add-to-list 'auto-mode-alist '("\\.html"  . html-mode))
+
+;; Catch-all: remap modes that aren't explicitly triggered by auto-mode-alist.
+(setq major-mode-remap-alist
+      '(
+        (yaml-mode . yaml-ts-mode)
+        (javascript-mode . js-ts-mode)
+        (js2-mode . js-ts-mode)
+        (typescript-mode . typescript-ts-mode)
+        (json-mode . json-ts-mode)
+        (css-mode . css-ts-mode)
+        (python-mode . python-ts-mode)
+        )
+      )
 
 ;; ======================================================================
 
@@ -181,21 +212,143 @@
 (add-to-list 'package-archives
 	     '("ELPA" . "https://elpa.gnu.org/packages/") 't)
 
+;; Language repos for treesitter.
+;; Courtesy https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+;; and https://github.com/mickeynp/combobulate (by the same author).
+(setq treesit-language-source-alist
+      '(
+        ;; Problems, don't compile:
+        ; (bash "https://github.com/tree-sitter/tree-sitter-bash" "v0.20.0")
+        ; (jsx        "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.1" "src")
+        ; (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+        ; (yaml "https://github.com/ikatyang/tree-sitter-yaml" "v0.5.0")
+        ;; Not using:
+        ; (cmake "https://github.com/uyha/tree-sitter-cmake")
+        ; (make "https://github.com/alemuller/tree-sitter-make")
+        (css        "https://github.com/tree-sitter/tree-sitter-css"        "v0.20.0")
+        (elisp      "https://github.com/Wilfred/tree-sitter-elisp")
+        (go         "https://github.com/tree-sitter/tree-sitter-go"         "v0.20.0")
+        (gomod      "https://github.com/camdencheek/tree-sitter-go-mod")
+        (html       "https://github.com/tree-sitter/tree-sitter-html"       "v0.20.1")
+        (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.1" "src")
+        (json       "https://github.com/tree-sitter/tree-sitter-json"       "v0.20.2")
+        (python     "https://github.com/tree-sitter/tree-sitter-python"     "v0.20.4")
+        (toml       "https://github.com/tree-sitter/tree-sitter-toml"       "v0.5.1")
+        (tsx        "https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src")
+        (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src")
+        )
+      )
+
+;; (use-package treesit
+;;   :mode (("\\.tsx\\'" . tsx-ts-mode)
+;;          ("\\.js\\'"  . typescript-ts-mode)
+;;          ("\\.mjs\\'" . typescript-ts-mode)
+;;          ("\\.mts\\'" . typescript-ts-mode)
+;;          ("\\.cjs\\'" . typescript-ts-mode)
+;;          ("\\.ts\\'"  . typescript-ts-mode)
+;;          ("\\.jsx\\'" . tsx-ts-mode)
+;;          ("\\.json\\'" .  json-ts-mode)
+;;          ("\\.Dockerfile\\'" . dockerfile-ts-mode)
+;;          ("\\.prisma\\'" . prisma-ts-mode)))
+
+
 ;; ======================================================================
 
-;; 6. Load custom packages.
+;; 7. Load custom packages.
 
-;; (a) Complete-anything (company).
-;; Kudos https://github.com/martenlienen/dotfiles/blob/e4f7c47/home/.emacs.d/straight/repos/mlextras/ml-init.org
+(use-package emacs
+  :custom
 
-(use-package company
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (tab-always-indent 'complete)
+  )
+
+
+;; (a) Corfu for completion (alternative to company -- see old company config below).
+(use-package corfu
+  :ensure t
+
+  :custom
+  (corfu-cycle t)
+  (corfu-preselect 'prompt)
+  (corfu-auto-delay 2)
+
+  (corfu-terminal-mode +1)
+
   :init
-  (global-company-mode)
-  (setf
-   company-idle-delay 0
-   company-minimum-prefix-length 2
-   company-show-quick-access t
-   company-selection-wrap-around t))
+  (global-corfu-mode)
+  (corfu-history-mode)
+  (corfu-popupinfo-mode)
+
+  :hook (prog-mode . corfu-mode))
+
+
+(add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
+
+(setq nerd-icons-corfu-mapping
+      '(
+        (array :style "cod" :icon "symbol_array" :face font-lock-type-face)
+        (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
+        ;; You can alternatively specify a function to perform the mapping,
+        ;; use this when knowing the exact completion candidate is important.
+        (file :fn nerd-icons-icon-for-file :face font-lock-string-face)
+        ;; ...
+        (t :style "cod" :icon "code" :face font-lock-warning-face)
+        )
+      )
+
+
+;; Enable auto completion and configure quitting
+(setq corfu-auto t
+      corfu-quit-no-match 'separator)
+
+(use-package nerd-icons
+  :ensure t
+  :after corfu
+  ;; :custom
+  ;; The Nerd Font you want to use in GUI
+  ;; "Symbols Nerd Font Mono" is the default and is recommended
+  ;; but you can use any other Nerd Font if you want
+  ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
+  )
+
+(use-package nerd-icons-completion
+  :ensure t
+  :after corfu
+  :config
+  (nerd-icons-completion-mode))
+
+;; (use-package kind-icon
+;;   :ensure t
+;;   :after corfu
+;;   :custom
+;;   (kind-icon-blend-background t)
+;;   (kind-icon-default-face 'corfu-default) ; only needed with blend-background
+;;   :config
+;;   ;; (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter)
+;;   ;; (setf kind-icon-use-icons t)
+;;   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
+;;   )
+
+
+;; Old config for complete-anything (company).
+;; Kudos https://github.com/martenlienen/dotfiles/blob/e4f7c47/home/.emacs.d/straight/repos/mlextras/ml-init.org
+;;
+;; (use-package company
+;;   :init
+;;   (global-company-mode)
+;;   (setf
+;;    company-idle-delay 0
+;;    company-minimum-prefix-length 2
+;;    company-show-quick-access t
+;;    company-selection-wrap-around t))
+
+
+;; ·····························································
+;; Currently, not using sideline.
+;; The below config is just a reminder.
+;; ·····························································
 
 ;; ;; (b) Sideline to display messages from Flymake.
 ;;
@@ -223,16 +376,12 @@
 
 ;; (d) Misc.
 
-;; (use-package web-mode :mode "\\.html\\.?")
-(use-package js2-mode)
-
-(use-package json-mode)
-
-(use-package multi-web-mode)
-
+; (use-package web-mode :mode "\\.html\\.?")
+; (use-package js2-mode)
+; (use-package json-mode)
+; (use-package multi-web-mode)
 (use-package markdown-mode)
-
-(use-package yaml-mode)
+; (use-package yaml-mode)
 
 (use-package rainbow-delimiters
   :config
@@ -249,49 +398,86 @@
 
 ;; ======================================================================
 
-;; 7. Eglot config.
+;; 8. Eglot config.
 
 (use-package eglot)
 
 ;; Tell Eglot which language servers are available.
-
 (with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs
-	       '(go-mode . ("gopls" "serve")))
-  ;;   (add-to-list 'eglot-server-programs
-  ;;                '(js-mode . ("typescript-language-server" "--stdio")))
-  ;;   (add-to-list 'eglot-server-programs
-  ;;                '(js2-mode . ("typescript-language-server" "--stdio")))
-  ;;   (add-to-list 'eglot-server-programs
-  ;;                '(json-mode . ("typescript-language-server" "--stdio")))
-  ;;   ;; (add-to-list 'eglot-server-programs
-  ;;   ;;              '(python-mode . ("pylsp")))
-  ;;   (add-to-list 'eglot-server-programs
-  ;;                '(sh-mode . ("bash-language-server" "start")))
-  ;;   (add-to-list 'eglot-server-programs
-  ;;                '(shell-script-mode . ("bash-language-server" "start")))
+  (add-to-list 'eglot-server-programs '(go-ts-mode         . ("gopls" "serve")))
+  ;; (add-to-list 'eglot-server-programs '(go-ts-mode         . ("gopls" "-remote=:37374" "-logfile=auto" "-debug=:0" "-rpc.trace")))
+  (add-to-list 'eglot-server-programs '(js-ts-mode         . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs '(typescript-ts-mode . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs '(tsx-ts-mode        . ("typescript-language-server" "--stdio")))
+  ;; (add-to-list 'eglot-server-programs '(json-ts-mode      . ("typescript-language-server" "--stdio")))
+  ;; (add-to-list 'eglot-server-programs '(python-ts-mode    . ("pylsp")))
+  ;; (add-to-list 'eglot-server-programs '(sh-mode           . ("bash-language-server" "start")))
+  ;; (add-to-list 'eglot-server-programs '(shell-script-mode . ("bash-language-server" "start")))
+
+  ;; Thanks claude.ai for the following!
+  ;; Set workspace configuration
+  (add-to-list 'eglot-workspace-configuration
+               '(:gopls
+				 (
+				  :usePlaceholders t
+				  :staticcheck t
+				  :completeUnimported t
+				  )
+				 )
+			   )
   )
 
-;; ;; Enable generally:
+;; Enable Eglot generally...
 ;; ;; (add-hook 'prog-mode-hook 'eglot-ensure)
 
-;; Alternatively enable individually:
-(add-hook 'go-mode-hook 'eglot-ensure)
-
+;; ...or enable individually:
+(setq-default eglot-extend-to-xref t)
+(add-hook 'go-ts-mode-hook 'eglot-ensure)
+(add-hook 'js-ts-mode-hook 'eglot-ensure)
+(add-hook 'tsx-ts-mode-hook 'eglot-ensure)
+(add-hook 'typescript-ts-mode-hook 'eglot-ensure)
 ;; (add-hook 'sh-mode-hook 'eglot-ensure)
 ;; (add-hook 'shell-script-mode-hook 'eglot-ensure)
-;; ;; (add-hook 'python-mode-hook 'eglot-ensure)
-;; ;; (add-hook 'js-mode-hook 'eglot-ensure)
-;; ;; etc.
+;; (add-hook 'python-ts-mode-hook 'eglot-ensure)
+;; etc.
+
+
+;; From https://tip.golang.org/gopls/editor/emacs
+;; Use built-in project package to identify the LSP workspace for a newly-opened buffer.
+;; (require 'project)
+;; (defun project-find-go-module (dir)
+;;   (when-let ((root (locate-dominating-file dir "go.mod")))
+;;     (cons 'go-module root)))
+;; (cl-defmethod project-root ((project (head go-module)))
+;;   (cdr project))
+;; (add-hook 'project-find-functions #'project-find-go-module)
+
 
 ;; Keep eglot away from some stuff:
-(add-to-list 'eglot-stay-out-of 'flymake)
+; (add-to-list 'eglot-stay-out-of "company")
 
-(add-to-list 'eglot-stay-out-of "company")
+;; Use Flymake to show messages from Eglot.
+(add-hook 'eglot-managed-mode-hook #'flymake-mode)
+
+
+;; FIXME -- the following isn't working :/
+;; (require 'cl-lib)
+;; (defun my-flymake-show-diagnostics-on-save ()
+;;   "Show Flymake diagnostics buffer on save if errors exist."
+;;   (interactive)
+;;   (when (cl-some (lambda (diag)
+;;                    (eq (flymake-diagnostic-type diag) :error))
+;;                  (flymake-diagnostics))
+;; 	(flymake-show-buffer-diagnostics))
+;;   )
+;; (add-hook 'eglot-managed-mode-hook
+;;           (lambda ()
+;;             (add-hook 'before-save-hook #'my-flymake-show-diagnostics-on-save nil t)))
+
 
 ;; ======================================================================
 
-;; ;; 8. Eldoc config.
+;; ;; 9. Eldoc config.
 ;;
 ;; ;; Prevent eldoc expanding the echo area.
 ;; ;; (setq eldoc-echo-area-use-multiline-p nil)
@@ -303,21 +489,29 @@
 
 ;; ======================================================================
 
-;; 9. Golang config.
+;; 10. Golang config.
 
-;; Automatically run gofmt on save.
-(add-hook 'before-save-hook 'gofmt-before-save)
+;; Automatically format buffer on save using eglot.
+;; Eglot uses the canonical Go formatter gofmt.
+(add-hook 'go-ts-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook #'eglot-format-buffer -10 t)))
 
-;; Automatically run goimports on save.
-(setq gofmt-command "goimports")
+;; Automatically update imports on save using goimports.
+(add-hook 'before-save-hook
+		  (lambda ()
+			(call-interactively 'eglot-code-action-organize-imports))
+		  nil t)
 
-(add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; ======================================================================
 
-;; 10. Miscellaneous.
+;; 11. Miscellaneous.
 
 ;; Kudos https://github.com/martenlienen/dotfiles/blob/e4f7c47/home/.emacs.d/straight/repos/mlextras/ml-init.org
+
+;; Make Escape quit prompts and act like C-g
+(define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
 
 ;; Table navigation in markdown tables
 ;; (add-hook 'markdown-mode-hook
@@ -392,7 +586,7 @@
 ;; Indentation.
 (setq-default tab-width 4)
 
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode t)
 
 (defun infer-indentation-style () ;; if our source file uses tabs, we use tabs, if spaces spaces, and if
   ;; neither, we use the current indent-tabs-mode
