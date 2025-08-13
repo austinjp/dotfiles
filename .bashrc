@@ -57,6 +57,10 @@ export DELTA_PAGER="less -XFRS"
 # apparently remain unset: https://stackoverflow.com/a/68226616
 PATH="${PATH}:/usr/local/go/bin:${HOME}/go/bin"
 
+# Update 2025-07-26
+# Trying to use multiple versions of go, possibly via GVM, or maybe just aliases :)
+# See .bash_aliases for now.
+
 # ==============================================================================
 # Prompt stuff.
 
@@ -252,8 +256,7 @@ PATH="${PATH}:${HOME}/.local/bin/"
 
 # ==============================================================================
 
-# Added 2021-02-11
-# for yarn global add (installs)
+# Added 2021-02-11 for yarn global add (installs)
 PATH="${PATH}:${HOME}/.yarn/bin/"
 
 
