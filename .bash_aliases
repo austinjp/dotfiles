@@ -90,11 +90,16 @@ function _gauth() {
         xsel --clear --primary
         xsel --clear --secondary
         xsel --clear --clipboard
-        otc=$(\gauth | \ag -i "${@}" | head -n 1 | sed -r -e 's/\s+/ /g' | cut -d' ' -f 4)
-        echo "${otc}" | xsel --trim -i --primary
-        echo "${otc}" | xsel --trim -i --secondary
-        echo "${otc}" | xsel --trim -i --clipboard
-        echo "${otc}"
+        otc=$(\gauth | \ag --nocolor --nonumbers -i "${@}")
+		if [[ $(echo "${otc}" | wc -l) -eq 1 ]]; then
+			otc=$(echo "${otc}" | sed -r -e 's/\s+/ /g' | cut -d' ' -f 4)
+			echo "${otc}" | xsel --trim -i --primary
+			echo "${otc}" | xsel --trim -i --secondary
+			echo "${otc}" | xsel --trim -i --clipboard
+			echo "${otc}"
+		else
+			echo ". . prev curr next"$'\n'"${otc}" | column -t
+		fi
     else
         \gauth
     fi
