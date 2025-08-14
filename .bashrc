@@ -10,13 +10,11 @@
 
 
 # ==============================================================================
-
 # Added 2023-10-14 to "fix" error messages after uninstalling a thing.
 # unset LD_PRELOAD
 
 
 # ==============================================================================
-
 # Don't add duplicate lines to the history.
 
 # See bash(1) for more options
@@ -31,7 +29,6 @@ export HISTFILESIZE=2000
 
 
 # ==============================================================================
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -42,7 +39,6 @@ shopt -s checkwinsize
 
 
 # ==============================================================================
-
 # Pagers. Defined early so aliases etc can use these env vars.
 
 export PAGER='less -XFRi'
@@ -51,7 +47,6 @@ export PAGER='less -XFRi'
 export DELTA_PAGER="less -XFRS"
 
 # ==============================================================================
-
 # Updated 2024-06-05
 # Add go bins to PATH without setting GOPATH or GOROOT which should
 # apparently remain unset: https://stackoverflow.com/a/68226616
@@ -150,18 +145,15 @@ fi
 export PS1
 
 # ==============================================================================
-
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 
 # ==============================================================================
-
 # Added 2024-03-30 for flatpak.
 export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/flatpak/exports/share:${HOME}/.local/share/flatpak/exports/share"
 
 # ==============================================================================
-
 # Alias definitions.
 unalias -a
 [[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
@@ -171,7 +163,6 @@ unalias -a
 
 
 # ==============================================================================
-
 # Added 2021-08-11
 # source ~/.bashrc.oh-my-bash
 
@@ -189,7 +180,6 @@ fi
 
 
 # ==============================================================================
-
 # Added 2019-09-12: use specific ssh key in Git:
 # export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_bitbucket"
 # Updated 2020-04-10
@@ -202,6 +192,7 @@ fi
 
 
 # ==============================================================================
+# Stop pesky notice messages from gnome keyring daemon.
 
 export $(gnome-keyring-daemon --daemonize --start 2>/dev/null)
 
@@ -212,7 +203,6 @@ PATH="${PATH}:${HOME}/bin/"
 
 
 # ==============================================================================
-
 # Added 2020-01-08 for Android Studio
 # as per https://facebook.github.io/react-native/docs/getting-started
 # Changed 2024-03-01
@@ -225,13 +215,11 @@ PATH="${PATH}:$ANDROID_HOME/platform-tools"
 
 
 # ==============================================================================
-
 # Added 2020-02-09 (initially for pip user installs, but for anything else too).
 PATH="${PATH}:${HOME}/.local/bin/"
 
 
 # ==============================================================================
-
 # tabtab source for packages
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/__tabtab.bash ] && . ~/.config/tabtab/__tabtab.bash || true
@@ -249,54 +237,45 @@ PATH="${PATH}:${HOME}/.local/bin/"
 
 
 # ==============================================================================
-
 # Added 2021-01-18 as per https://wiki.postmarketos.org/wiki/Installing_pmbootstrap
 # eval "$(register-python-argcomplete pmbootstrap)"
 
 
 # ==============================================================================
-
 # Added 2021-02-11 for yarn global add (installs)
 PATH="${PATH}:${HOME}/.yarn/bin/"
 
 
 # ==============================================================================
-
 # Added 2021-06-26
 export PYTHONSTARTUP="${HOME}/.pythonrc.py"
 
 
 # ==============================================================================
-
 # Added 2021-09026 mainly to get libimobiledevice (and libplist) working
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
 
 
 # ==============================================================================
-
 # Added 2022-03-25
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 
 # ==============================================================================
-
 # Added 2022-03-25
 [ -f ~/.config/nnn/nnn-autocompletion.bash ] && source ~/.config/nnn/nnn-autocompletion.bash
 
 # ==============================================================================
-
 # Added during installation of broot https://dystroy.org/broot/install-br/
 # source "${HOME}"/.config/broot/launcher/bash/br
 
 
 # ==============================================================================
-
 # Added 2022-07-16 for latest pandoc-crossref build.
 PATH="${PATH}:${HOME}/.cabal/bin"
 
 
 # ==============================================================================
-
 # Changed 2023-03-20
 # Update timezone. Added 2023-03-20 (but see update below)
 # to try fixing random read-only disk issues!
@@ -318,20 +297,17 @@ PATH="${PATH}:${HOME}/.cabal/bin"
 
 
 # ==============================================================================
-
 # Added 2022-09-22 (and 2022-03-09) for nim (via choosenim).
 # PATH="${PATH}:${HOME}/.nimble/bin"
 
 
 # ==============================================================================
-
 # # Added 2022-10-01 for Rust/Cargo/etc.
 # [[ -s "${HOME}/.cargo/bin" ]] && PATH="${PATH}:${HOME}/.cargo/bin"
 # [[ -s "${HOME}/.cargo/env" ]] && . "${HOME}/.cargo/env"
 
 
 # ==============================================================================
-
 # Ensure Python's .pyc files and __pycache__ folders don't clutter working dir.
 export PYTHONPYCACHEPREFIX="${HOME}/.cache/python"
 
@@ -355,13 +331,11 @@ export PYTHONPYCACHEPREFIX="${HOME}/.cache/python"
 
 
 # ==============================================================================
-
 # # Env var for https://keys.pub
 # [[ -f "${HOME}/.keys.sh" ]] && source "${HOME}/.keys.sh"
 
 
 # ==============================================================================
-
 # Added 2023-12-18 during re-install of pnpm.
 # pnpm
 export PNPM_HOME="/home/austinjp/.local/share/pnpm"
@@ -374,30 +348,25 @@ esac
 
 
 # ==============================================================================
-
 # Added 2023-10-14 to "fix" error messages after uninstalling a thing.
 unset LD_PRELOAD
 
 
 # ==============================================================================
-
 # Added 2023-10-23
 PATH="${PATH}:${HOME}/.luarocks/bin/"
 
 
 # ==============================================================================
-
 # Added 2023-11-27 temporarily: disable left control, shift, and caps-lock keys.
 # xmodmap -e 'keycode 37 50 66=' 2>/dev/null
 
 # ==============================================================================
-
 # Added 2024-01-15 for adb and fastboot.
 PATH="${PATH}:${HOME}/adb-fastboot"
 
 
 # ==============================================================================
-
 # # Added 2024-09-25 for https://github.com/sugarme/gotch
 # # which is used for Go transformers and tokenizers.
 # export GOTCH_LIBTORCH="/usr/lib/x86_64-linux-gnu"
@@ -406,19 +375,16 @@ PATH="${PATH}:${HOME}/adb-fastboot"
 # export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$GOTCH_LIBTORCH/lib"
 
 # ==============================================================================
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 # [[ -s "${HOME}/.rvm/bin" ]] & PATH="${PATH}:${HOME}/.rvm/bin"
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # ==============================================================================
-
 # Remove anything from PATH that doesn't exist.
 
 export PATH=$(for d in $(echo "${PATH}" | cut -d':' -f 1,-999 --output-delimiter=$'\n') ; do [[ -s "${d}" ]] && echo $d ; done | tr $'\n' ':' | sed -re 's/\:$//')
 
 # ==============================================================================
-
 # Add any node modules.
 # Update: Use direnv for this.
 # export PATH="${PATH}:node_modules/.bin"
@@ -465,7 +431,6 @@ export PROMPT_COMMAND="_aliases ; ${PROMPT_COMMAND}"
 tabs -4
 
 # Attempting to fix issues with Emacs mangling characters.
-
 export TERMINFO="/usr/share/terminfo"
 
 # ==============================================================================
