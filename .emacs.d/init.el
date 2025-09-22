@@ -67,7 +67,7 @@
  '(go-ts-mode-indent-offset 4)
  '(indent-tabs-mode t)
  '(package-selected-packages
-   '(yaml-mode eglot nerd-icons-completion nerd-icons-corfu corfu-terminal kind-icon corfu quelpa treesit-fold treesit protobuf-mode basic-mode exec-path-from-shell fold-this gnu-elpa-keyring-update markdown-mode multi-web-mode noxml-fold rainbow-delimiters undo-tree))
+   '(jq-mode jq-ts-mode web-mode multi-web-mode nginx-mode d2-mode terraform-mode yaml-mode eglot nerd-icons-completion nerd-icons-corfu corfu-terminal kind-icon corfu quelpa treesit-fold treesit protobuf-mode basic-mode exec-path-from-shell fold-this gnu-elpa-keyring-update markdown-mode noxml-fold rainbow-delimiters undo-tree))
  '(tab-width 4)
  '(undo-limit 10000)
  '(undo-tree-limit 10000)
@@ -660,3 +660,15 @@
 ;; ;;       )
 
 ;; ======================================================================
+
+(defun d2-format-file ()
+  "Format the current buffer file using the external 'd2 fmt' command, then reload."
+  (interactive)
+  (when (and buffer-file-name (file-exists-p buffer-file-name))
+    (save-buffer)
+    (shell-command (concat "d2 fmt " (shell-quote-argument buffer-file-name)))
+    (revert-buffer :ignore-auto :noconfirm)))
+
+;; (add-hook 'd2-mode-hook
+;;           (lambda ()
+;;             (add-hook 'before-save-hook #'d2-format-file nil t)))
