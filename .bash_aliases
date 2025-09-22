@@ -112,7 +112,7 @@ function _git_grep() {
 alias gg=_git_grep
 
 # Glow is a markdown viewer with syntax highlighting.
-alias glow='glow -n -p -w 0'
+alias glow='glow -n -p -w 0 -s ~/.config/glow/solarized-dark.json'
 alias markdown=glow
 alias md=markdown
 
