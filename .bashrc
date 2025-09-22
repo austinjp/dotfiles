@@ -201,6 +201,9 @@ export $(gnome-keyring-daemon --daemonize --start 2>/dev/null)
 
 PATH="${PATH}:${HOME}/bin/"
 
+# ==============================================================================
+# Added 2025-08-28
+PATH="${PATH}:/usr/local/pypy/bin/"
 
 # ==============================================================================
 # Added 2020-01-08 for Android Studio
