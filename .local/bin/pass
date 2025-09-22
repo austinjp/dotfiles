@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+xsel --clear --primary
+xsel --clear --secondary
+xsel --clear --clipboard
+
+db="${1}"
+selection="${2}"
+
+if [[ ! -r "${db}" ]]; then
+	if [[ "${db}" = "" ]]; then
+		db=$(ls -1 ~/Sync/keepass/*.kdbx | ag -v 'old|conflic' | fzf --scheme=path --height=$(ls -1 ~/Sync/keepass/*.kdbx | wc -l))
+	else
+		db=$(realpath ~/Sync/keepass/"${db}".kdbx)
+	fi
+fi
+
+if [[ ! -r "${db}" ]]; then
+	echo "Cannot find ${db}"
+	echo "Quitting!"
+	exit 1
+fi
+
+read -s -p "Password: " pwd
+echo
+
+# folder=$(echo "${pwd}" | /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=keepassxc-cli --file-forwarding org.keepassxc.KeePassXC ls --quiet "${db}" | fzf --height=4)
+# entry=$(echo "${pwd}" | /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=keepassxc-cli --file-forwarding org.keepassxc.KeePassXC ls --quiet "${db}" "${folder}" | fzf --height=10)
+
+if [[ "${selection}" = "" ]]; then
+	selection=$(echo "${pwd}" | /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=keepassxc-cli --file-forwarding org.keepassxc.KeePassXC ls --quiet -R -f "${db}" | ag -v 'Recycle Bin' | ag -v '/$' | sort | fzf)
+else
+	selection=$(echo "${pwd}" | /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=keepassxc-cli --file-forwarding org.keepassxc.KeePassXC search --quiet "${db}" "${selection}" | fzf -1)
+fi
+
+if [[ "${selection}" = "" ]]; then
+	echo "No selection!"
+	echo "Quitting"
+	exit 0
+fi
+
+echo "Copied password for: ${selection}"
+echo
+
+pw=$(echo "${pwd}" | /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=keepassxc-cli --file-forwarding org.keepassxc.KeePassXC show -s --quiet "${db}" "${selection}" | ag '^Password:' | sed -re 's/^Password:\s?//g')
+
+echo "${pw}" | xsel --trim -i --primary
+echo "${pw}" | xsel --trim -i --secondary
+echo "${pw}" | xsel --trim -i --clipboard
