@@ -7,7 +7,8 @@ Description=GROBID
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/podman run --rm --gpus all --init --ulimit core=0 -p 8070:8070 grobid/grobid:0.8.0
+# ExecStart=/usr/bin/podman run --rm --gpus all --init --ulimit core=0 -p 8070:8070 -p 8071:8071 grobid/grobid:0.8.0
+ExecStart=/usr/bin/podman run --rm --name grobid --gpus all --init --ulimit core=0 --cpus="2" --memory="8g" -p 8070:8070 -p 8071:8071 -v /home/austinjp/Desktop/scout-api/configs/grobid.yaml:/opt/grobid/grobid-home/config/grobid.yaml:ro lfoppiano/grobid:latest-crf
 ExecStop=
 Restart=on-failure
 WorkingDirectory=/tmp/
