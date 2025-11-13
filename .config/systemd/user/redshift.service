@@ -4,7 +4,7 @@ Description=Redshift
 [Service]
 Type=simple
 WorkingDirectory=%h/.local/tmp
-ExecStart=/usr/bin/redshift -l 51.5:0.0 -m randr
+ExecStart=/usr/bin/redshift -c %h/.dotfiles/.config/redshift/redshift.conf
 RestartSec=120
 Restart=always
 
