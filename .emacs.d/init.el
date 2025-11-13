@@ -67,7 +67,7 @@
  '(go-ts-mode-indent-offset 4)
  '(indent-tabs-mode t)
  '(package-selected-packages
-   '(jq-mode jq-ts-mode web-mode multi-web-mode nginx-mode d2-mode terraform-mode yaml-mode eglot nerd-icons-completion nerd-icons-corfu corfu-terminal kind-icon corfu quelpa treesit-fold treesit protobuf-mode basic-mode exec-path-from-shell fold-this gnu-elpa-keyring-update markdown-mode noxml-fold rainbow-delimiters undo-tree))
+   '(flatbuffers-mode jq-mode jq-ts-mode web-mode multi-web-mode nginx-mode d2-mode terraform-mode yaml-mode eglot nerd-icons-completion nerd-icons-corfu corfu-terminal kind-icon corfu quelpa treesit-fold treesit protobuf-mode basic-mode exec-path-from-shell fold-this gnu-elpa-keyring-update markdown-mode noxml-fold rainbow-delimiters undo-tree))
  '(tab-width 4)
  '(undo-limit 10000)
  '(undo-tree-limit 10000)
@@ -509,6 +509,9 @@
 ;; 11. Miscellaneous.
 
 ;; Kudos https://github.com/martenlienen/dotfiles/blob/e4f7c47/home/.emacs.d/straight/repos/mlextras/ml-init.org
+
+;; Set paragraph-fill size to 77 columns, to match go doc.
+(setq-default fill-column 77)
 
 ;; Make Escape quit prompts and act like C-g
 (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
