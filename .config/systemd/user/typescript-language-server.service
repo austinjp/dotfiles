@@ -1,0 +1,12 @@
+[Unit]
+Description=Language Server for Typescript
+
+[Service]
+Type=simple
+WorkingDirectory=/home/austinjp/.cache/typescript-language-server/
+ExecStart=/home/austinjp/.local/share/pnpm/typescript-language-server --stdio
+RestartSec=2
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
