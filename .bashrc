@@ -423,6 +423,8 @@ export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
 
 # eval $(aliases --hook)
 function _aliases() {
+	unalias -a
+	[[ -f ~/.bash_aliases && -r ~/.bash_aliases ]] && source ~/.bash_aliases 2>/dev/null || : ;
     [[ -f .aliases && -r .aliases ]] && source .aliases 2>/dev/null || : ;
 }
 export PROMPT_COMMAND="_aliases ; ${PROMPT_COMMAND}"
