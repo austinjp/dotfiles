@@ -428,17 +428,13 @@ function _aliases() {
 export PROMPT_COMMAND="_aliases ; ${PROMPT_COMMAND}"
 
 
-# ==============================================================================
-# Tabs size: 4 instead of 8
-
-tabs -4
-
-# Attempting to fix issues with Emacs mangling characters.
-export TERMINFO="/usr/share/terminfo"
-
-# ==============================================================================
-# Allow user scout to display X apps in my X session.
-xhost +si:localuser:scout >/dev/null
+# # ==============================================================================
+# # Tabs size: 4 instead of 8
+# 
+# tabs -4
+# 
+# # Attempting to fix issues with Emacs mangling characters.
+# export TERMINFO="/usr/share/terminfo"
 
 
 # ==============================================================================
