@@ -64,6 +64,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes '(austinjp-light))
+ '(custom-safe-themes
+   '("80d6120102cd9c86a9f2423b069796aa151b80d8b50c160d986681b530eeb4bf" "4946c7c5ce5809e22fb729f19e4bd20bc9d8a71e037293fa8741a68632161ecf" "60d168420498b42ac2a93af0eecd8763928fefef31810efd9c9cd15d139e76e7" "f7c5f39d05224ead8db13536a3d5bb013f59fb3ebf78f6380eb564192718aa8d" "e70a9781a2bafc47a3d9f15c502cd998036fe570a2001a64f6a1033e0f61e85e" default))
  '(go-ts-mode-indent-offset 4)
  '(indent-tabs-mode t)
  '(package-selected-packages
@@ -73,32 +76,6 @@
  '(undo-tree-limit 10000)
  '(undo-tree-outer-limit 10000)
  '(undo-tree-strong-limit 10000))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(font-lock-builtin-face ((((type tty)) (:foreground "royalblue3"))))
- '(font-lock-function-name-face ((t (:foreground "green"))))
- '(font-lock-keyword-face ((((type tty)) (:foreground "green4"))))
- '(font-lock-string-face ((((type tty)) (:foreground "purple"))))
- '(markdown-comment-face ((t (:inherit font-lock-comment-face :foreground "coral1"))))
- '(markdown-markup-face ((t (:inherit shadow :foreground "royalblue1" :slant normal :weight normal))))
- '(minibuffer-prompt ((((type tty)) (:foreground nil))))
- '(mode-line-buffer-id ((t (:foreground nil :weight bold))))
- '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "brightred"))))
- '(rainbow-delimiters-base-face ((t (:inherit nil))))
- '(rainbow-delimiters-depth-1-face ((t (:inherit rainbow-delimiters-base-face :foreground "green"))))
- '(rainbow-delimiters-depth-2-face ((t (:inherit rainbow-delimiters-base-face :foreground "orange"))))
- '(rainbow-delimiters-depth-3-face ((t (:inherit rainbow-delimiters-base-face :foreground "cyan4"))))
- '(rainbow-delimiters-depth-4-face ((t (:inherit rainbow-delimiters-depth-1-face))))
- '(rainbow-delimiters-depth-5-face ((t (:inherit rainbow-delimiters-depth-2-face))))
- '(rainbow-delimiters-depth-6-face ((t (:inherit rainbow-delimiters-depth-3-face))))
- '(rainbow-delimiters-depth-7-face ((t (:inherit rainbow-delimiters-depth-1-face))))
- '(rainbow-delimiters-depth-8-face ((t (:inherit rainbow-delimiters-depth-2-face))))
- '(rainbow-delimiters-depth-9-face ((t (:inherit rainbow-delimiters-depth-3-face))))
- '(rainbow-delimiters-mismatched-face ((t (:inherit rainbow-delimiters-unmatched-face)))))
 
 ;; ======================================================================
 
@@ -675,3 +652,9 @@
 ;; (add-hook 'd2-mode-hook
 ;;           (lambda ()
 ;;             (add-hook 'before-save-hook #'d2-format-file nil t)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
