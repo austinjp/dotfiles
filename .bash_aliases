@@ -170,7 +170,7 @@ alias skype="flatpak run com.skype.Client"
 alias spotify="spt"
 alias tree="tree --gitignore --ignore-case -I venv -I 'venv*'"
 
-alias vpn="expressvpn"
+alias vpn="mullvad"
 
 alias venv='make_venv -v 3.11 && source venv/bin/activate'
 
