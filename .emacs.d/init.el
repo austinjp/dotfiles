@@ -64,9 +64,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(austinjp-light))
+ '(custom-enabled-themes '(austinjp-dark))
  '(custom-safe-themes
-   '("80d6120102cd9c86a9f2423b069796aa151b80d8b50c160d986681b530eeb4bf" "4946c7c5ce5809e22fb729f19e4bd20bc9d8a71e037293fa8741a68632161ecf" "60d168420498b42ac2a93af0eecd8763928fefef31810efd9c9cd15d139e76e7" "f7c5f39d05224ead8db13536a3d5bb013f59fb3ebf78f6380eb564192718aa8d" "e70a9781a2bafc47a3d9f15c502cd998036fe570a2001a64f6a1033e0f61e85e" default))
+   '("b2046c610cb22975093b41f9f2f2c85dede8d718e0da645f426631ccc73e4d3e" "870f8b91c303b5f6fcb4667cdcc9c8f9daaa14ec4245211dd7ec02ab4aae1a49" "6658bd1273de73f14b1d88a38d9f257eca65ded6ff1532e7a29c7fe0b7124f75" "80d6120102cd9c86a9f2423b069796aa151b80d8b50c160d986681b530eeb4bf" "4946c7c5ce5809e22fb729f19e4bd20bc9d8a71e037293fa8741a68632161ecf" "60d168420498b42ac2a93af0eecd8763928fefef31810efd9c9cd15d139e76e7" "f7c5f39d05224ead8db13536a3d5bb013f59fb3ebf78f6380eb564192718aa8d" "e70a9781a2bafc47a3d9f15c502cd998036fe570a2001a64f6a1033e0f61e85e" default))
  '(go-ts-mode-indent-offset 4)
  '(indent-tabs-mode t)
  '(package-selected-packages
@@ -487,9 +487,6 @@
 
 ;; Kudos https://github.com/martenlienen/dotfiles/blob/e4f7c47/home/.emacs.d/straight/repos/mlextras/ml-init.org
 
-;; Set paragraph-fill size to 77 columns, to match go doc.
-(setq-default fill-column 77)
-
 ;; Make Escape quit prompts and act like C-g
 (define-key key-translation-map (kbd "<escape>") (kbd "C-g"))
 
@@ -502,8 +499,8 @@
 ;; Show current function in status line.
 (which-function-mode 1)
 
-;; Line breaks at 88 characters, default for black.
-(setq-default fill-column 88)
+;; Set paragraph-fill size to 77 columns, to match go doc.
+(setq-default fill-column 77)
 
 ;; Single space after a full-stop.
 (setq-default sentence-end-double-space nil)

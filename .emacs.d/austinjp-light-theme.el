@@ -1,21 +1,10 @@
 (deftheme austinjp-light
   "Created 2025-11-14.")
 
-(custom-theme-set-variables
- 'austinjp-light
- '(go-ts-mode-indent-offset 4)
- '(indent-tabs-mode t)
- '(package-selected-packages '(flatbuffers-mode jq-mode jq-ts-mode web-mode multi-web-mode nginx-mode d2-mode terraform-mode yaml-mode eglot nerd-icons-completion nerd-icons-corfu corfu-terminal kind-icon corfu quelpa treesit-fold treesit protobuf-mode basic-mode exec-path-from-shell fold-this gnu-elpa-keyring-update markdown-mode noxml-fold rainbow-delimiters undo-tree))
- '(tab-width 4)
- '(undo-limit 10000)
- '(undo-tree-limit 10000)
- '(undo-tree-outer-limit 10000)
- '(undo-tree-strong-limit 10000)
- '(ispell-dictionary nil))
-
 (custom-theme-set-faces
  'austinjp-light
  '(font-lock-builtin-face ((((type tty)) (:foreground "royalblue3"))))
+ '(font-lock-variable-name-face ((t (:foreground "orange"))))
  '(font-lock-function-name-face ((t (:foreground "green"))))
  '(markdown-comment-face ((t (:inherit font-lock-comment-face :foreground "coral1"))))
  '(markdown-markup-face ((t (:inherit shadow :foreground "royalblue1" :slant normal :weight normal))))
