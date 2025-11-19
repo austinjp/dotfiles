@@ -66,7 +66,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(austinjp-dark))
  '(custom-safe-themes
-   '("b2046c610cb22975093b41f9f2f2c85dede8d718e0da645f426631ccc73e4d3e" "870f8b91c303b5f6fcb4667cdcc9c8f9daaa14ec4245211dd7ec02ab4aae1a49" "6658bd1273de73f14b1d88a38d9f257eca65ded6ff1532e7a29c7fe0b7124f75" "80d6120102cd9c86a9f2423b069796aa151b80d8b50c160d986681b530eeb4bf" "4946c7c5ce5809e22fb729f19e4bd20bc9d8a71e037293fa8741a68632161ecf" "60d168420498b42ac2a93af0eecd8763928fefef31810efd9c9cd15d139e76e7" "f7c5f39d05224ead8db13536a3d5bb013f59fb3ebf78f6380eb564192718aa8d" "e70a9781a2bafc47a3d9f15c502cd998036fe570a2001a64f6a1033e0f61e85e" default))
+   '("2779e74bd6f7fc95e164e719f69e91e197be8b4e634c1c679375697cfeb24d35" "939b367e0d97e86aafcc363008c831334cccca87a725fb5b5191700977703cb5" "594313d27ceed59548e98bf56d8d5227a1c7e7fa28a9870e9d62b1b8cbacee0b" "41bd336750b4494a219449d7e1d96152ccbe68ddbccde1926776860aa89c9dfe" default))
  '(go-ts-mode-indent-offset 4)
  '(indent-tabs-mode t)
  '(package-selected-packages
@@ -611,6 +611,20 @@
 
 (add-hook 'after-make-frame-functions 'my-terminal-config)
 
+;; Mode for D2 files.
+(defun d2-format-file ()
+  "Format the current buffer file using the external 'd2 fmt' command, then reload."
+  (interactive)
+  (when (and buffer-file-name (file-exists-p buffer-file-name))
+    (save-buffer)
+    (shell-command (concat "d2 fmt " (shell-quote-argument buffer-file-name)))
+    (revert-buffer :ignore-auto :noconfirm)))
+
+;; (add-hook 'd2-mode-hook
+;;           (lambda ()
+;;             (add-hook 'before-save-hook #'d2-format-file nil t)))
+
+
 ;; ;; Prettier for JavaScript.
 ;; (require 'prettier-js)
 ;; (add-hook 'js-mode-hook 'prettier-js-mode)
@@ -637,18 +651,6 @@
 ;; ;;       )
 
 ;; ======================================================================
-
-(defun d2-format-file ()
-  "Format the current buffer file using the external 'd2 fmt' command, then reload."
-  (interactive)
-  (when (and buffer-file-name (file-exists-p buffer-file-name))
-    (save-buffer)
-    (shell-command (concat "d2 fmt " (shell-quote-argument buffer-file-name)))
-    (revert-buffer :ignore-auto :noconfirm)))
-
-;; (add-hook 'd2-mode-hook
-;;           (lambda ()
-;;             (add-hook 'before-save-hook #'d2-format-file nil t)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

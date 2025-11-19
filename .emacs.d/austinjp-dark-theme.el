@@ -3,15 +3,25 @@
 
 (custom-theme-set-faces
  'austinjp-dark
- '(font-lock-builtin-face ((((type tty)) (:foreground "royalblue3"))))
- '(font-lock-variable-name-face ((t (:foreground "brightyellow"))))
+
+ '(flymake-error ((t (:foreground "brightwhite"  :background "firebrick"))))
+
+ '(font-lock-builtin-face ((t (:foreground "royalblue1"))))
+ '(font-lock-comment-face ((t (:foreground "coral1"))))
+ '(font-lock-constant-face ((t (:foreground "palevioletred1"))))
  '(font-lock-function-name-face ((t (:foreground "green"))))
+ '(font-lock-keyword-face ((t (:foreground "mediumseagreen"))))
+ '(font-lock-string-face ((t (:foreground "deepskyblue3"))))
+ '(font-lock-variable-name-face ((t (:foreground "brightyellow"))))
+
  '(markdown-comment-face ((t (:inherit font-lock-comment-face :foreground "coral1"))))
  '(markdown-markup-face ((t (:inherit shadow :foreground "royalblue1" :slant normal :weight normal))))
- '(minibuffer-prompt ((((type tty)) (:foreground nil))))
- '(mode-line-buffer-id ((t (:foreground nil :weight bold))))
- '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "brightred"))))
+
+ '(minibuffer-prompt ((t (:foreground "white"))))
+ ;; '(mode-line-buffer-id ((t (:foreground "white" :weight bold))))
+
  '(rainbow-delimiters-base-face ((t (:inherit nil))))
+ '(rainbow-delimiters-base-error-face ((t (:inherit rainbow-delimiters-base-face :foreground "brightred"))))
  '(rainbow-delimiters-depth-1-face ((t (:inherit rainbow-delimiters-base-face :foreground "green"))))
  '(rainbow-delimiters-depth-2-face ((t (:inherit rainbow-delimiters-base-face :foreground "orange"))))
  '(rainbow-delimiters-depth-3-face ((t (:inherit rainbow-delimiters-base-face :foreground "cyan4"))))
@@ -22,8 +32,8 @@
  '(rainbow-delimiters-depth-8-face ((t (:inherit rainbow-delimiters-depth-2-face))))
  '(rainbow-delimiters-depth-9-face ((t (:inherit rainbow-delimiters-depth-3-face))))
  '(rainbow-delimiters-mismatched-face ((t (:inherit rainbow-delimiters-unmatched-face))))
- '(font-lock-string-face ((t (:foreground "deepskyblue1"))))
- '(font-lock-keyword-face ((t (:foreground "mediumseagreen"))))
- '(font-lock-constant-face ((t (:foreground "palevioletred1")))))
+
+ '(region ((t (:extend t :background "goldenrod" :foreground "black"))))
+ )
 
 (provide-theme 'austinjp-dark)
