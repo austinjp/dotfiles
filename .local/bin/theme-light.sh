@@ -11,12 +11,7 @@ wd=$(realpath "$(cd -- $(dirname -- "${BASH_SOURCE[0]}") &> /dev/null && pwd)")
 
     /usr/bin/xfconf-query --create -c 'xfce4-terminal' -p '/color-foreground' --type 'string' --set '#000000000000'
 
-    sleep 0.5
-
-    /usr/bin/cp \
-        -f \
-        /home/austinjp/.config/ghostty/config.day \
-        /home/austinjp/.config/ghostty/config
+	TMPDIR="${HOME}"/.local/tmp emacsclient --socket-name="${HOME}"/.local/tmp/emacs.socket -e "(progn (disable-theme 'austinjp-dark) (load-theme 'austinjp-light t))"
 
     sleep 0.5
 
@@ -25,5 +20,10 @@ wd=$(realpath "$(cd -- $(dirname -- "${BASH_SOURCE[0]}") &> /dev/null && pwd)")
         /home/austinjp/.config/ghostty/config.day \
         /home/austinjp/.config/ghostty/config
 
-    sleep 1
+    sleep 0.5
+
+    /usr/bin/cp \
+        -f \
+        /home/austinjp/.config/ghostty/config.day \
+        /home/austinjp/.config/ghostty/config
 } &

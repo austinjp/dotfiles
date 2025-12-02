@@ -7,8 +7,9 @@
  '(flymake-error ((t (:foreground "brightwhite"  :background "red"))))
 
  '(font-lock-builtin-face ((t (:foreground "royalblue3"))))
- '(font-lock-variable-name-face ((t (:foreground "orange"))))
- '(font-lock-function-name-face ((t (:foreground "green"))))
+ '(font-lock-variable-name-face ((t (:foreground "darkorange"))))
+ '(font-lock-function-name-face ((t (:foreground "darkgreen"))))
+ '(font-lock-type-face ((t (:foreground "royalblue"))))
 
  '(markdown-comment-face ((t (:inherit font-lock-comment-face :foreground "coral1"))))
  '(markdown-markup-face ((t (:inherit shadow :foreground "royalblue1" :slant normal :weight normal))))
