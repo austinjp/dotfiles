@@ -9,6 +9,7 @@
     autocrlf = input
     # pager = less -XFRS
     pager = delta --detect-dark-light=always --color-only --pager='less -XRi'
+	editor = emacs -q -nw
 
 [credential]
     helper = store
