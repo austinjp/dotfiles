@@ -17,8 +17,6 @@
 ;; 11. Miscellaneous.
 ;;
 
-;;; Code:
-
 ;; ======================================================================
 
 ;; 1. Some inspiration:
@@ -66,11 +64,11 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(austinjp-dark))
  '(custom-safe-themes
-   '("36395018b763f751c119dfe81c757b4cf189d7398d2e5fc76663ec50bf710e95" "93e794d80afd3c649bbc160ae7385555b86faf45934fc3802bf26d3972557514" "7a7f4bdc50993ba663dc212eca58db9d890634ebf2c3ea1dbeee8858d0fa80fc" "91217294c647ab2945669bb77360e8a93406b699d921860bfa38cd60f2172e84" "692999f0f6ea71b31d07a7721bd92abcb798f970b7974fb817a68d960779b3d6" "bff8c7430d6d7a84c695861f4f5939d61c86de2e9edcafd6412a70f837ac2864" "9395594cb75aa68c68a42443383ad98c9c2f6c08dcf57c57a8c82bf4f7adcb20" "2779e74bd6f7fc95e164e719f69e91e197be8b4e634c1c679375697cfeb24d35" "939b367e0d97e86aafcc363008c831334cccca87a725fb5b5191700977703cb5" "594313d27ceed59548e98bf56d8d5227a1c7e7fa28a9870e9d62b1b8cbacee0b" "41bd336750b4494a219449d7e1d96152ccbe68ddbccde1926776860aa89c9dfe" default))
+   '("fc5a6aa81f6242e7da78ce192d3daa9e37ab795682eeb95d3aa71bcec337c731" "03b05f9884af3b5b90bb574ac8dc65eef7d0fc63424d143527e57fa14de5b0a7" "f501df9001969818c40e01122005619743e73bc90ab9a119a29a4f24ab1e91d8" "2f0f3991f895a132cf58c936876694d664a28b534e2f8f3e05c21aac0955b277" "111285870a94434b3cdb237a1e3a7a0987538272b07448ab31975803e6e38de6" "a9a6b1d58a01d14c96c15c50a1d693b70a3b6741c66b2ecd44ad1ea9b52ef34d" "43dc946d0ad49703eac9b35fdf873dbfd0e6908a8c8753235a5a42616908c26f" "f688555bd24dd309b0b6afc2bb886bf8ae1840789f23373710cb0cb399478255" "cb2062be314618874df5aa03073f7ec3e8e44d63dd1ff8626a9276f6ba339f82" "10a30bdc4ecc7125b47f5143936fc962c1e96cbdaca556debbc37155caf6f8e5" "cb7ee8abcaed4395795578631a5a4033dd1116568228e282866f6e6ec7c48b23" "8bb8f2128adca6f7ac25d0c1618b3bf57337fe37e67a54aa4dd1f3e04c41cd58" "c4f2d66e8b91cc5f400db30657aca1cb2f6b4d29ebef994559c10ac33bad4391" "f1771edd6b37742aca0e0bc4f9d2523df1290c9b2703abe6ddc53a967ad447a6" "420549780e668044963b761f5bd1c614343419c5d816cf4e764dc8527d813ef4" "36395018b763f751c119dfe81c757b4cf189d7398d2e5fc76663ec50bf710e95" "93e794d80afd3c649bbc160ae7385555b86faf45934fc3802bf26d3972557514" "7a7f4bdc50993ba663dc212eca58db9d890634ebf2c3ea1dbeee8858d0fa80fc" "91217294c647ab2945669bb77360e8a93406b699d921860bfa38cd60f2172e84" "692999f0f6ea71b31d07a7721bd92abcb798f970b7974fb817a68d960779b3d6" "bff8c7430d6d7a84c695861f4f5939d61c86de2e9edcafd6412a70f837ac2864" "9395594cb75aa68c68a42443383ad98c9c2f6c08dcf57c57a8c82bf4f7adcb20" "2779e74bd6f7fc95e164e719f69e91e197be8b4e634c1c679375697cfeb24d35" "939b367e0d97e86aafcc363008c831334cccca87a725fb5b5191700977703cb5" "594313d27ceed59548e98bf56d8d5227a1c7e7fa28a9870e9d62b1b8cbacee0b" "41bd336750b4494a219449d7e1d96152ccbe68ddbccde1926776860aa89c9dfe" default))
  '(go-ts-mode-indent-offset 4)
  '(indent-tabs-mode t)
  '(package-selected-packages
-   '(flatbuffers-mode jq-mode jq-ts-mode web-mode multi-web-mode nginx-mode d2-mode terraform-mode yaml-mode eglot nerd-icons-completion nerd-icons-corfu corfu-terminal kind-icon corfu quelpa treesit-fold treesit protobuf-mode basic-mode exec-path-from-shell fold-this gnu-elpa-keyring-update markdown-mode noxml-fold rainbow-delimiters undo-tree))
+   '(treemacs typst-ts-mode typst-preview flatbuffers-mode jq-mode jq-ts-mode web-mode multi-web-mode nginx-mode d2-mode terraform-mode yaml-mode eglot nerd-icons-completion nerd-icons-corfu corfu-terminal kind-icon corfu quelpa treesit-fold treesit protobuf-mode basic-mode exec-path-from-shell fold-this gnu-elpa-keyring-update markdown-mode noxml-fold rainbow-delimiters undo-tree))
  '(tab-width 4)
  '(undo-limit 10000)
  '(undo-tree-limit 10000)
@@ -158,11 +156,9 @@
 ;; Using sh-mode for direnv files.
 (add-to-list 'auto-mode-alist '("\\.envrc" . sh-mode))
 
-;; HTML mode.
-(add-to-list 'auto-mode-alist '("\\.html"  . html-mode))
+;; Web mode.
+(add-to-list 'auto-mode-alist '("\\.html"  . web-mode))
 
-;; Javascript mode.
-(add-to-list 'auto-mode-alist '("\\.html"  . html-mode))
 
 ;; Catch-all: remap modes that aren't explicitly triggered by auto-mode-alist.
 (setq major-mode-remap-alist
@@ -183,11 +179,12 @@
 
 (add-to-list 'package-archives
 	     '("MELPA" . "https://melpa.org/packages/") 't)
-
 ;; (add-to-list 'package-archives
 ;;              '("MELPA Stable" . "https://stable.melpa.org/packages/") 't)
 (add-to-list 'package-archives
 	     '("ELPA" . "https://elpa.gnu.org/packages/") 't)
+(add-to-list 'package-archives
+	     '("nongnu" . "https://elpa.nongnu.org/nongnu") 't)
 
 ;; Language repos for treesitter.
 ;; Courtesy https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
@@ -451,6 +448,14 @@
 ;;           (lambda ()
 ;;             (add-hook 'before-save-hook #'my-flymake-show-diagnostics-on-save nil t)))
 
+(with-eval-after-load 'eglot
+  (with-eval-after-load 'typst-ts-mode
+    (add-to-list 'eglot-server-programs
+                 `((typst-ts-mode) .
+                   ,(eglot-alternatives `(,typst-ts-lsp-download-path
+                                          "tinymist"
+                                          "typst-lsp"))))))
+
 
 ;; ======================================================================
 
@@ -541,24 +546,27 @@
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
 ;; Backups.
-(setq backup-by-copying t               ; don't clobber symlinks
+(setq backup-by-copying t    ; don't clobber symlinks
       delete-old-versions t
       kept-new-versions 6
       kept-old-versions 2
-      version-control t)
-
-					; use versioned backups
+      version-control t      ; use versioned backups
+	  )
+(setq backup-directory-alist
+      '(("." . "~/.local/tmp/")))
 
 ;; (setq backup-directory-alist
 ;;       `((".*" . ,temporary-file-directory)))
 ;; (setq auto-save-file-name-transforms
 ;;       `((".*" ,temporary-file-directory t)))
 
-(setq backup-directory-alist
-      '(("." . "~/.local/tmp/")))
-
+;; Auto saves.
 (setq auto-save-file-name-transforms
       `((".*" ,"~/.local/tmp/" t)))
+
+;; Lock files.
+(setq create-lockfiles nil) ;; avoid .#lock files
+
 
 ;; Indentation.
 (setq-default tab-width 4)
