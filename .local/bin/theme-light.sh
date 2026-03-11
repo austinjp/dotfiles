@@ -11,7 +11,7 @@ wd=$(realpath "$(cd -- $(dirname -- "${BASH_SOURCE[0]}") &> /dev/null && pwd)")
 
     /usr/bin/xfconf-query --create -c 'xfce4-terminal' -p '/color-foreground' --type 'string' --set '#000000000000'
 
-	TMPDIR="${HOME}"/.local/tmp emacsclient --socket-name="${HOME}"/.local/tmp/emacs.socket -e "(progn (disable-theme 'austinjp-dark) (load-theme 'austinjp-light t))"
+	TMPDIR="${HOME}"/.local/tmp emacsclient -a "" --socket-name="${HOME}"/.local/tmp/emacs.socket -e "(progn (disable-theme 'austinjp-dark) (load-theme 'austinjp-light t))"
 
     sleep 0.5
 
