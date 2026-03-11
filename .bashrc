@@ -50,7 +50,13 @@ export DELTA_PAGER="less -XFRS"
 # Updated 2024-06-05
 # Add go bins to PATH without setting GOPATH or GOROOT which should
 # apparently remain unset: https://stackoverflow.com/a/68226616
-PATH="${PATH}:/usr/local/go/bin:${HOME}/go/bin"
+# PATH="${PATH}:${HOME}/go/bin"
+
+# Update 2026-03-07
+# GOROOT is where the Go toolchain lives.
+# GOPATH is where my dev workspace should live.
+export GOPATH=/home/austinjp/.local/share/go
+PATH="${PATH}:${HOME}/go/bin:${GOPATH}/bin"
 
 # Update 2025-07-26
 # Trying to use multiple versions of go, possibly via GVM, or maybe just aliases :)
@@ -127,11 +133,14 @@ function _update_ps1() {
     #     # echo -ne '\033[0m'$'\n\033[0;36;1m \$ \033[0m')"
     #    )
 }
+
+PROMPT_COMMAND=""
 if [ "$TERM" != "linux" ] && [[ $(which powerline-go) ]]; then
-    PROMPT_COMMAND="_update_ps1_powerline; $PROMPT_COMMAND"
+    PROMPT_COMMAND="_update_ps1_powerline"
 else
-    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+    PROMPT_COMMAND="_update_ps1"
 fi
+export PROMPT_COMMAND
 
 # Workaround for nix-shell --pure
 if [ "$IN_NIX_SHELL" == "pure" ]; then
