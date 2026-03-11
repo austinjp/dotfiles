@@ -4,12 +4,21 @@
 (custom-theme-set-faces
  'austinjp-light
 
+ '(custom-state ((t (:foreground "magenta"))))
+
  '(flymake-error ((t (:foreground "brightwhite"  :background "red"))))
 
  '(font-lock-builtin-face ((t (:foreground "royalblue3"))))
- '(font-lock-variable-name-face ((t (:foreground "darkorange"))))
+ '(font-lock-constant-face ((t (:foreground "deepskyblue"))))
  '(font-lock-function-name-face ((t (:foreground "darkgreen"))))
+ '(font-lock-keyword-face ((t (:foreground "magenta"))))
+ '(font-lock-string-face ((t (:foreground "indianred"))))
  '(font-lock-type-face ((t (:foreground "royalblue"))))
+ '(font-lock-variable-name-face ((t (:foreground "darkorange"))))
+
+ '(homoglyph ((t (:foreground "brightblue"))))
+
+ '(link ((t (:foreground "brightblue" :underline t))))
 
  '(markdown-comment-face ((t (:inherit font-lock-comment-face :foreground "coral1"))))
  '(markdown-markup-face ((t (:inherit shadow :foreground "royalblue1" :slant normal :weight normal))))
@@ -31,6 +40,10 @@
  '(rainbow-delimiters-mismatched-face ((t (:inherit rainbow-delimiters-unmatched-face))))
 
  '(region ((t (:extend t :background "black" :foreground "white"))))
+ 
+ '(typst-ts-markup-item-indicator-face ((t (:foreground "black" :weight bold))))
+ '(typst-ts-markup-quote-face ((t nil)))
+ '(typst-ts-math-indicator-face ((t (:foreground "green" :weight bold))))
  )
 
 (provide-theme 'austinjp-light)
