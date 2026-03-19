@@ -83,8 +83,6 @@ alias fd='fdfind --color=never --follow --glob --no-ignore'
 
 alias free="free -h --giga"
 
-alias go=go1.24.4
-
 function _gauth() {
     if [ "${@}" ]; then
         xsel --clear --primary
@@ -105,6 +103,13 @@ function _gauth() {
     fi
 }
 alias gauth=_gauth
+
+function _gemini() {
+	nvm use node
+	export PATH="${PATH}:/${HOME}/npm-installs/bin/"
+	$HOME/npm-installs/bin/gemini
+}
+alias gemini=_gemini
 
 function _git_grep() {
     git rev-list --all | xargs git grep -e "${@}"
@@ -136,6 +141,19 @@ alias man=_batman
 function mcd () { mkdir -p "${1}" && cd "${1}" ; }
 
 alias mv="mv -i"
+
+function _ollama_ls_sort () {
+	# read first line (header) from stdin
+	IFS= read -r header || return 0
+
+	body=$(sort -k3 -h)
+
+	echo "${header}"
+	echo "${body}"
+}
+function ollama-ls () {
+	ollama ls "${@}" | sed -re 's/([0-9]+) ((G|M)B)/\1\2 /g' | _ollama_ls_sort | column -t -s $'\t' -o $'\t'
+}
 
 alias p="pnpm"
 
@@ -264,4 +282,3 @@ function sdk() {
 
 
 alias ag='ag --pager="less -XFRi"'
-
